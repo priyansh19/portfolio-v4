@@ -1,0 +1,84 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  background: var(--surface-dark);
+  opacity: 1;
+  transition: opacity 0.42s var(--bezier);
+  pointer-events: none;
+}
+
+.overlay[data-phase='done'] {
+  opacity: 0;
+}
+
+.mark {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.markLine {
+  position: absolute;
+  inset: -14px;
+  border: 1px solid var(--on-dark-soft);
+  opacity: 0.4;
+}
+
+.markText {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--on-dark);
+}
+
+.rail {
+  position: relative;
+  width: 180px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.14);
+  overflow: hidden;
+}
+
+.fill {
+  position: absolute;
+  inset: 0;
+  transform-origin: left;
+  transform: scaleX(0);
+  background: var(--primary);
+  animation-name: fillRail;
+  animation-timing-function: var(--bezier);
+  animation-fill-mode: forwards;
+}
+
+.label {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--on-dark-soft);
+}
+
+@keyframes fillRail {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay {
+    display: none;
+  }
+}

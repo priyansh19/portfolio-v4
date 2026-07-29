@@ -1,23 +1,15 @@
-import { Caveat, Fraunces, Lora } from 'next/font/google';
+import { Inter } from 'next/font/google';
+import { LoadingScreen } from '@/components/loading-screen/loading-screen';
 import { ThemeProvider } from '@/components/theme-provider';
 import { links, profile } from '@/lib/content';
 import { siteUrl } from '@/lib/site';
 import './globals.css';
 
-const fraunces = Fraunces({
-  variable: '--font-fraunces',
-  subsets: ['latin'],
-  display: 'swap',
-});
-
-const lora = Lora({
-  variable: '--font-lora',
-  subsets: ['latin'],
-  display: 'swap',
-});
-
-const caveat = Caveat({
-  variable: '--font-caveat',
+// BMW Type Next Latin is proprietary; Inter is the documented open-source
+// substitute at the two weights the system actually uses — 700 display,
+// 300 body. It ships as a variable font, so both are in one download.
+const inter = Inter({
+  variable: '--font-sans-loader',
   subsets: ['latin'],
   display: 'swap',
 });
@@ -71,24 +63,22 @@ export const metadata = {
 
 export const viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#efe4ce' },
-    { media: '(prefers-color-scheme: dark)', color: '#1c1813' },
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#0d1013' },
   ],
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html
-      lang="en"
-      data-theme="light"
-      className={`${fraunces.variable} ${lora.variable} ${caveat.variable}`}
-      suppressHydrationWarning
-    >
+    <html lang="en" data-theme="light" className={inter.variable} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <LoadingScreen />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

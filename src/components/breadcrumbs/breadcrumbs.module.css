@@ -20,21 +20,20 @@
 .link,
 .current,
 .separator {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.13em;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .link {
-  color: var(--ink-soft);
-  transition: color 0.15s ease;
+  color: var(--muted);
+  transition: color 0.2s var(--bezier);
 }
 
 .link:hover {
-  color: var(--accent-ink);
-  text-decoration: underline;
-  text-underline-offset: 4px;
+  color: var(--primary);
 }
 
 .current {
@@ -43,5 +42,21 @@
 
 .separator {
   margin: 0 10px;
-  color: var(--rule);
+  color: var(--hairline-strong);
+}
+
+.nav[data-on-dark='true'] .link {
+  color: var(--on-dark-soft);
+}
+
+.nav[data-on-dark='true'] .link:hover {
+  color: var(--on-dark);
+}
+
+.nav[data-on-dark='true'] .current {
+  color: var(--on-dark);
+}
+
+.nav[data-on-dark='true'] .separator {
+  color: rgba(255, 255, 255, 0.25);
 }

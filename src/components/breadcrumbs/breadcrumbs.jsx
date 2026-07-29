@@ -7,8 +7,8 @@ import styles from './breadcrumbs.module.css';
  * `crumbs` is [{ label, href }] for ancestors; the last entry is rendered as
  * plain text and marked aria-current since you are already there.
  */
-export const Breadcrumbs = ({ crumbs = [] }) => (
-  <nav className={styles.nav} aria-label="Breadcrumb">
+export const Breadcrumbs = ({ crumbs = [], onDark = false }) => (
+  <nav className={styles.nav} data-on-dark={onDark} aria-label="Breadcrumb">
     <ol className={styles.list}>
       {crumbs.map((crumb, index) => {
         const isLast = index === crumbs.length - 1;

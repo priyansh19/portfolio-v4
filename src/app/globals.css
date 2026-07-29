@@ -1,62 +1,115 @@
 @import 'tailwindcss';
 
 /*
- * Slam-book / scrapbook direction: warm paper, ink, tape and ruled lines.
- * Layout-first phase — no 3D scenes, no scroll animation.
+ * BMW corporate direction — measured, engineered, precise.
+ * Light canvas, BMW blue CTAs, dark navy hero bands, two type weights only
+ * (700 display / 300 body). Depth comes from colour-block contrast and
+ * photographic subject, never from a drop shadow or a rounded corner.
+ *
+ * Legacy component CSS still references the previous token names (--card,
+ * --ink-soft, --rule, --accent, etc.) — rather than touch every module file,
+ * those names are aliased below onto the new BMW semantic tokens. New
+ * components should reach for the BMW names directly.
  */
 
 :root {
-  --font-display: var(--font-fraunces), Georgia, 'Times New Roman', serif;
-  --font-body: var(--font-lora), Georgia, 'Times New Roman', serif;
-  --font-hand: var(--font-caveat), 'Segoe Script', cursive;
-  --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
-
-  /* The page fills the viewport — only the gutter holds content off the edge.
-     Long-form text is still capped by --prose-width so lines stay readable. */
+  /* -- Structural tokens (frozen — see DESIGN-CHARTER.md §5) -------------- */
   --page-width: 100%;
-  --prose-width: 72ch;
+  --prose-width: 66ch;
   --gutter: clamp(20px, 4vw, 72px);
-  --radius: 3px;
+
+  /* -- Type -- */
+  --font-sans: var(--font-sans-loader), system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --bezier: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* -- Radius & elevation: BMW corporate is rectangular and flat -- */
+  --radius: 0px;
+  --shadow: transparent;
+
+  /* -- Spacing scale (8px base) -- */
+  --space-xxs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-xxl: 48px;
+  --space-section: clamp(48px, 7vw, 80px);
+
+  /* -- Structural surfaces: the dark navy hero/CTA band is constant across
+     both themes — it is a deliberate contrast band, not a page background. -- */
+  --surface-dark: #1a2129;
+  --surface-dark-elevated: #262e38;
+  --on-dark: #ffffff;
+  --on-dark-soft: #bbbbbb;
+
+  /* -- Brand -- */
+  --primary: #1c69d4;
+  --primary-active: #0653b6;
+  --primary-disabled: #d6d6d6;
+  --on-primary: #ffffff;
+
+  /* -- Semantic -- */
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --error: #dc2626;
+
+  --marker: rgba(28, 105, 212, 0.28);
+
+  /* -- Legacy → BMW alias layer (do not remove; every module CSS file still
+     reads these names) -- */
+  --paper: var(--canvas);
+  --paper-deep: var(--surface-strong);
+  --card: var(--canvas);
+  --card-alt: var(--surface-soft);
+  --ink-body: var(--body);
+  --ink-soft: var(--muted);
+  --rule: var(--hairline-strong);
+  --rule-soft: var(--hairline);
+  --accent: var(--primary);
+  --accent-ink: var(--primary-active);
+  --stamp: var(--success);
+  --text-light: var(--muted-soft);
+  --glow: rgba(28, 105, 212, 0.35);
+  --accent-violet: var(--primary);
+  --accent-magenta: var(--primary-active);
+  --font-display: var(--font-sans);
+  --font-body: var(--font-sans);
+  --font-hand: var(--font-sans);
+  --font-mono: var(--font-sans);
 }
 
 :root,
 [data-theme='light'] {
-  --paper: #efe4ce;
-  --paper-deep: #e4d5b8;
-  --card: #fbf6ea;
-  --card-alt: #f6eeda;
-  --ink: #2c2418;
-  --ink-body: #4a3f2e;
-  --ink-soft: #7d6e57;
-  --rule: #d8c6a3;
-  --rule-soft: #e3d5b9;
-  --tape: rgba(224, 205, 158, 0.85);
-  --accent: #b0432c;
-  --accent-soft: #d9a08d;
-  --accent-ink: #8c3320;
-  --marker: #e8c96a;
-  --stamp: #2f6560;
-  --shadow: rgba(80, 62, 34, 0.18);
+  --canvas: #ffffff;
+  --surface-soft: #f7f7f7;
+  --surface-card: #fafafa;
+  --surface-strong: #ebebeb;
+  --ink: #262626;
+  --body: #3c3c3c;
+  --body-strong: #1a1a1a;
+  --muted: #6b6b6b;
+  --muted-soft: #9a9a9a;
+  --hairline: #e6e6e6;
+  --hairline-strong: #cccccc;
+  --accent-soft: #a9c7ec;
   color-scheme: light;
 }
 
 [data-theme='dark'] {
-  --paper: #1c1813;
-  --paper-deep: #15120e;
-  --card: #262019;
-  --card-alt: #2d2620;
-  --ink: #f3e9d6;
-  --ink-body: #ddd0b8;
-  --ink-soft: #a29175;
-  --rule: #453b2e;
-  --rule-soft: #362e24;
-  --tape: rgba(120, 102, 66, 0.6);
-  --accent: #e08163;
-  --accent-soft: #7c4433;
-  --accent-ink: #f0a186;
-  --marker: #7a6530;
-  --stamp: #6aa9a2;
-  --shadow: rgba(0, 0, 0, 0.5);
+  --canvas: #0d1013;
+  --surface-soft: #12161b;
+  --surface-card: #171c22;
+  --surface-strong: #20262d;
+  --ink: #f2f3f5;
+  --body: #c7ccd1;
+  --body-strong: #ffffff;
+  --muted: #9aa2ab;
+  --muted-soft: #6b727a;
+  --hairline: #242a31;
+  --hairline-strong: #333a42;
+  --primary-disabled: #33393f;
+  --accent-soft: #3d6ea8;
   color-scheme: dark;
 }
 
@@ -92,28 +145,29 @@ body::-webkit-scrollbar,
 }
 
 body {
-  background-color: var(--paper);
-  /* Faint fibre speckle so the beige reads as paper, not a flat fill.
-     Inline SVG keeps it self-contained — no image request. */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
-  color: var(--ink-body);
-  font-family: var(--font-body);
-  font-size: 17px;
-  line-height: 1.72;
+  background-color: var(--canvas);
+  color: var(--body);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  transition: background-color 0.2s var(--bezier), color 0.2s var(--bezier);
 }
 
+/* Display hierarchy: BMW Type Next Latin substitute runs heavy 700 against
+   Light 300 body copy. Weight 500/600 never appears. */
 h1,
 h2,
 h3,
 h4 {
-  font-family: var(--font-display);
+  font-family: var(--font-sans);
   color: var(--ink);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.15;
-  letter-spacing: -0.015em;
+  letter-spacing: 0;
   text-wrap: balance;
 }
 
@@ -124,11 +178,10 @@ a {
 
 p a,
 .prose a {
-  color: var(--accent-ink);
+  color: var(--primary);
   text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-thickness: 1px;
-  text-decoration-color: var(--accent-soft);
 }
 
 ::selection {
@@ -137,76 +190,73 @@ p a,
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--primary);
   outline-offset: 3px;
 }
 
-/* ---- Shared paper primitives ---- */
+/* ---- Shared primitives ---- */
 
-/* A sheet of paper: off-white card, hairline border, soft drop shadow. */
+/* A flat plate: canvas surface, hairline border, no shadow — the BMW card. */
 .sheet {
-  background: var(--card);
-  border: 1px solid var(--rule);
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
   border-radius: var(--radius);
-  box-shadow: 0 1px 0 var(--rule-soft), 0 10px 24px -18px var(--shadow);
 }
 
-/* Notebook ruling, used behind long-form text blocks. */
+/* Retained for compatibility; BMW's flat system has no ruled-paper texture. */
 .ruled {
-  background-image: repeating-linear-gradient(
-    to bottom,
-    transparent 0,
-    transparent 33px,
-    var(--rule-soft) 33px,
-    var(--rule-soft) 34px
-  );
+  background-image: none;
 }
 
-/* Handwritten aside, as if scribbled in the margin. */
+/* Retained for compatibility; BMW has no handwritten voice. Renders as body copy. */
 .hand {
-  font-family: var(--font-hand);
-  font-size: 1.32em;
-  line-height: 1.4;
-  color: var(--accent-ink);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  color: var(--primary-active);
 }
 
-/* Long-form article body, used on every blog-style page. Global rather than a
-   CSS module so the sub-pages can share one set of typographic rules. */
+/* Long-form article body, used on /work, /freelance, /open-source and every
+   project page. Global rather than a CSS module so the sub-pages can share
+   one set of typographic rules. */
 .prose {
   max-width: var(--prose-width);
-  font-size: 1.06rem;
-  line-height: 1.78;
-  color: var(--ink-body);
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--body);
 }
 
 .prose > * + * {
-  margin-top: 1.15em;
+  margin-top: 1.1em;
 }
 
 .prose h2 {
   margin-top: 2em;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
 .prose h3 {
   margin-top: 1.7em;
-  font-size: 1.22rem;
+  font-size: 1.15rem;
+  font-weight: 700;
 }
 
 .prose strong {
   color: var(--ink);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .prose blockquote {
   margin-left: 0;
   margin-right: 0;
   padding: 4px 0 4px 20px;
-  border-left: 2px solid var(--accent-soft);
-  font-family: var(--font-hand);
-  font-size: 1.34rem;
-  line-height: 1.45;
-  color: var(--accent-ink);
+  border-left: 2px solid var(--primary);
+  font-size: 1.1rem;
+  font-weight: 300;
+  font-style: normal;
+  line-height: 1.5;
+  color: var(--body-strong);
 }
 
 .prose ul {
@@ -217,6 +267,29 @@ p a,
   margin-top: 0.5em;
 }
 
+/* Uppercase, letter-spaced inline CTA — "LEARN MORE ›". The BMW label voice. */
+.labelLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+.labelLink svg,
+.labelLink .arrow {
+  transition: transform 0.25s var(--bezier);
+}
+
+.labelLink:hover .arrow,
+.labelLink:focus-visible .arrow {
+  transform: translateX(3px);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -224,5 +297,6 @@ p a,
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

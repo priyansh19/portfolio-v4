@@ -5,10 +5,16 @@ import styles from './page-header.module.css';
  * Masthead for the blog-style sub-pages. Always carries a breadcrumb trail so
  * home and the parent page are one click away from anywhere in the site.
  */
-export const PageHeader = ({ crumbs = [], kicker, title, tagline, meta = [] }) => (
+/**
+ * Every sub-page opens on the dark navy band — the structural rhythm the
+ * design system is built around. `visual` is an optional decorative element
+ * (e.g. a <GeometricForm />) rendered behind the copy.
+ */
+export const PageHeader = ({ crumbs = [], kicker, title, tagline, meta = [], visual }) => (
   <header className={styles.header}>
+    {visual && <div className={styles.visual}>{visual}</div>}
     <div className={styles.inner}>
-      <Breadcrumbs crumbs={[{ label: 'Home', href: '/' }, ...crumbs]} />
+      <Breadcrumbs onDark crumbs={[{ label: 'Home', href: '/' }, ...crumbs]} />
 
       {kicker && <p className={styles.kicker}>{kicker}</p>}
       <h1 className={styles.title}>{title}</h1>
