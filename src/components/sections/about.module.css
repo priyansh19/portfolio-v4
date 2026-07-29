@@ -31,7 +31,7 @@
   font-size: 3.4em;
   font-weight: 600;
   line-height: 0.8;
-  color: var(--accent);
+  color: var(--ink);
 }
 
 .scribble {
@@ -39,9 +39,10 @@
   padding-left: 18px;
   border-left: 2px solid var(--accent-soft);
   font-family: var(--font-hand);
-  font-size: 1.34rem;
+  font-weight: 500;
+  font-size: 1.2rem;
   line-height: 1.4;
-  color: var(--accent-ink);
+  color: var(--ink);
 }
 
 .foot {

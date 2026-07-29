@@ -1,23 +1,19 @@
-import { Caveat, Fraunces, Lora } from 'next/font/google';
+import { Geist_Mono, Inter } from 'next/font/google';
 import { ThemeProvider } from '@/components/theme-provider';
 import { links, profile } from '@/lib/content';
 import { siteUrl } from '@/lib/site';
 import './globals.css';
 
-const fraunces = Fraunces({
-  variable: '--font-fraunces',
+// Inter carries every UI surface — headings, body, labels. Geist Mono is
+// reserved for code-ish chips and captions. No third typeface.
+const inter = Inter({
+  variable: '--font-inter',
   subsets: ['latin'],
   display: 'swap',
 });
 
-const lora = Lora({
-  variable: '--font-lora',
-  subsets: ['latin'],
-  display: 'swap',
-});
-
-const caveat = Caveat({
-  variable: '--font-caveat',
+const geistMono = Geist_Mono({
+  variable: '--font-geist-mono',
   subsets: ['latin'],
   display: 'swap',
 });
@@ -71,8 +67,8 @@ export const metadata = {
 
 export const viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#efe4ce' },
-    { media: '(prefers-color-scheme: dark)', color: '#1c1813' },
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#0a0a0a' },
   ],
 };
 
@@ -81,7 +77,7 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       data-theme="light"
-      className={`${fraunces.variable} ${lora.variable} ${caveat.variable}`}
+      className={`${inter.variable} ${geistMono.variable}`}
       suppressHydrationWarning
     >
       <head>

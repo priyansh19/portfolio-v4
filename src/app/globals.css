@@ -1,62 +1,126 @@
 @import 'tailwindcss';
 
 /*
- * Slam-book / scrapbook direction: warm paper, ink, tape and ruled lines.
- * Layout-first phase — no 3D scenes, no scroll animation.
+ * Mintlify direction: flat white/near-black canvas, hairline borders, pill
+ * buttons, Inter for prose and Geist Mono for code-ish labels. Signature mint
+ * (#00d4a4) is rationed to accent CTAs and active-state indicators — never
+ * body text, never a large surface.
+ *
+ * Token names below are kept from the previous "slam-book" pass where the
+ * role still fits (--ink, --card, --rule, --font-mono, ...) so every
+ * component CSS module keeps working untouched; only the values — and a
+ * couple of variables whose old role no longer makes sense — changed.
  */
 
 :root {
-  --font-display: var(--font-fraunces), Georgia, 'Times New Roman', serif;
-  --font-body: var(--font-lora), Georgia, 'Times New Roman', serif;
-  --font-hand: var(--font-caveat), 'Segoe Script', cursive;
-  --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  /* Inter carries every UI surface; Geist Mono is reserved for code-ish
+     labels (periods, stack tags, monospace captions). No third typeface. */
+  --font-display: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-hand: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: var(--font-geist-mono), 'SF Mono', Menlo, Consolas, 'Geist Mono Fallback', monospace;
 
   /* The page fills the viewport — only the gutter holds content off the edge.
      Long-form text is still capped by --prose-width so lines stay readable. */
   --page-width: 100%;
   --prose-width: 72ch;
   --gutter: clamp(20px, 4vw, 72px);
-  --radius: 3px;
+
+  /* Radius scale — disciplined per the spec: 12px for cards, 8px only for
+     compact UI (unused here today, kept for parity), pill for every button,
+     tab, tag and badge. Nothing sits between 8px and 12px. */
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-xs: 6px;
+  --radius-pill: 9999px;
+
+  /* Spacing scale, 4px base / 8px increment. Section paddings still flex with
+     clamp() for fluid layout, but these are here for anything that wants a
+     fixed step. */
+  --space-xxs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 20px;
+  --space-xl: 24px;
+  --space-xxl: 32px;
+  --space-xxxl: 40px;
+  --space-section-sm: 48px;
+  --space-section: 64px;
+  --space-section-lg: 96px;
+  --space-hero: 120px;
+
+  /* Homepage hero atmosphere — sky-blue easing to cream, per the design spec.
+     Dark theme swaps this out for a flat canvas (see below); an atmospheric
+     pastel wash reads wrong against a near-black page. */
+  --hero-sky-from: #87a8c8;
+  --hero-sky-to: #f5e9d8;
+
+  /* Mint is fixed across both themes (a signature accent should not drift),
+     and its paired text colour is always the fixed dark ink from the spec —
+     not the theme's flipped --ink — so accent-on-mint stays readable in dark
+     mode too. */
+  --accent: #00d4a4;
+  --accent-deep: #00b48a;
+  --accent-soft: #7cebcb;
+  --accent-on: #0a0a0a;
+
+  /* Alias kept from the previous pass: every "kicker / label / link-hover"
+     rule across the component CSS modules points at --accent-ink. It now
+     resolves to the theme's ink rather than a saturated accent colour —
+     mint is not allowed on body text or link text per the spec, so the
+     quiet, high-contrast fix is to fold this into plain ink. */
+  --accent-ink: var(--ink);
 }
 
 :root,
 [data-theme='light'] {
-  --paper: #efe4ce;
-  --paper-deep: #e4d5b8;
-  --card: #fbf6ea;
-  --card-alt: #f6eeda;
-  --ink: #2c2418;
-  --ink-body: #4a3f2e;
-  --ink-soft: #7d6e57;
-  --rule: #d8c6a3;
-  --rule-soft: #e3d5b9;
-  --tape: rgba(224, 205, 158, 0.85);
-  --accent: #b0432c;
-  --accent-soft: #d9a08d;
-  --accent-ink: #8c3320;
-  --marker: #e8c96a;
-  --stamp: #2f6560;
-  --shadow: rgba(80, 62, 34, 0.18);
+  --paper: #ffffff;
+  --paper-deep: #f7f7f7;
+  --card: #ffffff;
+  --card-alt: #f7f7f7;
+  --ink: #0a0a0a;
+  --ink-body: #1c1c1e;
+  --ink-soft: #5a5a5c;
+  --ink-muted: #a8a8aa;
+  --rule: #e5e5e5;
+  --rule-soft: #ededed;
+  --stamp: var(--accent);
+  --marker: rgba(0, 212, 164, 0.3);
+  --shadow: rgba(10, 10, 10, 0.12);
+  --btn-primary-bg: var(--ink);
+  --btn-primary-text: var(--paper);
+  --btn-primary-hover: #1c1c1e;
+  --hero-gradient: linear-gradient(
+    180deg,
+    var(--hero-sky-from) 0%,
+    var(--hero-sky-to) 45%,
+    var(--paper) 72%
+  );
   color-scheme: light;
 }
 
 [data-theme='dark'] {
-  --paper: #1c1813;
-  --paper-deep: #15120e;
-  --card: #262019;
-  --card-alt: #2d2620;
-  --ink: #f3e9d6;
-  --ink-body: #ddd0b8;
-  --ink-soft: #a29175;
-  --rule: #453b2e;
-  --rule-soft: #362e24;
-  --tape: rgba(120, 102, 66, 0.6);
-  --accent: #e08163;
-  --accent-soft: #7c4433;
-  --accent-ink: #f0a186;
-  --marker: #7a6530;
-  --stamp: #6aa9a2;
-  --shadow: rgba(0, 0, 0, 0.5);
+  --paper: #0a0a0a;
+  --paper-deep: #141414;
+  --card: #0a0a0a;
+  --card-alt: #1c1c1e;
+  --ink: #ffffff;
+  --ink-body: #e5e5e5;
+  --ink-soft: #b3b3b3;
+  --ink-muted: #888888;
+  --rule: #1f1f1f;
+  --rule-soft: #262626;
+  --stamp: var(--accent);
+  --marker: rgba(0, 212, 164, 0.35);
+  --shadow: rgba(0, 0, 0, 0.55);
+  --btn-primary-bg: var(--ink);
+  --btn-primary-text: var(--paper);
+  --btn-primary-hover: #e5e5e5;
+  /* No published atmospheric dark hero in the source spec — a light sky
+     wash would fight the near-black canvas, so dark mode gets a flat page
+     background instead of the gradient band. */
+  --hero-gradient: none;
   color-scheme: dark;
 }
 
@@ -93,13 +157,10 @@ body::-webkit-scrollbar,
 
 body {
   background-color: var(--paper);
-  /* Faint fibre speckle so the beige reads as paper, not a flat fill.
-     Inline SVG keeps it self-contained — no image request. */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
   color: var(--ink-body);
   font-family: var(--font-body);
-  font-size: 17px;
-  line-height: 1.72;
+  font-size: 16px;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -113,7 +174,7 @@ h4 {
   color: var(--ink);
   font-weight: 600;
   line-height: 1.15;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.02em;
   text-wrap: balance;
 }
 
@@ -124,11 +185,11 @@ a {
 
 p a,
 .prose a {
-  color: var(--accent-ink);
+  color: var(--ink);
   text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-thickness: 1px;
-  text-decoration-color: var(--accent-soft);
+  text-decoration-color: var(--rule);
 }
 
 ::selection {
@@ -141,17 +202,16 @@ p a,
   outline-offset: 3px;
 }
 
-/* ---- Shared paper primitives ---- */
+/* ---- Shared primitives ---- */
 
-/* A sheet of paper: off-white card, hairline border, soft drop shadow. */
+/* A flat card: canvas background, hairline border, 12px radius, no shadow. */
 .sheet {
   background: var(--card);
   border: 1px solid var(--rule);
   border-radius: var(--radius);
-  box-shadow: 0 1px 0 var(--rule-soft), 0 10px 24px -18px var(--shadow);
 }
 
-/* Notebook ruling, used behind long-form text blocks. */
+/* Quiet rule lines behind long-form text blocks. */
 .ruled {
   background-image: repeating-linear-gradient(
     to bottom,
@@ -162,20 +222,23 @@ p a,
   );
 }
 
-/* Handwritten aside, as if scribbled in the margin. */
+/* Editorial aside / pull-quote emphasis. Weight and colour carry the
+   emphasis now rather than a second typeface or italics, per the spec. */
 .hand {
   font-family: var(--font-hand);
-  font-size: 1.32em;
+  font-weight: 500;
+  font-size: 1.15em;
   line-height: 1.4;
-  color: var(--accent-ink);
+  color: var(--ink);
 }
 
 /* Long-form article body, used on every blog-style page. Global rather than a
-   CSS module so the sub-pages can share one set of typographic rules. */
+   CSS module so the sub-pages can share one set of typographic rules.
+   16px / 1.50 — documentation-grade reading, never compressed. */
 .prose {
   max-width: var(--prose-width);
-  font-size: 1.06rem;
-  line-height: 1.78;
+  font-size: 1rem;
+  line-height: 1.5;
   color: var(--ink-body);
 }
 
@@ -203,10 +266,10 @@ p a,
   margin-right: 0;
   padding: 4px 0 4px 20px;
   border-left: 2px solid var(--accent-soft);
-  font-family: var(--font-hand);
-  font-size: 1.34rem;
-  line-height: 1.45;
-  color: var(--accent-ink);
+  font-weight: 500;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: var(--ink);
 }
 
 .prose ul {

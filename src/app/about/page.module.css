@@ -28,7 +28,7 @@
   font-size: 3.4em;
   font-weight: 600;
   line-height: 0.8;
-  color: var(--accent);
+  color: var(--ink);
 }
 
 .prose blockquote {
@@ -36,9 +36,10 @@
   padding: 4px 0 4px 20px;
   border-left: 2px solid var(--accent-soft);
   font-family: var(--font-hand);
-  font-size: 1.36rem;
+  font-weight: 500;
+  font-size: 1.2rem;
   line-height: 1.45;
-  color: var(--accent-ink);
+  color: var(--ink);
 }
 
 .side {
@@ -214,7 +215,7 @@
   padding: 5px 11px;
   background: var(--card-alt);
   border: 1px solid var(--rule-soft);
-  border-radius: var(--radius);
+  border-radius: var(--radius-pill);
   font-size: 0.86rem;
   color: var(--ink-body);
 }

@@ -16,23 +16,24 @@ export default function Image() {
           flexDirection: 'column',
           justifyContent: 'space-between',
           padding: '72px 80px',
-          background: '#efe4ce',
-          color: '#2c2418',
-          fontFamily: 'Georgia, serif',
+          background: '#ffffff',
+          color: '#0a0a0a',
+          fontFamily: 'Inter, sans-serif',
         }}
       >
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <div
             style={{
-              fontSize: 24,
-              letterSpacing: 6,
+              fontSize: 20,
+              letterSpacing: 2,
               textTransform: 'uppercase',
-              color: '#8c3320',
+              fontWeight: 600,
+              color: '#5a5a5c',
             }}
           >
             {profile.role}
           </div>
-          <div style={{ fontSize: 96, fontWeight: 700, marginTop: 18, lineHeight: 1.05 }}>
+          <div style={{ fontSize: 92, fontWeight: 600, marginTop: 18, lineHeight: 1.05, letterSpacing: -3 }}>
             {profile.name}
           </div>
         </div>
@@ -41,14 +42,14 @@ export default function Image() {
           style={{
             display: 'flex',
             flexDirection: 'column',
-            borderTop: '2px solid #d8c6a3',
+            borderTop: '1px solid #e5e5e5',
             paddingTop: 28,
           }}
         >
-          <div style={{ fontSize: 30, color: '#4a3f2e', lineHeight: 1.4 }}>
+          <div style={{ fontSize: 28, color: '#1c1c1e', lineHeight: 1.4 }}>
             Agentic AI platforms, RAG at enterprise scale, and the Kubernetes
           </div>
-          <div style={{ fontSize: 30, color: '#4a3f2e', lineHeight: 1.4 }}>
+          <div style={{ fontSize: 28, color: '#1c1c1e', lineHeight: 1.4 }}>
             plumbing that keeps them alive.
           </div>
         </div>

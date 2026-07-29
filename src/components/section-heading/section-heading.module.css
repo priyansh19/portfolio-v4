@@ -4,18 +4,22 @@
   border-bottom: 2px solid var(--rule);
 }
 
+/* Uppercase micro label — 11px/600 with +0.5px tracking, per the spec's
+   sidebar-section-header treatment. */
 .eyebrow {
   margin: 0 0 8px;
   font-family: var(--font-mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.2em;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
-  color: var(--accent-ink);
+  color: var(--ink-soft);
 }
 
 .title {
   margin: 0;
   font-size: clamp(1.9rem, 4.2vw, 2.9rem);
+  letter-spacing: -0.02em;
 }
 
 .lede {
@@ -28,6 +32,7 @@
 .aside {
   margin: 12px 0 0;
   font-family: var(--font-hand);
-  font-size: 1.25rem;
-  color: var(--accent-ink);
+  font-weight: 500;
+  font-size: 1.05rem;
+  color: var(--ink-soft);
 }

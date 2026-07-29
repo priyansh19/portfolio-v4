@@ -1,22 +1,14 @@
+/* Flat bordered media tile — 12px radius, hairline border, no shadow, no
+   rotation or tape. `data-tilt` / `data-tape` are accepted on the element for
+   API compatibility but carry no styling. */
 .polaroid {
   position: relative;
   margin: 0;
-  padding: 12px 12px 0;
+  padding: 0;
   background: var(--card);
   border: 1px solid var(--rule);
-  box-shadow: 0 12px 26px -18px var(--shadow), 0 2px 0 var(--rule-soft);
-}
-
-.polaroid[data-tilt='left'] {
-  transform: rotate(-1.8deg);
-}
-
-.polaroid[data-tilt='right'] {
-  transform: rotate(1.6deg);
-}
-
-.polaroid[data-tilt='none'] {
-  transform: none;
+  border-radius: var(--radius);
+  overflow: hidden;
 }
 
 .polaroid[data-size='sm'] {
@@ -32,33 +24,10 @@
   max-width: 380px;
 }
 
-/* Strip of masking tape */
-.tape {
-  position: absolute;
-  width: 88px;
-  height: 26px;
-  background: var(--tape);
-  border-left: 1px dashed rgba(255, 255, 255, 0.35);
-  border-right: 1px dashed rgba(255, 255, 255, 0.35);
-  box-shadow: 0 1px 3px -1px var(--shadow);
-}
-
-.tape[data-tape='top'] {
-  top: -13px;
-  left: 50%;
-  transform: translateX(-50%) rotate(-2deg);
-}
-
-.tape[data-tape='corner'] {
-  top: -14px;
-  left: -22px;
-  transform: rotate(-38deg);
-}
-
 .window {
   aspect-ratio: 4 / 3;
   overflow: hidden;
-  background: var(--paper-deep);
+  background: var(--card-alt);
 }
 
 .image {
@@ -76,7 +45,6 @@
   gap: 6px;
   width: 100%;
   height: 100%;
-  border: 1px dashed var(--rule);
   color: var(--ink-soft);
 }
 
@@ -95,10 +63,10 @@
 }
 
 .caption {
-  padding: 10px 2px 14px;
-  font-family: var(--font-hand);
-  font-size: 1.15rem;
+  padding: 10px 12px 12px;
+  border-top: 1px solid var(--rule);
+  font-size: 0.9rem;
   line-height: 1.3;
-  text-align: center;
+  text-align: left;
   color: var(--ink-body);
 }

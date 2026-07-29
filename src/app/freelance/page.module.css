@@ -150,9 +150,10 @@
 .quote {
   margin: 0 0 12px;
   font-family: var(--font-hand);
-  font-size: 1.3rem;
+  font-weight: 500;
+  font-size: 1.1rem;
   line-height: 1.45;
-  color: var(--accent-ink);
+  color: var(--ink);
 }
 
 .attribution {
@@ -290,8 +291,9 @@
 .ctaHand {
   margin: 0 0 10px;
   font-family: var(--font-hand);
-  font-size: 1.7rem;
-  color: var(--accent-ink);
+  font-weight: 500;
+  font-size: 1.4rem;
+  color: var(--ink);
 }
 
 .ctaBody {
@@ -303,18 +305,19 @@
 .ctaButton {
   display: inline-block;
   padding: 12px 26px;
-  background: var(--accent);
-  border: 1px solid var(--accent);
-  border-radius: var(--radius);
+  background: var(--btn-primary-bg);
+  border: 1px solid var(--btn-primary-bg);
+  border-radius: var(--radius-pill);
   font-family: var(--font-display);
   font-size: 0.98rem;
-  color: #fdf6ea;
+  font-weight: 500;
+  color: var(--btn-primary-text);
   transition: background-color 0.15s ease;
 }
 
 .ctaButton:hover {
-  background: var(--accent-ink);
-  border-color: var(--accent-ink);
+  background: var(--btn-primary-hover);
+  border-color: var(--btn-primary-hover);
 }
 
 @media (max-width: 860px) {
