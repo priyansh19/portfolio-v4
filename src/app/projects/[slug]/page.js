@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation';
 import { Nav } from '@/components/nav/nav';
 import { PageHeader } from '@/components/page-header/page-header';
 import { Polaroid } from '@/components/polaroid/polaroid';
+import { Reveal } from '@/components/reveal/reveal';
+import { ScrollProgress } from '@/components/scroll-progress/scroll-progress';
 import { SiteFooter } from '@/components/site-footer/site-footer';
 import { projectBySlug, projects } from '@/lib/content';
 import styles from './page.module.css';
@@ -46,6 +48,7 @@ export default async function ProjectPage({ params }) {
 
   return (
     <>
+      <ScrollProgress />
       <Nav />
 
       <PageHeader
@@ -63,16 +66,16 @@ export default async function ProjectPage({ params }) {
       <main className={styles.main}>
         <div className={styles.layout}>
           <article className={styles.article}>
-            <section className={styles.block}>
+            <Reveal as="section" className={styles.block}>
               <h2 className={styles.blockTitle}>The problem</h2>
               <div className="prose">
                 {project.problem.map(paragraph => (
                   <p key={paragraph}>{paragraph}</p>
                 ))}
               </div>
-            </section>
+            </Reveal>
 
-            <section className={styles.block}>
+            <Reveal as="section" className={styles.block}>
               <h2 className={styles.blockTitle}>How it was built</h2>
               <ol className={styles.steps}>
                 {project.approach.map((step, index) => (
@@ -87,10 +90,10 @@ export default async function ProjectPage({ params }) {
                   </li>
                 ))}
               </ol>
-            </section>
+            </Reveal>
 
             {project.architecture && (
-              <section className={styles.block}>
+              <Reveal as="section" className={styles.block}>
                 <h2 className={styles.blockTitle}>How it fits together</h2>
                 <p className={styles.caption}>{project.architecture.caption}</p>
 
@@ -108,10 +111,10 @@ export default async function ProjectPage({ params }) {
                     </li>
                   ))}
                 </ol>
-              </section>
+              </Reveal>
             )}
 
-            <section className={styles.block}>
+            <Reveal as="section" className={styles.block}>
               <h2 className={styles.blockTitle}>Worth noting</h2>
               <ul className={styles.highlights}>
                 {project.highlights.map(item => (
@@ -120,7 +123,7 @@ export default async function ProjectPage({ params }) {
                   </li>
                 ))}
               </ul>
-            </section>
+            </Reveal>
           </article>
 
           <aside className={styles.sidebar}>

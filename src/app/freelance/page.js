@@ -1,6 +1,8 @@
 import { Nav } from '@/components/nav/nav';
 import { PageHeader } from '@/components/page-header/page-header';
 import { Polaroid } from '@/components/polaroid/polaroid';
+import { Reveal, RevealGroup, RevealItem } from '@/components/reveal/reveal';
+import { ScrollProgress } from '@/components/scroll-progress/scroll-progress';
 import { SiteFooter } from '@/components/site-footer/site-footer';
 import { freelance, links } from '@/lib/content';
 import styles from './page.module.css';
@@ -21,6 +23,7 @@ export default function FreelancePage() {
 
   return (
     <>
+      <ScrollProgress />
       <Nav />
 
       <PageHeader
@@ -109,9 +112,9 @@ export default function FreelancePage() {
 
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>What I take on</h2>
-          <ul className={styles.services}>
+          <RevealGroup as="ul" className={styles.services}>
             {freelance.services.map(service => (
-              <li className={styles.service} key={service.id}>
+              <RevealItem as="li" className={styles.service} key={service.id}>
                 <h3 className={styles.serviceTitle}>{service.title}</h3>
                 <p className={styles.serviceBody}>{service.body}</p>
                 <ul className={styles.tags}>
@@ -121,9 +124,9 @@ export default function FreelancePage() {
                     </li>
                   ))}
                 </ul>
-              </li>
+              </RevealItem>
             ))}
-          </ul>
+          </RevealGroup>
         </section>
 
         <section className={styles.section}>
@@ -153,7 +156,7 @@ export default function FreelancePage() {
           </ul>
         </section>
 
-        <section className={styles.cta}>
+        <Reveal as="section" className={styles.cta}>
           <p className={styles.ctaHand}>Got something that needs to actually ship?</p>
           <p className={styles.ctaBody}>
             Tell me the problem and the constraints. If it is not something I should take,
@@ -162,7 +165,7 @@ export default function FreelancePage() {
           <a className={styles.ctaButton} href={`mailto:${links.email}`}>
             Get in touch
           </a>
-        </section>
+        </Reveal>
       </main>
 
       <SiteFooter />

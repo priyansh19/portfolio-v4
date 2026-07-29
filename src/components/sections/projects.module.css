@@ -1,11 +1,12 @@
 .section {
-  padding: clamp(48px, 7vw, 84px) var(--gutter);
-  border-top: 1px solid var(--rule);
+  padding: 0 var(--gutter);
+  border-top: 1px solid var(--hairline);
 }
 
 .inner {
-  max-width: var(--page-width);
+  max-width: var(--content-max);
   margin: 0 auto;
+  padding: var(--space-section) 0;
 }
 
 .list {
@@ -23,15 +24,15 @@
   gap: clamp(22px, 4vw, 44px);
   align-items: center;
   padding: clamp(20px, 3vw, 30px);
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  box-shadow: 0 8px 22px -20px var(--shadow);
-  transition: border-color 0.15s ease;
+  background: var(--surface-card);
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-lg);
+  transition: border-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
 }
 
 .card:hover {
-  border-color: var(--accent-soft);
+  border-color: var(--ink);
+  box-shadow: 0 4px 12px var(--shadow-soft);
 }
 
 .photo {
@@ -48,41 +49,38 @@
   margin: 0;
   font-family: var(--font-mono);
   font-size: 0.64rem;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--ink-soft);
+  color: var(--muted);
 }
 
 .name {
   margin: 4px 0 0;
-  font-size: clamp(1.4rem, 3vw, 1.95rem);
+  font-size: clamp(1.3rem, 3vw, 1.75rem);
 }
 
 .nameLink {
   color: var(--ink);
-  transition: color 0.15s ease;
+  transition: color var(--duration-fast) ease;
 }
 
 .nameLink:hover {
-  color: var(--accent-ink);
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 1px;
+  color: var(--text-link);
 }
 
 .subtitle {
   margin: 4px 0 0;
-  font-family: var(--font-hand);
-  font-size: 1.2rem;
-  color: var(--accent-ink);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-link);
 }
 
 .description {
   max-width: 62ch;
   margin: 12px 0 0;
   font-size: 0.98rem;
-  line-height: 1.66;
-  color: var(--ink-body);
+  line-height: 1.6;
+  color: var(--body);
 }
 
 .stack {
@@ -96,11 +94,11 @@
 
 .tech {
   padding: 3px 10px;
-  border: 1px solid var(--rule);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-strong);
   font-family: var(--font-mono);
   font-size: 0.63rem;
-  color: var(--ink-soft);
+  color: var(--body);
 }
 
 /* Per-project button through to the full write-up */
@@ -109,55 +107,42 @@
   align-items: center;
   gap: 9px;
   margin-top: 20px;
-  padding: 10px 20px;
-  background: var(--card-alt);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  font-family: var(--font-display);
-  font-size: 0.94rem;
+  padding: 9px 18px;
+  background: var(--surface-card);
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-md);
+  font-size: 0.88rem;
+  font-weight: 500;
   color: var(--ink);
-  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  transition: background-color var(--duration-fast) ease, border-color var(--duration-fast) ease,
+    color var(--duration-fast) ease;
 }
 
 .button:hover,
 .button:focus-visible {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #fdf6ea;
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--on-primary);
 }
 
 .buttonArrow {
-  transition: transform 0.15s ease;
+  transition: transform var(--duration-fast) ease;
 }
 
 .button:hover .buttonArrow {
   transform: translateX(3px);
 }
 
-/* Gives the button an unambiguous label for screen readers without
-   repeating the project name visually on every card. */
-.srOnly {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-  border: 0;
-}
-
 .foot {
   margin-top: clamp(24px, 3vw, 34px);
   padding-top: 22px;
-  border-top: 2px solid var(--rule);
+  border-top: 1px solid var(--hairline);
 }
 
 .footLink {
-  font-family: var(--font-display);
-  font-size: 0.98rem;
-  color: var(--accent-ink);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-link);
 }
 
 .footLink:hover {
@@ -168,7 +153,6 @@
 @media (max-width: 780px) {
   .card {
     grid-template-columns: minmax(0, 1fr);
-    gap: 24px;
   }
 
   .photo {

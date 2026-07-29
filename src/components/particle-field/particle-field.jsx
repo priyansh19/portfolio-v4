@@ -16,7 +16,7 @@ import {
   WebGLRenderer,
 } from 'three';
 import { useTheme } from '@/components/theme-provider';
-import { useInViewport, useWindowSize } from '@/lib/hooks';
+import { useInViewport } from '@/lib/hooks';
 import { throttle } from '@/lib/throttle';
 import { cleanRenderer, cleanScene } from '@/lib/three-utils';
 import styles from './particle-field.module.css';
@@ -56,10 +56,13 @@ const pointFragment = /* glsl */ `
 
 /**
  * Drifting constellation of nodes with links that form and break as
- * particles move. Sits behind page content as a fixed backdrop.
+ * particles move. Fills its parent element (sized via ResizeObserver, not
+ * the viewport) — meant to sit inside a positioned container such as the
+ * hero, not as a full-page fixed backdrop.
  */
-export const ParticleField = props => {
+export const ParticleField = ({ className = '', ...rest }) => {
   const { theme } = useTheme();
+  const containerRef = useRef();
   const canvasRef = useRef();
   const renderer = useRef();
   const camera = useRef();
@@ -72,13 +75,14 @@ export const ParticleField = props => {
   const pointer = useRef({ x: 0, y: 0, tx: 0, ty: 0 });
   const clock = useRef(0);
   const reduceMotion = useReducedMotion();
-  const isInViewport = useInViewport(canvasRef);
-  const windowSize = useWindowSize();
+  const isInViewport = useInViewport(containerRef);
   const [visible, setVisible] = useState(false);
 
   // Build the scene once — theme only swaps material colours afterwards.
   useEffect(() => {
-    const { innerWidth, innerHeight } = window;
+    const container = containerRef.current;
+    const width = container.clientWidth || 1;
+    const height = container.clientHeight || 1;
 
     renderer.current = new WebGLRenderer({
       canvas: canvasRef.current,
@@ -86,11 +90,12 @@ export const ParticleField = props => {
       alpha: true,
       powerPreference: 'high-performance',
     });
-    renderer.current.setSize(innerWidth, innerHeight);
+    // updateStyle=false: CSS owns the canvas box, the renderer only owns pixels
+    renderer.current.setSize(width, height, false);
     renderer.current.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
 
-    camera.current = new PerspectiveCamera(60, innerWidth / innerHeight, 1, 400);
-    camera.current.position.z = 110;
+    camera.current = new PerspectiveCamera(60, width / height, 1, 400);
+    camera.current.position.z = width < 700 ? 150 : 110;
 
     scene.current = new Scene();
 
@@ -120,8 +125,8 @@ export const ParticleField = props => {
     const pointMaterial = new ShaderMaterial({
       uniforms: {
         time: { value: 0 },
-        color: { value: new Color(0x5ee7f5) },
-        opacity: { value: 0.9 },
+        color: { value: new Color(0x0d74ce) },
+        opacity: { value: 0.6 },
       },
       vertexShader: pointVertex,
       fragmentShader: pointFragment,
@@ -140,9 +145,9 @@ export const ParticleField = props => {
     lineGeometry.setDrawRange(0, 0);
 
     const lineMaterial = new LineBasicMaterial({
-      color: new Color(0x5ee7f5),
+      color: new Color(0x0d74ce),
       transparent: true,
-      opacity: 0.16,
+      opacity: 0.14,
       depthWrite: false,
       blending: AdditiveBlending,
     });
@@ -163,33 +168,45 @@ export const ParticleField = props => {
     };
   }, []);
 
-  // Theme swap: warm the palette down for light mode so it stays legible.
+  // Theme swap: sky blue for dark canvases, a deeper text-link blue for light.
   useEffect(() => {
     if (!points.current) return;
 
     const isLight = theme === 'light';
-    const color = new Color(isLight ? 0x1f6f8b : 0x5ee7f5);
+    const color = new Color(isLight ? 0x0d74ce : 0x5eb0ff);
 
     points.current.material.uniforms.color.value = color;
-    points.current.material.uniforms.opacity.value = isLight ? 0.55 : 0.9;
+    points.current.material.uniforms.opacity.value = isLight ? 0.45 : 0.75;
     lines.current.material.color = color;
-    lines.current.material.opacity = isLight ? 0.12 : 0.16;
+    lines.current.material.opacity = isLight ? 0.1 : 0.15;
   }, [theme]);
 
+  // Resize with the container, not the window — this field lives inside a
+  // positioned parent (the hero), not as a full-viewport fixed backdrop.
   useEffect(() => {
-    if (!renderer.current) return;
+    const container = containerRef.current;
+    if (!container) return;
 
-    const { width, height } = windowSize;
-    renderer.current.setSize(width, height);
-    camera.current.aspect = width / height;
-    // Pull the camera back on narrow screens so the field still fills the frame
-    camera.current.position.z = width < 700 ? 150 : 110;
-    camera.current.updateProjectionMatrix();
+    const resize = () => {
+      if (!renderer.current) return;
+      const width = container.clientWidth || 1;
+      const height = container.clientHeight || 1;
+      renderer.current.setSize(width, height, false);
+      camera.current.aspect = width / height;
+      camera.current.position.z = width < 700 ? 150 : 110;
+      camera.current.updateProjectionMatrix();
 
-    if (reduceMotion) {
-      renderer.current.render(scene.current, camera.current);
-    }
-  }, [reduceMotion, windowSize]);
+      if (reduceMotion) {
+        renderer.current.render(scene.current, camera.current);
+      }
+    };
+
+    const observer = new ResizeObserver(resize);
+    observer.observe(container);
+    resize();
+
+    return () => observer.disconnect();
+  }, [reduceMotion]);
 
   useEffect(() => {
     const onPointerMove = throttle(event => {
@@ -276,12 +293,8 @@ export const ParticleField = props => {
   }, [isInViewport, reduceMotion]);
 
   return (
-    <canvas
-      aria-hidden
-      className={styles.canvas}
-      data-visible={visible}
-      ref={canvasRef}
-      {...props}
-    />
+    <div className={`${styles.container} ${className}`} ref={containerRef} aria-hidden {...rest}>
+      <canvas className={styles.canvas} data-visible={visible} ref={canvasRef} />
+    </div>
   );
 };

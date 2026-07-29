@@ -1,5 +1,5 @@
 .main {
-  max-width: var(--page-width);
+  max-width: var(--content-max);
   margin: 0 auto;
   padding: clamp(36px, 5vw, 60px) var(--gutter) clamp(48px, 6vw, 72px);
 }
@@ -7,27 +7,30 @@
 .narrativeTitle {
   margin: 0 0 20px;
   font-size: clamp(1.5rem, 3.2vw, 2rem);
+  color: var(--ink);
 }
 
 .section {
   margin-top: clamp(44px, 6vw, 70px);
   padding-top: clamp(32px, 4vw, 44px);
-  border-top: 1px solid var(--rule);
+  border-top: 1px solid var(--hairline);
 }
 
 .sectionTitle {
   margin: 0 0 24px;
   font-size: clamp(1.4rem, 3vw, 1.85rem);
+  color: var(--ink);
 }
 
 .note {
   max-width: var(--prose-width);
   margin: -8px 0 26px;
   padding: 14px 18px;
-  background: var(--card-alt);
-  border-left: 2px solid var(--accent-soft);
+  background: var(--surface-strong);
+  border-left: 2px solid var(--text-link);
+  border-radius: var(--radius-md);
   font-size: 0.96rem;
-  color: var(--ink-body);
+  color: var(--body);
 }
 
 .list {
@@ -58,33 +61,33 @@
   margin: 0;
   font-family: var(--font-mono);
   font-size: 0.68rem;
-  letter-spacing: 0.13em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--ink-soft);
+  color: var(--muted);
 }
 
 .badge {
   padding: 2px 9px;
-  border: 1px solid var(--stamp);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--success) 14%, transparent);
   font-family: var(--font-mono);
   font-size: 0.58rem;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--stamp);
+  color: var(--success);
 }
 
 .card {
   padding: clamp(20px, 3vw, 30px);
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  box-shadow: 0 8px 22px -20px var(--shadow);
+  background: var(--surface-card);
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-lg);
 }
 
 .role {
   margin: 0;
   font-size: clamp(1.2rem, 2.4vw, 1.5rem);
+  color: var(--ink);
 }
 
 .company {
@@ -94,15 +97,16 @@
   gap: 10px;
   margin: 5px 0 18px;
   font-size: 0.97rem;
-  color: var(--accent-ink);
+  font-weight: 500;
+  color: var(--text-link);
 }
 
 .scope {
   font-family: var(--font-mono);
   font-size: 0.64rem;
-  letter-spacing: 0.13em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--ink-soft);
+  color: var(--muted);
 }
 
 .points {
@@ -118,14 +122,19 @@
   position: relative;
   padding-left: 20px;
   font-size: 0.98rem;
-  line-height: 1.66;
+  line-height: 1.6;
+  color: var(--body);
 }
 
 .point::before {
-  content: '—';
+  content: '';
   position: absolute;
-  left: 0;
-  color: var(--accent-soft);
+  left: 2px;
+  top: 0.65em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--text-link);
 }
 
 .tags {
@@ -134,17 +143,17 @@
   gap: 6px;
   margin: 20px 0 0;
   padding: 16px 0 0;
-  border-top: 1px dashed var(--rule);
+  border-top: 1px solid var(--hairline);
   list-style: none;
 }
 
 .tag {
   padding: 3px 10px;
-  border: 1px solid var(--rule);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-strong);
   font-family: var(--font-mono);
   font-size: 0.64rem;
-  color: var(--ink-soft);
+  color: var(--body);
 }
 
 @media (max-width: 760px) {

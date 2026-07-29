@@ -1,11 +1,12 @@
 .section {
-  padding: clamp(48px, 7vw, 84px) var(--gutter);
-  border-top: 1px solid var(--rule);
+  padding: 0 var(--gutter);
+  border-top: 1px solid var(--hairline);
 }
 
 .inner {
-  max-width: var(--page-width);
+  max-width: var(--content-max);
   margin: 0 auto;
+  padding: var(--space-section) 0;
 }
 
 .layout {
@@ -17,43 +18,34 @@
 
 .prose {
   max-width: var(--prose-width);
-  font-size: 1.04rem;
+  font-size: 1.02rem;
+  line-height: 1.65;
+  color: var(--body);
 }
 
 .prose p {
   margin: 0 0 18px;
 }
 
-.prose p:first-child::first-letter {
-  float: left;
-  margin: 0.1em 0.12em 0 0;
-  font-family: var(--font-display);
-  font-size: 3.4em;
-  font-weight: 600;
-  line-height: 0.8;
-  color: var(--accent);
-}
-
 .scribble {
-  margin-top: 26px !important;
+  margin-top: 22px !important;
   padding-left: 18px;
-  border-left: 2px solid var(--accent-soft);
-  font-family: var(--font-hand);
-  font-size: 1.34rem;
-  line-height: 1.4;
-  color: var(--accent-ink);
+  border-left: 2px solid var(--hairline-strong);
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--ink);
 }
 
 .foot {
   margin-top: 26px;
   padding-top: 20px;
-  border-top: 1px dashed var(--rule);
+  border-top: 1px solid var(--hairline);
 }
 
 .footLink {
-  font-family: var(--font-display);
-  font-size: 0.98rem;
-  color: var(--accent-ink);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-link);
 }
 
 .footLink:hover {
@@ -61,8 +53,6 @@
   text-underline-offset: 4px;
 }
 
-/* Photo and quick facts sit side by side so the column matches the short
-   teaser prose instead of running on past it. */
 .side {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr));
@@ -73,9 +63,9 @@
 .quick {
   margin: 0;
   padding: 18px;
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
+  background: var(--surface-card);
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-lg);
 }
 
 .quickRow {
@@ -83,7 +73,7 @@
   flex-direction: column;
   gap: 3px;
   padding: 9px 0;
-  border-bottom: 1px solid var(--rule-soft);
+  border-bottom: 1px solid var(--hairline);
 }
 
 .quickRow:last-child {
@@ -92,10 +82,10 @@
 
 .quickLabel {
   font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.13em;
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--ink-soft);
+  color: var(--muted);
 }
 
 .quickValue {

@@ -28,7 +28,7 @@ const springConfig = {
   mass: 2,
 };
 
-export const DisplacementSphere = props => {
+export const DisplacementSphere = ({ className = '', ...rest }) => {
   const { theme } = useTheme();
   const start = useRef(0);
   const canvasRef = useRef();
@@ -189,10 +189,10 @@ export const DisplacementSphere = props => {
   return (
     <canvas
       aria-hidden
-      className={styles.canvas}
+      className={`${styles.canvas} ${className}`}
       data-visible={visible}
       ref={canvasRef}
-      {...props}
+      {...rest}
     />
   );
 };

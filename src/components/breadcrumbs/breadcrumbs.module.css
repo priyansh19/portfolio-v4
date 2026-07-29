@@ -21,18 +21,17 @@
 .current,
 .separator {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
 }
 
 .link {
-  color: var(--ink-soft);
-  transition: color 0.15s ease;
+  color: var(--muted);
+  transition: color var(--duration-fast) ease;
 }
 
 .link:hover {
-  color: var(--accent-ink);
+  color: var(--text-link);
   text-decoration: underline;
   text-underline-offset: 4px;
 }
@@ -43,5 +42,5 @@
 
 .separator {
   margin: 0 10px;
-  color: var(--rule);
+  color: var(--hairline-strong);
 }

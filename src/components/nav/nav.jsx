@@ -25,8 +25,10 @@ export const Nav = () => {
     <header className={styles.header}>
       <div className={styles.inner}>
         <Link className={styles.brand} href="/" onClick={close}>
+          <span className={styles.brandMark} aria-hidden>
+            {profile.firstName?.[0] ?? profile.name[0]}
+          </span>
           <span className={styles.brandName}>{profile.name}</span>
-          <span className={styles.brandRole}>{profile.role}</span>
         </Link>
 
         <nav className={styles.tabs} aria-label="Primary">
@@ -43,18 +45,16 @@ export const Nav = () => {
                 </Link>
               </li>
             ))}
-            {navSections.map(item => (
-              <li key={item.id}>
-                <a className={styles.tab} href={sectionHref(item.id)}>
-                  {item.label}
-                </a>
-              </li>
-            ))}
           </ul>
         </nav>
 
         <div className={styles.actions}>
-          <ThemeToggle />
+          <ThemeToggle className={styles.toggle} />
+          {navSections.map(item => (
+            <a className={styles.cta} href={sectionHref(item.id)} key={item.id}>
+              {item.label}
+            </a>
+          ))}
           <button
             type="button"
             className={styles.menuButton}

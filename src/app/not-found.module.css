@@ -1,5 +1,5 @@
 .main {
-  max-width: var(--page-width);
+  max-width: var(--content-max);
   margin: 0 auto;
   padding: clamp(56px, 9vw, 110px) var(--gutter) clamp(56px, 8vw, 90px);
 }
@@ -7,23 +7,27 @@
 .kicker {
   margin: 0 0 8px;
   font-family: var(--font-mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.2em;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--accent-ink);
+  color: var(--text-link);
 }
 
 .title {
   max-width: 18ch;
   margin: 0;
   font-size: clamp(2rem, 5.5vw, 3.2rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink);
 }
 
 .body {
   max-width: 52ch;
   margin: 16px 0 0;
   font-size: 1.04rem;
-  color: var(--ink-body);
+  color: var(--body);
 }
 
 .list {
@@ -41,25 +45,23 @@
   gap: 5px;
   height: 100%;
   padding: 20px;
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  transition: border-color 0.15s ease, background-color 0.15s ease;
+  background: var(--surface-card);
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-lg);
+  transition: border-color var(--duration-fast) ease;
 }
 
 .card:hover {
-  border-color: var(--accent-soft);
-  background: var(--card-alt);
+  border-color: var(--ink);
 }
 
 .cardLabel {
-  font-family: var(--font-display);
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 600;
   color: var(--ink);
 }
 
 .cardNote {
   font-size: 0.9rem;
-  color: var(--ink-soft);
+  color: var(--muted);
 }

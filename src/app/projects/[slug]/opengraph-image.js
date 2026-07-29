@@ -26,26 +26,28 @@ export default async function Image({ params }) {
           flexDirection: 'column',
           justifyContent: 'space-between',
           padding: '72px 80px',
-          background: '#efe4ce',
-          color: '#2c2418',
-          fontFamily: 'Georgia, serif',
+          background:
+            'radial-gradient(120% 90% at 15% 0%, #cfe7ff 0%, #a8c8e8 38%, #ffffff 72%)',
+          color: '#171717',
+          fontFamily: 'Inter, -apple-system, sans-serif',
         }}
       >
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <div
             style={{
-              fontSize: 22,
-              letterSpacing: 6,
+              fontSize: 20,
+              letterSpacing: 4,
               textTransform: 'uppercase',
-              color: '#8c3320',
+              color: '#0d74ce',
+              fontWeight: 600,
             }}
           >
             {kicker}
           </div>
-          <div style={{ fontSize: 82, fontWeight: 700, marginTop: 20, lineHeight: 1.05 }}>
+          <div style={{ fontSize: 78, fontWeight: 600, marginTop: 20, lineHeight: 1.05, letterSpacing: -2 }}>
             {project.name}
           </div>
-          <div style={{ fontSize: 32, color: '#4a3f2e', marginTop: 24, lineHeight: 1.4 }}>
+          <div style={{ fontSize: 30, color: '#60646c', marginTop: 24, lineHeight: 1.4 }}>
             {project.tagline}
           </div>
         </div>
@@ -54,10 +56,10 @@ export default async function Image({ params }) {
           style={{
             display: 'flex',
             justifyContent: 'space-between',
-            borderTop: '2px solid #d8c6a3',
+            borderTop: '1px solid #dcdee0',
             paddingTop: 26,
-            fontSize: 24,
-            color: '#7d6e57',
+            fontSize: 22,
+            color: '#60646c',
           }}
         >
           <div style={{ display: 'flex' }}>Priyansh Gupta</div>

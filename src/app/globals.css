@@ -1,62 +1,136 @@
 @import 'tailwindcss';
 
 /*
- * Slam-book / scrapbook direction: warm paper, ink, tape and ruled lines.
- * Layout-first phase — no 3D scenes, no scroll animation.
+ * Expo direction: pure white canvas, near-black ink, black CTAs, a sky-blue
+ * gradient wash behind the hero only, Inter for display/body, JetBrains Mono
+ * for every code-ish surface. Depth is structural (3D hero, scroll-driven
+ * motion) rather than decorative.
  */
 
 :root {
-  --font-display: var(--font-fraunces), Georgia, 'Times New Roman', serif;
-  --font-body: var(--font-lora), Georgia, 'Times New Roman', serif;
-  --font-hand: var(--font-caveat), 'Segoe Script', cursive;
-  --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --font-sans: var(--font-inter), -apple-system, system-ui, 'Segoe UI', sans-serif;
+  --font-mono: var(--font-jbmono), 'Fira Code', ui-monospace, Menlo, Consolas, monospace;
 
   /* The page fills the viewport — only the gutter holds content off the edge.
-     Long-form text is still capped by --prose-width so lines stay readable. */
+     Sections span full width; --content-max caps the readable column inside
+     them, so backgrounds stay full-bleed while text stays editorial-width. */
   --page-width: 100%;
-  --prose-width: 72ch;
+  --content-max: 1200px;
+  --prose-width: 70ch;
   --gutter: clamp(20px, 4vw, 72px);
-  --radius: 3px;
+  --nav-height: 72px;
+
+  /* Radius scale */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-xxl: 24px;
+  --radius-pill: 9999px;
+  --radius: var(--radius-md);
+
+  /* Spacing scale */
+  --space-xxs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-base: 16px;
+  --space-md: 20px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-xxl: 48px;
+  --space-section: clamp(56px, 9vw, 96px);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --bezier: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 0.15s;
+  --duration-base: 0.3s;
 }
 
 :root,
 [data-theme='light'] {
-  --paper: #efe4ce;
-  --paper-deep: #e4d5b8;
-  --card: #fbf6ea;
-  --card-alt: #f6eeda;
-  --ink: #2c2418;
-  --ink-body: #4a3f2e;
-  --ink-soft: #7d6e57;
-  --rule: #d8c6a3;
-  --rule-soft: #e3d5b9;
-  --tape: rgba(224, 205, 158, 0.85);
-  --accent: #b0432c;
-  --accent-soft: #d9a08d;
-  --accent-ink: #8c3320;
-  --marker: #e8c96a;
-  --stamp: #2f6560;
-  --shadow: rgba(80, 62, 34, 0.18);
+  --canvas: #ffffff;
+  --canvas-soft: #fafafa;
+  --surface-card: #ffffff;
+  --surface-strong: #f0f0f3;
+  --surface-dark: #171717;
+  --surface-dark-elevated: #1a1a1a;
+
+  --ink: #171717;
+  --body: #60646c;
+  --body-strong: #171717;
+  --muted: #999999;
+  --muted-soft: #cccccc;
+
+  --hairline: #f0f0f3;
+  --hairline-soft: #f5f5f7;
+  --hairline-strong: #dcdee0;
+
+  --primary: #000000;
+  --primary-active: #1a1a1a;
+  --on-primary: #ffffff;
+  --on-dark: #ffffff;
+  --on-dark-soft: #b0b4ba;
+
+  --text-link: #0d74ce;
+  --text-link-secondary: #476cff;
+  --accent-bright: #47c2ff;
+
+  --success: #16a34a;
+  --error: #eb8e90;
+  --warning: #ab6400;
+
+  --sky-light: #cfe7ff;
+  --sky-mid: #a8c8e8;
+
+  --shadow: rgba(23, 23, 23, 0.08);
+  --shadow-soft: rgba(16, 24, 40, 0.06);
+  --glow: rgba(13, 116, 206, 0.25);
+
   color-scheme: light;
 }
 
 [data-theme='dark'] {
-  --paper: #1c1813;
-  --paper-deep: #15120e;
-  --card: #262019;
-  --card-alt: #2d2620;
-  --ink: #f3e9d6;
-  --ink-body: #ddd0b8;
-  --ink-soft: #a29175;
-  --rule: #453b2e;
-  --rule-soft: #362e24;
-  --tape: rgba(120, 102, 66, 0.6);
-  --accent: #e08163;
-  --accent-soft: #7c4433;
-  --accent-ink: #f0a186;
-  --marker: #7a6530;
-  --stamp: #6aa9a2;
-  --shadow: rgba(0, 0, 0, 0.5);
+  --canvas: #0b0c0e;
+  --canvas-soft: #111216;
+  --surface-card: #141519;
+  --surface-strong: #1c1e23;
+  --surface-dark: #000000;
+  --surface-dark-elevated: #18191d;
+
+  --ink: #f5f6f7;
+  --body: #a3a8b2;
+  --body-strong: #f5f6f7;
+  --muted: #838993;
+  --muted-soft: #454952;
+
+  --hairline: rgba(255, 255, 255, 0.09);
+  --hairline-soft: rgba(255, 255, 255, 0.06);
+  --hairline-strong: rgba(255, 255, 255, 0.16);
+
+  /* CTA inverts on dark canvas — pure black would vanish, so the "single
+     voltage" becomes pure white instead, keeping the same restrained logic. */
+  --primary: #ffffff;
+  --primary-active: #e4e4e4;
+  --on-primary: #0b0c0e;
+  --on-dark: #ffffff;
+  --on-dark-soft: #b0b4ba;
+
+  --text-link: #5eb0ff;
+  --text-link-secondary: #7c9bff;
+  --accent-bright: #6cd0ff;
+
+  --success: #34d399;
+  --error: #f4a3a5;
+  --warning: #d99a3d;
+
+  --sky-light: #142a46;
+  --sky-mid: #0b1a2c;
+
+  --shadow: rgba(0, 0, 0, 0.55);
+  --shadow-soft: rgba(0, 0, 0, 0.4);
+  --glow: rgba(94, 176, 255, 0.25);
+
   color-scheme: dark;
 }
 
@@ -92,28 +166,26 @@ body::-webkit-scrollbar,
 }
 
 body {
-  background-color: var(--paper);
-  /* Faint fibre speckle so the beige reads as paper, not a flat fill.
-     Inline SVG keeps it self-contained — no image request. */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
-  color: var(--ink-body);
-  font-family: var(--font-body);
-  font-size: 17px;
-  line-height: 1.72;
+  background-color: var(--canvas);
+  color: var(--body);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  transition: background-color var(--duration-base) ease, color var(--duration-base) ease;
 }
 
 h1,
 h2,
 h3,
 h4 {
-  font-family: var(--font-display);
+  font-family: var(--font-sans);
   color: var(--ink);
   font-weight: 600;
   line-height: 1.15;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.02em;
   text-wrap: balance;
 }
 
@@ -124,59 +196,151 @@ a {
 
 p a,
 .prose a {
-  color: var(--accent-ink);
+  color: var(--text-link);
   text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-thickness: 1px;
-  text-decoration-color: var(--accent-soft);
+}
+
+code,
+pre,
+kbd,
+samp {
+  font-family: var(--font-mono);
 }
 
 ::selection {
-  background: var(--marker);
+  background: var(--sky-mid);
   color: var(--ink);
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--text-link);
   outline-offset: 3px;
+  border-radius: var(--radius-xs);
 }
 
-/* ---- Shared paper primitives ---- */
+/* ---- Shared Expo primitives ---- */
 
-/* A sheet of paper: off-white card, hairline border, soft drop shadow. */
-.sheet {
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  box-shadow: 0 1px 0 var(--rule-soft), 0 10px 24px -18px var(--shadow);
+/* A hairline-bordered white card with the single soft-drop shadow tier. */
+.card {
+  background: var(--surface-card);
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-lg);
 }
 
-/* Notebook ruling, used behind long-form text blocks. */
-.ruled {
-  background-image: repeating-linear-gradient(
-    to bottom,
-    transparent 0,
-    transparent 33px,
-    var(--rule-soft) 33px,
-    var(--rule-soft) 34px
-  );
+.card--soft {
+  border-color: var(--hairline);
 }
 
-/* Handwritten aside, as if scribbled in the margin. */
-.hand {
-  font-family: var(--font-hand);
-  font-size: 1.32em;
-  line-height: 1.4;
-  color: var(--accent-ink);
+/* Pure black pill CTA — the single brand voltage, used scarcely. */
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;
+  padding: 10px 18px;
+  border: 1px solid var(--primary);
+  border-radius: var(--radius-md);
+  background: var(--primary);
+  color: var(--on-primary);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) ease, border-color var(--duration-fast) ease,
+    transform var(--duration-fast) ease;
+}
+
+.btnPrimary:hover {
+  background: var(--primary-active);
+  border-color: var(--primary-active);
+}
+
+.btnPrimary:active {
+  transform: translateY(1px);
+}
+
+/* White card CTA with a hairline-strong border. */
+.btnSecondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;
+  padding: 9px 17px;
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-md);
+  background: var(--surface-card);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color var(--duration-fast) ease, color var(--duration-fast) ease;
+}
+
+.btnSecondary:hover {
+  border-color: var(--ink);
+}
+
+/* Inline text link — the only place text-link blue is allowed. */
+.btnText {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  color: var(--text-link);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.btnText:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Small uppercase pill, badges only — never a CTA shape. */
+.pillBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-strong);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+}
+
+/* Uppercase mono section eyebrow / kicker */
+.eyebrow {
+  display: block;
+  margin: 0 0 10px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+  color: var(--text-link);
 }
 
 /* Long-form article body, used on every blog-style page. Global rather than a
    CSS module so the sub-pages can share one set of typographic rules. */
 .prose {
   max-width: var(--prose-width);
-  font-size: 1.06rem;
-  line-height: 1.78;
-  color: var(--ink-body);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--body);
 }
 
 .prose > * + * {
@@ -186,11 +350,13 @@ p a,
 .prose h2 {
   margin-top: 2em;
   font-size: 1.6rem;
+  color: var(--ink);
 }
 
 .prose h3 {
   margin-top: 1.7em;
   font-size: 1.22rem;
+  color: var(--ink);
 }
 
 .prose strong {
@@ -202,11 +368,10 @@ p a,
   margin-left: 0;
   margin-right: 0;
   padding: 4px 0 4px 20px;
-  border-left: 2px solid var(--accent-soft);
-  font-family: var(--font-hand);
-  font-size: 1.34rem;
-  line-height: 1.45;
-  color: var(--accent-ink);
+  border-left: 2px solid var(--hairline-strong);
+  font-size: 1.05rem;
+  font-style: normal;
+  color: var(--ink);
 }
 
 .prose ul {
@@ -217,6 +382,19 @@ p a,
   margin-top: 0.5em;
 }
 
+/* Screen-reader-only utility, used across several list/card components. */
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -224,5 +402,6 @@ p a,
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

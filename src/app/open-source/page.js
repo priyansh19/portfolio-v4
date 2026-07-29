@@ -1,5 +1,7 @@
 import { Nav } from '@/components/nav/nav';
 import { PageHeader } from '@/components/page-header/page-header';
+import { RevealGroup, RevealItem } from '@/components/reveal/reveal';
+import { ScrollProgress } from '@/components/scroll-progress/scroll-progress';
 import { SiteFooter } from '@/components/site-footer/site-footer';
 import { openSource } from '@/lib/content';
 import styles from './page.module.css';
@@ -17,6 +19,7 @@ export default function OpenSourcePage() {
 
   return (
     <>
+      <ScrollProgress />
       <Nav />
 
       <PageHeader
@@ -52,9 +55,9 @@ export default function OpenSourcePage() {
             pull request — several are still open.
           </p>
 
-          <ul className={styles.repos}>
+          <RevealGroup as="ul" className={styles.repos}>
             {recent.map(repo => (
-              <li className={styles.repo} key={repo.id}>
+              <RevealItem as="li" className={styles.repo} key={repo.id}>
                 <header className={styles.repoHead}>
                   <div>
                     <h3 className={styles.repoName}>
@@ -98,9 +101,9 @@ export default function OpenSourcePage() {
                     </li>
                   ))}
                 </ul>
-              </li>
+              </RevealItem>
             ))}
-          </ul>
+          </RevealGroup>
         </section>
 
         <section className={styles.section}>

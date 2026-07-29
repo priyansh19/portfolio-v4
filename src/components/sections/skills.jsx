@@ -6,7 +6,7 @@ export const Skills = () => (
   <section className={styles.section} id="skills">
     <div className={styles.inner}>
       <SectionHeading
-        eyebrow="Chapter five"
+        eyebrow="Skills"
         title="What I work with"
         lede="Model layer down to metal — agent frameworks, cloud platforms, cluster tooling and the data stores underneath."
       />

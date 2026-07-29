@@ -1,7 +1,10 @@
 import { Nav } from '@/components/nav/nav';
 import { PageHeader } from '@/components/page-header/page-header';
 import { Polaroid } from '@/components/polaroid/polaroid';
+import { RevealGroup, RevealItem } from '@/components/reveal/reveal';
+import { ScrollProgress } from '@/components/scroll-progress/scroll-progress';
 import { SiteFooter } from '@/components/site-footer/site-footer';
+import { SkillConstellation } from '@/components/skill-constellation/skill-constellation';
 import { certifications, education, profile, skillGroups } from '@/lib/content';
 import styles from './page.module.css';
 
@@ -20,6 +23,7 @@ const certBacked = {
 export default function AboutPage() {
   return (
     <>
+      <ScrollProgress />
       <Nav />
 
       <PageHeader
@@ -110,9 +114,11 @@ export default function AboutPage() {
             named — that is verifiable, unlike a self-assigned skill rating.
           </p>
 
-          <div className={styles.grid}>
+          <SkillConstellation className={styles.constellation} />
+
+          <RevealGroup as="div" className={styles.grid}>
             {skillGroups.map(group => (
-              <section className={styles.group} key={group.id}>
+              <RevealItem as="section" className={styles.group} key={group.id}>
                 <h3 className={styles.groupTitle}>
                   {group.title}
                   <span className={styles.count}>{group.items.length}</span>
@@ -131,9 +137,9 @@ export default function AboutPage() {
                     </li>
                   ))}
                 </ul>
-              </section>
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
         </section>
       </main>
 

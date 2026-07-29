@@ -35,6 +35,6 @@
   font-size: 0.72rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--text-light);
+  color: var(--muted);
   pointer-events: none;
 }

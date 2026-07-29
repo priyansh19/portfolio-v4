@@ -1,25 +1,21 @@
-import { Caveat, Fraunces, Lora } from 'next/font/google';
+import { Inter, JetBrains_Mono } from 'next/font/google';
+import { LoadingScreen } from '@/components/loading-screen/loading-screen';
 import { ThemeProvider } from '@/components/theme-provider';
 import { links, profile } from '@/lib/content';
 import { siteUrl } from '@/lib/site';
 import './globals.css';
 
-const fraunces = Fraunces({
-  variable: '--font-fraunces',
+const inter = Inter({
+  variable: '--font-inter',
   subsets: ['latin'],
   display: 'swap',
 });
 
-const lora = Lora({
-  variable: '--font-lora',
+const jetbrainsMono = JetBrains_Mono({
+  variable: '--font-jbmono',
   subsets: ['latin'],
   display: 'swap',
-});
-
-const caveat = Caveat({
-  variable: '--font-caveat',
-  subsets: ['latin'],
-  display: 'swap',
+  weight: ['400', '500', '600'],
 });
 
 // Runs before first paint so the correct theme is set with no flash.
@@ -71,8 +67,8 @@ export const metadata = {
 
 export const viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#efe4ce' },
-    { media: '(prefers-color-scheme: dark)', color: '#1c1813' },
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#0b0c0e' },
   ],
 };
 
@@ -81,14 +77,17 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       data-theme="light"
-      className={`${fraunces.variable} ${lora.variable} ${caveat.variable}`}
+      className={`${inter.variable} ${jetbrainsMono.variable}`}
       suppressHydrationWarning
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <LoadingScreen />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

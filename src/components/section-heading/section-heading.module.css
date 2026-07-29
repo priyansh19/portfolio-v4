@@ -1,33 +1,36 @@
 .heading {
   margin-bottom: clamp(28px, 4vw, 46px);
-  padding-bottom: 18px;
-  border-bottom: 2px solid var(--rule);
 }
 
 .eyebrow {
-  margin: 0 0 8px;
+  margin: 0 0 10px;
   font-family: var(--font-mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.2em;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--accent-ink);
+  color: var(--text-link);
 }
 
 .title {
   margin: 0;
-  font-size: clamp(1.9rem, 4.2vw, 2.9rem);
+  font-size: clamp(1.75rem, 3.6vw, 2.5rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink);
 }
 
 .lede {
   max-width: var(--prose-width);
   margin: 14px 0 0;
-  font-size: 1.03rem;
-  color: var(--ink-body);
+  font-size: 1.02rem;
+  line-height: 1.6;
+  color: var(--body);
 }
 
 .aside {
-  margin: 12px 0 0;
-  font-family: var(--font-hand);
-  font-size: 1.25rem;
-  color: var(--accent-ink);
+  margin: 10px 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--muted);
 }

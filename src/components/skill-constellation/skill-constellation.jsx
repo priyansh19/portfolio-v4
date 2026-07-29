@@ -76,7 +76,7 @@ function makeLabelTexture(text, color) {
  * Interactive sphere of skill labels wrapped in a wireframe icosahedron.
  * Drag to spin; it idles with a slow auto-rotation.
  */
-export const SkillConstellation = props => {
+export const SkillConstellation = ({ className = '', ...rest }) => {
   const { theme } = useTheme();
   const containerRef = useRef();
   const canvasRef = useRef();
@@ -98,8 +98,8 @@ export const SkillConstellation = props => {
     const width = container.clientWidth;
     const height = container.clientHeight;
     const isLight = theme === 'light';
-    const labelColor = isLight ? '#12333f' : '#dff7fb';
-    const wireColor = new Color(isLight ? 0x2b7f96 : 0x4fd7ea);
+    const labelColor = isLight ? '#171717' : '#f5f6f7';
+    const wireColor = new Color(isLight ? 0x0d74ce : 0x5eb0ff);
 
     renderer.current = new WebGLRenderer({
       canvas: canvasRef.current,
@@ -263,12 +263,12 @@ export const SkillConstellation = props => {
 
   return (
     <div
-      className={styles.container}
+      className={`${styles.container} ${className}`}
       data-visible={visible}
       ref={containerRef}
       role="img"
       aria-label={`3D constellation of technologies: ${orbitSkills.join(', ')}`}
-      {...props}
+      {...rest}
     >
       <canvas className={styles.canvas} ref={canvasRef} />
       <span className={styles.hint} aria-hidden>

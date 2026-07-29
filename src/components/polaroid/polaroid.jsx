@@ -1,38 +1,41 @@
 import styles from './polaroid.module.css';
 
 /**
- * A taped-down photo with a handwritten caption.
+ * A clean device/browser-chrome frame around a screenshot.
  *
- * Drop real images in /public/photos and pass `src`. Without one it renders a
- * labelled placeholder rather than a stock photo, so it is obvious what is
- * still missing.
+ * Kept as `Polaroid` with its original prop surface so every calling page
+ * needs no changes — `tilt` and `tape` are no-ops now that the design
+ * language is Expo's flat device-mockup card rather than taped scrapbook
+ * photos. Drop real images in /public and pass `src`; without one it renders
+ * a labelled placeholder rather than a stock photo.
  */
 export const Polaroid = ({
   src,
   alt = '',
   caption,
-  tilt = 'left',
-  tape = 'top',
   size = 'md',
   className = '',
+  // `tilt` / `tape` absorbed for backward compatibility with existing call
+  // sites — no-ops in the flat device-frame treatment.
+  ...legacyProps
 }) => (
-  <figure
-    className={`${styles.polaroid} ${className}`}
-    data-tilt={tilt}
-    data-size={size}
-  >
-    {tape !== 'none' && <span className={styles.tape} data-tape={tape} aria-hidden />}
+  <figure className={`${styles.frame} ${className}`} data-size={size}>
+    <div className={styles.chrome} aria-hidden>
+      <span className={styles.dot} />
+      <span className={styles.dot} />
+      <span className={styles.dot} />
+    </div>
 
     <div className={styles.window}>
       {src ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img className={styles.image} src={src} alt={alt} loading="lazy" />
       ) : (
-        <div className={styles.placeholder} role="img" aria-label={alt || 'Photo placeholder'}>
-          <span className={styles.placeholderMark} aria-hidden>
-            ✦
+        <div className={styles.placeholder} role="img" aria-label={alt || 'Screenshot placeholder'}>
+          <span className={styles.placeholderGlyph} aria-hidden>
+            ▢
           </span>
-          <span className={styles.placeholderText}>{alt || 'photo'}</span>
+          <span className={styles.placeholderText}>{alt || 'preview'}</span>
         </div>
       )}
     </div>

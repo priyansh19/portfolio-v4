@@ -1,6 +1,7 @@
 .footer {
-  padding: 28px var(--gutter) 44px;
-  border-top: 2px solid var(--rule);
+  padding: clamp(40px, 6vw, 64px) var(--gutter) clamp(32px, 4vw, 44px);
+  border-top: 1px solid var(--hairline);
+  background: var(--canvas-soft);
 }
 
 .inner {
@@ -9,7 +10,7 @@
   align-items: baseline;
   justify-content: space-between;
   gap: 16px;
-  max-width: var(--page-width);
+  max-width: var(--content-max);
   margin: 0 auto;
 }
 
@@ -19,31 +20,31 @@
   align-items: baseline;
   gap: 12px;
   margin: 0;
-  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
   color: var(--ink);
 }
 
 .location {
   font-family: var(--font-mono);
-  font-size: 0.63rem;
-  letter-spacing: 0.13em;
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--ink-soft);
+  color: var(--muted);
 }
 
 .links {
   display: flex;
   flex-wrap: wrap;
-  gap: 18px;
+  gap: 20px;
 }
 
 .link {
-  font-size: 0.9rem;
-  color: var(--ink-body);
+  font-size: 0.88rem;
+  color: var(--body);
+  transition: color var(--duration-fast) ease;
 }
 
 .link:hover {
-  color: var(--accent-ink);
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  color: var(--text-link);
 }

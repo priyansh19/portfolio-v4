@@ -1,11 +1,12 @@
 .section {
-  padding: clamp(48px, 7vw, 84px) var(--gutter);
-  border-top: 1px solid var(--rule);
+  padding: 0 var(--gutter);
+  border-top: 1px solid var(--hairline);
 }
 
 .inner {
-  max-width: var(--page-width);
+  max-width: var(--content-max);
   margin: 0 auto;
+  padding: var(--space-section) 0;
 }
 
 .layout {
@@ -18,7 +19,7 @@
 .subheading {
   margin: 0 0 16px;
   padding-bottom: 9px;
-  border-bottom: 1px solid var(--rule-soft);
+  border-bottom: 1px solid var(--hairline);
   font-size: 1.02rem;
 }
 
@@ -37,13 +38,12 @@
   flex-direction: column;
   gap: 6px;
   padding: 18px;
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
+  background: var(--surface-card);
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-lg);
 }
 
 .serviceTitle {
-  font-family: var(--font-display);
   font-size: 1.02rem;
   font-weight: 600;
   color: var(--ink);
@@ -51,8 +51,8 @@
 
 .serviceBody {
   font-size: 0.92rem;
-  line-height: 1.65;
-  color: var(--ink-body);
+  line-height: 1.6;
+  color: var(--body);
 }
 
 /* Sidebar */
@@ -68,9 +68,8 @@
   gap: 26px;
   margin: 0;
   padding: 18px;
-  background: var(--card-alt);
-  border: 1px solid var(--rule-soft);
-  border-radius: var(--radius);
+  background: var(--surface-strong);
+  border-radius: var(--radius-lg);
 }
 
 .stat {
@@ -80,8 +79,7 @@
 }
 
 .statValue {
-  font-family: var(--font-display);
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 600;
   color: var(--ink);
 }
@@ -90,9 +88,9 @@
   margin: 0;
   font-family: var(--font-mono);
   font-size: 0.6rem;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--ink-soft);
+  color: var(--muted);
 }
 
 .processList {
@@ -106,7 +104,7 @@
   align-items: baseline;
   gap: 14px;
   padding: 10px 0;
-  border-bottom: 1px dashed var(--rule-soft);
+  border-bottom: 1px solid var(--hairline);
 }
 
 .phase:last-child {
@@ -116,12 +114,12 @@
 .phaseStep {
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  color: var(--accent);
+  color: var(--text-link);
 }
 
 .phaseTitle {
-  font-family: var(--font-display);
-  font-size: 1rem;
+  font-size: 0.98rem;
+  font-weight: 500;
   color: var(--ink);
 }
 
@@ -134,34 +132,36 @@
   gap: 20px;
   margin-top: clamp(28px, 4vw, 40px);
   padding-top: 24px;
-  border-top: 2px solid var(--rule);
+  border-top: 1px solid var(--hairline);
 }
 
 .ctaNote {
   max-width: 52ch;
   margin: 0;
-  font-family: var(--font-hand);
-  font-size: 1.32rem;
-  line-height: 1.4;
-  color: var(--accent-ink);
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--body);
 }
 
 .ctaButton {
-  display: inline-block;
-  padding: 12px 24px;
-  background: var(--accent);
-  border: 1px solid var(--accent);
-  border-radius: var(--radius);
-  font-family: var(--font-display);
-  font-size: 0.98rem;
-  color: #fdf6ea;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 10px 22px;
+  background: var(--primary);
+  border: 1px solid var(--primary);
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--on-primary);
   white-space: nowrap;
-  transition: background-color 0.15s ease;
+  transition: background-color var(--duration-fast) ease;
 }
 
 .ctaButton:hover {
-  background: var(--accent-ink);
-  border-color: var(--accent-ink);
+  background: var(--primary-active);
+  border-color: var(--primary-active);
 }
 
 @media (max-width: 900px) {

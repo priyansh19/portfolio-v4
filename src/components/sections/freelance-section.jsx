@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Reveal, RevealGroup, RevealItem } from '@/components/reveal/reveal';
 import { SectionHeading } from '@/components/section-heading/section-heading';
 import { freelance } from '@/lib/content';
 import styles from './freelance-section.module.css';
@@ -7,7 +8,7 @@ export const FreelanceSection = () => (
   <section className={styles.section} id="freelance">
     <div className={styles.inner}>
       <SectionHeading
-        eyebrow="Chapter three"
+        eyebrow="Freelance"
         title="Freelance & consulting"
         lede={freelance.intro}
         aside={`${freelance.period} · ${freelance.channel}`}
@@ -16,14 +17,14 @@ export const FreelanceSection = () => (
       <div className={styles.layout}>
         <div className={styles.main}>
           <h3 className={styles.subheading}>What I take on</h3>
-          <ul className={styles.services}>
+          <RevealGroup as="ul" className={styles.services}>
             {freelance.services.map(service => (
-              <li className={styles.service} key={service.id}>
+              <RevealItem as="li" className={styles.service} key={service.id}>
                 <span className={styles.serviceTitle}>{service.title}</span>
                 <span className={styles.serviceBody}>{service.body}</span>
-              </li>
+              </RevealItem>
             ))}
-          </ul>
+          </RevealGroup>
         </div>
 
         <aside className={styles.side}>
@@ -50,7 +51,7 @@ export const FreelanceSection = () => (
         </aside>
       </div>
 
-      <div className={styles.cta}>
+      <Reveal className={styles.cta}>
         <p className={styles.ctaNote}>
           The full breakdown — every service, the process end to end, and what past
           engagements looked like.
@@ -58,7 +59,7 @@ export const FreelanceSection = () => (
         <Link className={styles.ctaButton} href="/freelance">
           See my freelance work →
         </Link>
-      </div>
+      </Reveal>
     </div>
   </section>
 );

@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { Nav } from '@/components/nav/nav';
 import { PageHeader } from '@/components/page-header/page-header';
 import { Polaroid } from '@/components/polaroid/polaroid';
+import { RevealGroup, RevealItem } from '@/components/reveal/reveal';
+import { ScrollProgress } from '@/components/scroll-progress/scroll-progress';
 import { SiteFooter } from '@/components/site-footer/site-footer';
 import { projects } from '@/lib/content';
 import styles from './page.module.css';
@@ -15,6 +17,7 @@ export const metadata = {
 export default function ProjectsIndexPage() {
   return (
     <>
+      <ScrollProgress />
       <Nav />
 
       <PageHeader
@@ -29,9 +32,9 @@ export default function ProjectsIndexPage() {
       />
 
       <main className={styles.main}>
-        <ul className={styles.list}>
+        <RevealGroup as="ul" className={styles.list}>
           {projects.map(project => (
-            <li key={project.id}>
+            <RevealItem as="li" key={project.id}>
               <article className={styles.card}>
                 <div className={styles.photo}>
                   <Polaroid
@@ -72,9 +75,9 @@ export default function ProjectsIndexPage() {
                   </Link>
                 </div>
               </article>
-            </li>
+            </RevealItem>
           ))}
-        </ul>
+        </RevealGroup>
 
         <div className={styles.foot}>
           <Link className={styles.footLink} href="/">

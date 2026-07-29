@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Reveal } from '@/components/reveal/reveal';
 import { SectionHeading } from '@/components/section-heading/section-heading';
 import { openSource } from '@/lib/content';
 import styles from './open-source-section.module.css';
@@ -13,20 +14,22 @@ export const OpenSourceSection = () => (
   <section className={styles.section} id="open-source">
     <div className={styles.inner}>
       <SectionHeading
-        eyebrow="Chapter four"
+        eyebrow="Open Source"
         title="Open source"
         lede={openSource.intro}
         aside={`contributing as @${openSource.handle} since ${openSource.since}`}
       />
 
-      <dl className={styles.stats}>
-        {openSource.stats.map(stat => (
-          <div className={styles.stat} key={stat.label}>
-            <dt className={styles.statValue}>{stat.value}</dt>
-            <dd className={styles.statLabel}>{stat.label}</dd>
-          </div>
-        ))}
-      </dl>
+      <Reveal>
+        <dl className={styles.stats}>
+          {openSource.stats.map(stat => (
+            <div className={styles.stat} key={stat.label}>
+              <dt className={styles.statValue}>{stat.value}</dt>
+              <dd className={styles.statLabel}>{stat.label}</dd>
+            </div>
+          ))}
+        </dl>
+      </Reveal>
 
       <div className={styles.layout}>
         <div className={styles.column}>
@@ -78,14 +81,14 @@ export const OpenSourceSection = () => (
         </div>
       </div>
 
-      <div className={styles.cta}>
+      <Reveal className={styles.cta}>
         <p className={styles.ctaNote}>
           Every upstream patch, every repo, with merged status marked honestly.
         </p>
         <Link className={styles.ctaButton} href="/open-source">
           See all my contributions →
         </Link>
-      </div>
+      </Reveal>
     </div>
   </section>
 );

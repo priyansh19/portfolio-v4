@@ -1,5 +1,7 @@
 import { Nav } from '@/components/nav/nav';
 import { PageHeader } from '@/components/page-header/page-header';
+import { Reveal, RevealGroup, RevealItem } from '@/components/reveal/reveal';
+import { ScrollProgress } from '@/components/scroll-progress/scroll-progress';
 import { SiteFooter } from '@/components/site-footer/site-footer';
 import { careerNarrative, experience, experienceNote } from '@/lib/content';
 import styles from './page.module.css';
@@ -13,6 +15,7 @@ export const metadata = {
 export default function WorkPage() {
   return (
     <>
+      <ScrollProgress />
       <Nav />
 
       <PageHeader
@@ -28,23 +31,23 @@ export default function WorkPage() {
       />
 
       <main className={styles.main}>
-        <section className={styles.narrative}>
+        <Reveal as="section" className={styles.narrative}>
           <h2 className={styles.narrativeTitle}>{careerNarrative.title}</h2>
           <div className="prose">
             {careerNarrative.paragraphs.map(paragraph => (
               <p key={paragraph}>{paragraph}</p>
             ))}
           </div>
-        </section>
+        </Reveal>
 
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>The roles</h2>
 
           {experienceNote && <p className={styles.note}>{experienceNote}</p>}
 
-          <ol className={styles.list}>
+          <RevealGroup as="ol" className={styles.list}>
             {experience.map(job => (
-              <li className={styles.item} key={job.id}>
+              <RevealItem as="li" className={styles.item} key={job.id}>
                 <div className={styles.meta}>
                   <p className={styles.period}>{job.period}</p>
                   {job.current && <span className={styles.badge}>Current</span>}
@@ -73,9 +76,9 @@ export default function WorkPage() {
                     ))}
                   </ul>
                 </div>
-              </li>
+              </RevealItem>
             ))}
-          </ol>
+          </RevealGroup>
         </section>
       </main>
 

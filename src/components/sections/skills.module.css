@@ -1,11 +1,12 @@
 .section {
-  padding: clamp(48px, 7vw, 84px) var(--gutter);
-  border-top: 1px solid var(--rule);
+  padding: 0 var(--gutter);
+  border-top: 1px solid var(--hairline);
 }
 
 .inner {
-  max-width: var(--page-width);
+  max-width: var(--content-max);
   margin: 0 auto;
+  padding: var(--space-section) 0;
 }
 
 .grid {
@@ -16,9 +17,9 @@
 
 .group {
   padding: clamp(18px, 2.5vw, 24px);
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
+  background: var(--surface-card);
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-lg);
 }
 
 .groupTitle {
@@ -28,14 +29,15 @@
   gap: 12px;
   margin: 0 0 14px;
   padding-bottom: 10px;
-  border-bottom: 1px solid var(--rule-soft);
+  border-bottom: 1px solid var(--hairline);
   font-size: 1.08rem;
+  color: var(--ink);
 }
 
 .count {
   font-family: var(--font-mono);
   font-size: 0.66rem;
-  color: var(--ink-soft);
+  color: var(--muted);
 }
 
 .items {
@@ -49,9 +51,8 @@
 
 .item {
   padding: 5px 11px;
-  background: var(--card-alt);
-  border: 1px solid var(--rule-soft);
-  border-radius: var(--radius);
+  background: var(--surface-strong);
+  border-radius: var(--radius-md);
   font-size: 0.86rem;
-  color: var(--ink-body);
+  color: var(--body);
 }
