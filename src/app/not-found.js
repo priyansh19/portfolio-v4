@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Nav } from '@/components/nav/nav';
+import { RevealGroup, RevealItem } from '@/components/reveal/reveal';
 import { SiteFooter } from '@/components/site-footer/site-footer';
 import { navPages } from '@/lib/content';
 import styles from './not-found.module.css';
@@ -34,16 +35,16 @@ export default function NotFound() {
           Whatever was here has moved or never existed. Here is everything else.
         </p>
 
-        <ul className={styles.list}>
+        <RevealGroup as="ul" className={styles.list}>
           {destinations.map(item => (
-            <li key={item.href}>
+            <RevealItem as="li" key={item.href}>
               <Link className={styles.card} href={item.href}>
                 <span className={styles.cardLabel}>{item.label}</span>
                 <span className={styles.cardNote}>{item.note}</span>
               </Link>
-            </li>
+            </RevealItem>
           ))}
-        </ul>
+        </RevealGroup>
       </main>
 
       <SiteFooter />

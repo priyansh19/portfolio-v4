@@ -1,16 +1,17 @@
 .heading {
   margin-bottom: clamp(28px, 4vw, 46px);
-  padding-bottom: 18px;
-  border-bottom: 2px solid var(--rule);
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--hairline);
 }
 
 .eyebrow {
-  margin: 0 0 8px;
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.2em;
+  margin: 0 0 var(--space-sm);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--accent-ink);
+  color: var(--primary);
 }
 
 .title {
@@ -20,14 +21,28 @@
 
 .lede {
   max-width: var(--prose-width);
-  margin: 14px 0 0;
-  font-size: 1.03rem;
-  color: var(--ink-body);
+  margin: var(--space-md) 0 0;
+  font-size: 1.05rem;
+  color: var(--body);
 }
 
 .aside {
-  margin: 12px 0 0;
-  font-family: var(--font-hand);
-  font-size: 1.25rem;
-  color: var(--accent-ink);
+  margin: var(--space-sm) 0 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--primary);
+}
+
+.heading[data-tone='dark'] .title {
+  color: var(--on-dark);
+}
+
+.heading[data-tone='dark'] .lede {
+  color: var(--on-dark-soft);
+}
+
+.heading[data-tone='dark'] .eyebrow,
+.heading[data-tone='dark'] .aside {
+  color: var(--accent-amber);
 }

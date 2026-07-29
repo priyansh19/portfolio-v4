@@ -14,10 +14,10 @@
 .stats {
   display: flex;
   flex-wrap: wrap;
-  gap: 34px;
-  margin: 30px 0 0;
-  padding-top: 22px;
-  border-top: 1px dashed var(--rule);
+  gap: var(--space-xl);
+  margin: var(--space-lg) 0 0;
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--hairline);
 }
 
 .stat {
@@ -29,27 +29,24 @@
 .statValue {
   font-family: var(--font-display);
   font-size: 1.7rem;
-  font-weight: 600;
+  letter-spacing: -0.01em;
   color: var(--ink);
 }
 
 .statLabel {
   margin: 0;
-  font-family: var(--font-mono);
-  font-size: 0.63rem;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
+  font-size: 0.76rem;
+  color: var(--muted);
 }
 
 .section {
   margin-top: clamp(44px, 6vw, 70px);
   padding-top: clamp(32px, 4vw, 44px);
-  border-top: 1px solid var(--rule);
+  border-top: 1px solid var(--hairline);
 }
 
 .sectionTitle {
-  margin: 0 0 24px;
+  margin: 0 0 var(--space-xl);
   font-size: clamp(1.4rem, 3vw, 1.85rem);
 }
 
@@ -57,24 +54,24 @@
 .availability {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
-  gap: 14px;
+  gap: var(--space-sm);
   margin: 0;
 }
 
 .availabilityRow {
-  padding: 18px;
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-left: 3px solid var(--stamp);
-  border-radius: var(--radius);
+  padding: var(--space-md);
+  background: var(--surface-card);
+  border-left: 3px solid var(--accent-teal);
+  border-radius: var(--radius-lg);
 }
 
 .availabilityLabel {
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.14em;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--ink-soft);
+  color: var(--muted);
 }
 
 .availabilityValue {
@@ -89,99 +86,96 @@
 .testimonials {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
-  gap: 16px;
+  gap: var(--space-md);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .caseStudy {
-  padding: 22px;
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
+  padding: var(--space-lg);
+  background: var(--surface-card);
+  border-radius: var(--radius-lg);
 }
 
 .caseSector {
   margin: 0 0 6px;
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.14em;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--accent-ink);
+  color: var(--primary);
 }
 
 .caseTitle {
-  margin: 0 0 10px;
+  margin: 0 0 var(--space-sm);
   font-size: 1.1rem;
 }
 
 .caseBody {
-  margin: 0 0 10px;
+  margin: 0 0 var(--space-sm);
   font-size: 0.95rem;
   line-height: 1.68;
+  color: var(--body);
 }
 
 .caseResult {
   margin: 0;
-  padding-top: 12px;
-  border-top: 1px dashed var(--rule-soft);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--hairline);
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--ink);
 }
 
 .caseDuration {
-  margin: 8px 0 0;
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.1em;
+  margin: var(--space-sm) 0 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--ink-soft);
+  color: var(--muted);
 }
 
 .testimonial {
-  padding: 22px;
-  background: var(--card-alt);
-  border: 1px solid var(--rule-soft);
-  border-radius: var(--radius);
+  padding: var(--space-lg);
+  background: var(--surface-card);
+  border-radius: var(--radius-lg);
 }
 
 .quote {
-  margin: 0 0 12px;
-  font-family: var(--font-hand);
-  font-size: 1.3rem;
+  margin: 0 0 var(--space-sm);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.2rem;
   line-height: 1.45;
-  color: var(--accent-ink);
+  color: var(--body-strong);
 }
 
 .attribution {
   margin: 0;
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.1em;
-  color: var(--ink-soft);
+  font-size: 0.78rem;
+  color: var(--muted);
 }
 
 /* Services */
 .services {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
-  gap: 16px;
+  gap: var(--space-md);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .service {
-  padding: 22px;
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
+  padding: var(--space-lg);
+  background: var(--surface-card);
+  border-radius: var(--radius-lg);
 }
 
 .serviceTitle {
-  margin: 0 0 8px;
+  margin: 0 0 var(--space-xs);
   font-size: 1.1rem;
 }
 
@@ -189,25 +183,26 @@
   margin: 0;
   font-size: 0.97rem;
   line-height: 1.7;
+  color: var(--body);
 }
 
 .tags {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin: 16px 0 0;
-  padding: 14px 0 0;
-  border-top: 1px dashed var(--rule-soft);
+  margin: var(--space-md) 0 0;
+  padding: var(--space-sm) 0 0;
+  border-top: 1px solid var(--hairline);
   list-style: none;
 }
 
 .tag {
-  padding: 3px 10px;
-  border: 1px solid var(--rule);
-  border-radius: 999px;
-  font-family: var(--font-mono);
-  font-size: 0.63rem;
-  color: var(--ink-soft);
+  padding: 3px 11px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-cream-strong);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  color: var(--body-strong);
 }
 
 /* Process */
@@ -220,9 +215,9 @@
 .phase {
   display: grid;
   grid-template-columns: 62px minmax(0, 1fr);
-  gap: 20px;
-  padding: 20px 0;
-  border-bottom: 1px dashed var(--rule);
+  gap: var(--space-lg);
+  padding: var(--space-lg) 0;
+  border-bottom: 1px solid var(--hairline);
 }
 
 .phase:last-child {
@@ -232,8 +227,8 @@
 .phaseStep {
   font-family: var(--font-display);
   font-size: 1.7rem;
-  font-weight: 600;
-  color: var(--accent-soft);
+  letter-spacing: -0.01em;
+  color: var(--primary);
   line-height: 1;
 }
 
@@ -247,23 +242,23 @@
   margin: 0;
   font-size: 1rem;
   line-height: 1.72;
+  color: var(--body);
 }
 
 /* Engagements */
 .engagements {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
-  gap: 16px;
+  gap: var(--space-md);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .engagement {
-  padding: 20px;
-  background: var(--card-alt);
-  border: 1px solid var(--rule-soft);
-  border-radius: var(--radius);
+  padding: var(--space-lg);
+  background: var(--surface-card);
+  border-radius: var(--radius-lg);
 }
 
 .engagementTitle {
@@ -275,46 +270,49 @@
   margin: 0;
   font-size: 0.94rem;
   line-height: 1.68;
+  color: var(--body);
 }
 
 /* CTA */
 .cta {
   margin-top: clamp(44px, 6vw, 70px);
   padding: clamp(28px, 4vw, 40px);
-  background: var(--card);
-  border: 1px dashed var(--rule);
-  border-radius: var(--radius);
+  background: var(--surface-dark);
+  border-radius: var(--radius-xl);
   text-align: center;
 }
 
 .ctaHand {
-  margin: 0 0 10px;
-  font-family: var(--font-hand);
-  font-size: 1.7rem;
-  color: var(--accent-ink);
+  margin: 0 0 var(--space-sm);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.6rem;
+  color: var(--on-dark);
 }
 
 .ctaBody {
   max-width: 46ch;
-  margin: 0 auto 22px;
+  margin: 0 auto var(--space-lg);
   font-size: 1rem;
+  color: var(--on-dark-soft);
 }
 
 .ctaButton {
-  display: inline-block;
-  padding: 12px 26px;
-  background: var(--accent);
-  border: 1px solid var(--accent);
-  border-radius: var(--radius);
-  font-family: var(--font-display);
-  font-size: 0.98rem;
-  color: #fdf6ea;
-  transition: background-color 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 24px;
+  background: var(--primary);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--on-primary);
+  transition: background-color 0.2s var(--ease-warm);
 }
 
 .ctaButton:hover {
-  background: var(--accent-ink);
-  border-color: var(--accent-ink);
+  background: var(--primary-active);
 }
 
 @media (max-width: 860px) {

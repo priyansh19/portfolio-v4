@@ -7,10 +7,10 @@
 .stats {
   display: flex;
   flex-wrap: wrap;
-  gap: 38px;
-  margin: 30px 0 0;
-  padding-top: 22px;
-  border-top: 1px dashed var(--rule);
+  gap: var(--space-xl);
+  margin: var(--space-lg) 0 0;
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--hairline);
 }
 
 .stat {
@@ -22,42 +22,39 @@
 .statValue {
   font-family: var(--font-display);
   font-size: 1.8rem;
-  font-weight: 600;
+  letter-spacing: -0.01em;
   color: var(--ink);
 }
 
 .statLabel {
   margin: 0;
-  font-family: var(--font-mono);
-  font-size: 0.63rem;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
+  font-size: 0.76rem;
+  color: var(--muted);
 }
 
 .section {
   margin-top: clamp(44px, 6vw, 70px);
   padding-top: clamp(32px, 4vw, 44px);
-  border-top: 1px solid var(--rule);
+  border-top: 1px solid var(--hairline);
 }
 
 .sectionTitle {
-  margin: 0 0 8px;
+  margin: 0 0 var(--space-sm);
   font-size: clamp(1.4rem, 3vw, 1.85rem);
 }
 
 .sectionNote {
   max-width: var(--prose-width);
-  margin: 0 0 26px;
+  margin: 0 0 var(--space-xl);
   font-size: 0.97rem;
-  color: var(--ink-body);
+  color: var(--body);
 }
 
 /* Upstream repos */
 .repos {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: var(--space-md);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -65,9 +62,8 @@
 
 .repo {
   padding: clamp(18px, 2.5vw, 24px);
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
+  background: var(--surface-card);
+  border-radius: var(--radius-lg);
 }
 
 .repoHead {
@@ -75,21 +71,20 @@
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 16px;
-  padding-bottom: 14px;
-  border-bottom: 1px solid var(--rule-soft);
+  gap: var(--space-md);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--hairline);
 }
 
 .repoName {
   margin: 0;
   font-family: var(--font-mono);
   font-size: 1rem;
-  font-weight: 600;
   color: var(--ink);
 }
 
 .repoName a:hover {
-  color: var(--accent-ink);
+  color: var(--primary);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -97,12 +92,12 @@
 .repoDescription {
   margin: 4px 0 0;
   font-size: 0.92rem;
-  color: var(--ink-soft);
+  color: var(--muted);
 }
 
 .repoCounts {
   display: flex;
-  gap: 22px;
+  gap: var(--space-lg);
   margin: 0;
 }
 
@@ -114,18 +109,16 @@
 }
 
 .repoCountLabel {
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.14em;
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--ink-soft);
+  color: var(--muted);
 }
 
 .repoCountValue {
   margin: 0;
   font-family: var(--font-display);
   font-size: 1.2rem;
-  font-weight: 600;
   color: var(--ink);
 }
 
@@ -137,7 +130,7 @@
 }
 
 .pr {
-  border-bottom: 1px dashed var(--rule-soft);
+  border-bottom: 1px solid var(--hairline);
 }
 
 .pr:last-child {
@@ -147,21 +140,21 @@
 .prLink {
   display: grid;
   grid-template-columns: 92px minmax(0, 1fr) auto;
-  gap: 14px;
+  gap: var(--space-md);
   align-items: baseline;
-  padding: 13px 0;
+  padding: var(--space-sm) 0;
 }
 
 .prLink:hover .prTitle {
-  color: var(--accent-ink);
+  color: var(--primary);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 
 .prNumber {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--ink-soft);
+  font-size: 0.76rem;
+  color: var(--muted);
 }
 
 .prBody {
@@ -178,31 +171,31 @@
 .prNote {
   font-size: 0.88rem;
   line-height: 1.6;
-  color: var(--ink-body);
+  color: var(--body);
 }
 
 .prState {
   padding: 2px 10px;
-  border: 1px solid var(--rule);
-  border-radius: 999px;
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.12em;
+  border-radius: var(--radius-pill);
+  background: var(--surface-cream-strong);
+  font-family: var(--font-body);
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--ink-soft);
+  color: var(--muted);
   white-space: nowrap;
 }
 
 .prState[data-merged='true'] {
-  border-color: var(--stamp);
-  color: var(--stamp);
+  background: color-mix(in srgb, var(--accent-teal) 22%, var(--surface-cream-strong));
+  color: var(--body-strong);
 }
 
 /* Earlier, lower-signal contributions */
 .earlyList {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
-  gap: 10px;
+  gap: var(--space-sm);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -213,15 +206,14 @@
   flex-direction: column;
   gap: 3px;
   height: 100%;
-  padding: 14px 16px;
-  background: var(--card-alt);
-  border: 1px solid var(--rule-soft);
-  border-radius: var(--radius);
-  transition: border-color 0.15s ease;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--surface-card);
+  border-radius: var(--radius-lg);
+  transition: box-shadow 0.2s var(--ease-warm);
 }
 
 .earlyLink:hover {
-  border-color: var(--accent-soft);
+  box-shadow: 0 10px 22px -18px var(--shadow-strong);
 }
 
 .earlyOrg {
@@ -232,23 +224,22 @@
 
 .earlyDescription {
   font-size: 0.85rem;
-  color: var(--ink-soft);
+  color: var(--muted);
 }
 
 .earlyMeta {
   margin-top: 4px;
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.1em;
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--ink-soft);
+  color: var(--muted-soft);
 }
 
 /* Maintained projects */
 .projects {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
-  gap: 14px;
+  gap: var(--space-sm);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -257,40 +248,36 @@
 .projectLink {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--space-xs);
   height: 100%;
-  padding: 20px;
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  transition: border-color 0.15s ease, background-color 0.15s ease;
+  padding: var(--space-md);
+  background: var(--surface-card);
+  border-radius: var(--radius-lg);
+  transition: box-shadow 0.2s var(--ease-warm);
 }
 
 .projectLink:hover {
-  border-color: var(--accent-soft);
-  background: var(--card-alt);
+  box-shadow: 0 10px 22px -18px var(--shadow-strong);
 }
 
 .projectHead {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 12px;
+  gap: var(--space-sm);
 }
 
 .projectName {
   font-family: var(--font-mono);
   font-size: 0.95rem;
-  font-weight: 600;
   color: var(--ink);
 }
 
 .projectNote {
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.1em;
+  font-size: 0.66rem;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--accent-ink);
+  color: var(--primary);
   white-space: nowrap;
 }
 
@@ -298,26 +285,23 @@
   flex: 1;
   font-size: 0.91rem;
   line-height: 1.64;
-  color: var(--ink-body);
+  color: var(--body);
 }
 
 .projectLanguage {
-  padding-top: 10px;
-  border-top: 1px dashed var(--rule-soft);
-  font-family: var(--font-mono);
-  font-size: 0.63rem;
-  letter-spacing: 0.1em;
-  color: var(--ink-soft);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--hairline);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--muted);
 }
 
 .footnote {
   margin: clamp(38px, 5vw, 56px) 0 0;
-  padding-top: 20px;
-  border-top: 1px solid var(--rule);
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.08em;
-  color: var(--ink-soft);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--hairline);
+  font-size: 0.78rem;
+  color: var(--muted-soft);
 }
 
 @media (max-width: 620px) {

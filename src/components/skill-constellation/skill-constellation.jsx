@@ -98,8 +98,8 @@ export const SkillConstellation = props => {
     const width = container.clientWidth;
     const height = container.clientHeight;
     const isLight = theme === 'light';
-    const labelColor = isLight ? '#12333f' : '#dff7fb';
-    const wireColor = new Color(isLight ? 0x2b7f96 : 0x4fd7ea);
+    const labelColor = isLight ? '#a9583e' : '#f0b876';
+    const wireColor = new Color(isLight ? 0xcc785c : 0x5db8a6);
 
     renderer.current = new WebGLRenderer({
       canvas: canvasRef.current,

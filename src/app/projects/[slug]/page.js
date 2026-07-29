@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation';
 import { Nav } from '@/components/nav/nav';
 import { PageHeader } from '@/components/page-header/page-header';
 import { Polaroid } from '@/components/polaroid/polaroid';
+import { ProjectShape } from '@/components/project-shape/project-shape';
+import { Reveal } from '@/components/reveal/reveal';
 import { SiteFooter } from '@/components/site-footer/site-footer';
 import { projectBySlug, projects } from '@/lib/content';
 import styles from './page.module.css';
@@ -124,7 +126,13 @@ export default async function ProjectPage({ params }) {
           </article>
 
           <aside className={styles.sidebar}>
-            {/* Two shots of the project, taped at opposing angles */}
+            {/* A generated 3D shape stands in for a hero screenshot — real
+                geometry keyed off the project's `shape` field. */}
+            <Reveal as="div" className={styles.shape}>
+              <ProjectShape shape={project.shape} />
+            </Reveal>
+
+            {/* Two shots of the project, at opposing angles */}
             <div className={styles.photos}>
               {project.photos.map((photo, index) => (
                 <Polaroid

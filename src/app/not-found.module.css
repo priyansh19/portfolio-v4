@@ -5,12 +5,13 @@
 }
 
 .kicker {
-  margin: 0 0 8px;
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.2em;
+  margin: 0 0 var(--space-sm);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--accent-ink);
+  color: var(--primary);
 }
 
 .title {
@@ -21,15 +22,15 @@
 
 .body {
   max-width: 52ch;
-  margin: 16px 0 0;
+  margin: var(--space-md) 0 0;
   font-size: 1.04rem;
-  color: var(--ink-body);
+  color: var(--body);
 }
 
 .list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
-  gap: 14px;
+  gap: var(--space-sm);
   margin: clamp(32px, 5vw, 48px) 0 0;
   padding: 0;
   list-style: none;
@@ -40,26 +41,25 @@
   flex-direction: column;
   gap: 5px;
   height: 100%;
-  padding: 20px;
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  transition: border-color 0.15s ease, background-color 0.15s ease;
+  padding: var(--space-md);
+  background: var(--surface-card);
+  border-radius: var(--radius-lg);
+  transition: box-shadow 0.2s var(--ease-warm), transform 0.2s var(--ease-warm);
 }
 
 .card:hover {
-  border-color: var(--accent-soft);
-  background: var(--card-alt);
+  box-shadow: 0 14px 28px -20px var(--shadow-strong);
+  transform: translateY(-2px);
 }
 
 .cardLabel {
   font-family: var(--font-display);
   font-size: 1.1rem;
-  font-weight: 600;
+  letter-spacing: -0.01em;
   color: var(--ink);
 }
 
 .cardNote {
   font-size: 0.9rem;
-  color: var(--ink-soft);
+  color: var(--muted);
 }

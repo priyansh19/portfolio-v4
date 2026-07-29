@@ -18,19 +18,20 @@
 .block + .block {
   margin-top: clamp(40px, 5vw, 60px);
   padding-top: clamp(32px, 4vw, 46px);
-  border-top: 1px solid var(--rule);
+  border-top: 1px solid var(--hairline);
 }
 
 .blockTitle {
-  margin: 0 0 20px;
+  margin: 0 0 var(--space-lg);
   font-size: clamp(1.4rem, 3vw, 1.8rem);
 }
 
 .caption {
-  margin: -8px 0 20px;
-  font-family: var(--font-hand);
-  font-size: 1.24rem;
-  color: var(--accent-ink);
+  margin: -8px 0 var(--space-lg);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--primary);
 }
 
 /* Numbered build steps */
@@ -43,9 +44,9 @@
 .step {
   display: grid;
   grid-template-columns: 46px minmax(0, 1fr);
-  gap: 18px;
-  padding: 20px 0;
-  border-bottom: 1px dashed var(--rule);
+  gap: var(--space-md);
+  padding: var(--space-lg) 0;
+  border-bottom: 1px solid var(--hairline);
 }
 
 .step:last-child {
@@ -54,8 +55,8 @@
 
 .stepNumber {
   font-family: var(--font-mono);
-  font-size: 0.78rem;
-  color: var(--accent);
+  font-size: 0.82rem;
+  color: var(--primary);
   padding-top: 3px;
 }
 
@@ -69,6 +70,7 @@
   margin: 0;
   font-size: 1rem;
   line-height: 1.72;
+  color: var(--body);
 }
 
 /* Architecture as stacked layers rather than a drawn diagram */
@@ -76,18 +78,16 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  counter-reset: layer;
 }
 
 .layer {
   display: grid;
   grid-template-columns: 130px minmax(0, 1fr);
-  gap: 16px;
+  gap: var(--space-md);
   align-items: center;
-  padding: 14px 16px;
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--surface-card);
+  border-radius: var(--radius-lg);
 }
 
 .layer + .layer {
@@ -103,15 +103,16 @@
   left: 44px;
   width: 1px;
   height: 8px;
-  background: var(--rule);
+  background: var(--hairline);
 }
 
 .layerLabel {
-  font-family: var(--font-mono);
-  font-size: 0.64rem;
-  letter-spacing: 0.14em;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--ink-soft);
+  color: var(--muted);
 }
 
 .layerNodes {
@@ -122,9 +123,8 @@
 
 .node {
   padding: 5px 12px;
-  background: var(--card-alt);
-  border: 1px solid var(--rule-soft);
-  border-radius: var(--radius);
+  background: var(--surface-cream-strong);
+  border-radius: var(--radius-md);
   font-size: 0.87rem;
   color: var(--ink);
 }
@@ -139,7 +139,7 @@
 .highlight {
   position: relative;
   padding: 11px 0 11px 24px;
-  border-bottom: 1px solid var(--rule-soft);
+  border-bottom: 1px solid var(--hairline);
   font-size: 1rem;
 }
 
@@ -151,7 +151,7 @@
   content: '✓';
   position: absolute;
   left: 0;
-  color: var(--stamp);
+  color: var(--accent-teal);
 }
 
 /* Sidebar. Not sticky — with two photos it is taller than the viewport, and a
@@ -159,27 +159,32 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  gap: 26px;
+  gap: var(--space-lg);
+}
+
+.shape {
+  padding: clamp(20px, 3vw, 28px);
+  background: var(--surface-dark);
+  border-radius: var(--radius-xl);
 }
 
 .photos {
   display: flex;
   flex-direction: column;
-  gap: 34px;
+  gap: var(--space-xl);
   padding: 6px 0 8px;
 }
 
 .card {
-  padding: 20px;
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
+  padding: var(--space-md);
+  background: var(--surface-card);
+  border-radius: var(--radius-lg);
 }
 
 .cardTitle {
-  margin: 0 0 14px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--rule-soft);
+  margin: 0 0 var(--space-md);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--hairline);
   font-size: 1rem;
 }
 
@@ -188,60 +193,60 @@
 }
 
 .outcome + .outcome {
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 1px dashed var(--rule-soft);
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--hairline);
 }
 
 .outcomeValue {
   font-family: var(--font-display);
   font-size: 1.3rem;
-  font-weight: 600;
+  letter-spacing: -0.01em;
   color: var(--ink);
 }
 
 .outcomeLabel {
   margin: 3px 0 0;
   font-size: 0.87rem;
-  color: var(--ink-body);
+  color: var(--body);
 }
 
 /* Evidence */
 .evidenceKind {
   display: inline-block;
-  margin: 0 0 10px;
+  margin: 0 0 var(--space-sm);
   padding: 3px 11px;
-  border: 1px solid var(--rule);
-  border-radius: 999px;
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.13em;
+  border-radius: var(--radius-pill);
+  background: var(--surface-cream-strong);
+  font-family: var(--font-body);
+  font-size: 0.66rem;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--ink-soft);
+  color: var(--muted);
 }
 
 .evidenceKind[data-kind='open-source'] {
-  border-color: var(--stamp);
-  color: var(--stamp);
+  background: color-mix(in srgb, var(--accent-teal) 22%, var(--surface-cream-strong));
+  color: var(--body-strong);
 }
 
 .evidenceKind[data-kind='proprietary'] {
-  border-color: var(--accent-soft);
-  color: var(--accent-ink);
+  background: color-mix(in srgb, var(--primary) 20%, var(--surface-cream-strong));
+  color: var(--primary-active);
 }
 
 .evidenceNote {
   margin: 0;
   font-size: 0.91rem;
   line-height: 1.66;
-  color: var(--ink-body);
+  color: var(--body);
 }
 
 .outcomeBasis {
   margin: 6px 0 0;
   font-size: 0.79rem;
   line-height: 1.55;
-  color: var(--ink-soft);
+  color: var(--muted);
 }
 
 /* Jump to any other project */
@@ -254,11 +259,11 @@
 .jumpLink {
   display: flex;
   align-items: baseline;
-  gap: 10px;
-  padding: 9px 0;
-  border-bottom: 1px dashed var(--rule-soft);
+  gap: var(--space-sm);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--hairline);
   font-size: 0.93rem;
-  color: var(--ink-body);
+  color: var(--body);
 }
 
 .jumpList li:last-child .jumpLink {
@@ -266,13 +271,13 @@
 }
 
 .jumpLink:hover {
-  color: var(--accent-ink);
+  color: var(--primary);
 }
 
 .jumpIndex {
   font-family: var(--font-mono);
-  font-size: 0.62rem;
-  color: var(--ink-soft);
+  font-size: 0.7rem;
+  color: var(--muted);
 }
 
 .stack {
@@ -285,21 +290,21 @@
 }
 
 .tech {
-  padding: 4px 10px;
-  background: var(--card-alt);
-  border: 1px solid var(--rule-soft);
-  border-radius: 999px;
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  color: var(--ink-soft);
+  padding: 4px 11px;
+  background: var(--surface-cream-strong);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  color: var(--body-strong);
 }
 
 .repoLink {
   display: inline-block;
-  margin-top: 16px;
-  font-family: var(--font-display);
+  margin-top: var(--space-md);
+  font-family: var(--font-body);
   font-size: 0.92rem;
-  color: var(--accent-ink);
+  font-weight: 500;
+  color: var(--primary);
 }
 
 .repoLink:hover {
@@ -312,11 +317,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: var(--space-md);
   max-width: var(--page-width);
   margin: clamp(48px, 6vw, 72px) auto 0;
-  padding-top: 26px;
-  border-top: 2px solid var(--rule);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--hairline);
 }
 
 .pagerLink {
@@ -333,38 +338,43 @@
 /* Up one level, sat between prev and next */
 .pagerUp {
   flex-shrink: 0;
-  padding: 9px 18px;
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  background: var(--card);
-  font-family: var(--font-display);
-  font-size: 0.9rem;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 18px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
+  background: var(--canvas);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
   color: var(--ink);
-  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  transition: background-color 0.2s var(--ease-warm), border-color 0.2s var(--ease-warm),
+    color 0.2s var(--ease-warm);
 }
 
 .pagerUp:hover {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #fdf6ea;
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--on-primary);
 }
 
 .pagerLabel {
-  font-family: var(--font-mono);
-  font-size: 0.63rem;
-  letter-spacing: 0.15em;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--ink-soft);
+  color: var(--muted);
 }
 
 .pagerName {
   font-family: var(--font-display);
   font-size: 1.1rem;
+  letter-spacing: -0.01em;
   color: var(--ink);
 }
 
 .pagerLink:hover .pagerName {
-  color: var(--accent-ink);
+  color: var(--primary);
 }
 
 @media (max-width: 940px) {

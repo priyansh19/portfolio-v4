@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Reveal } from '@/components/reveal/reveal';
 import { SectionHeading } from '@/components/section-heading/section-heading';
 import { openSource } from '@/lib/content';
 import styles from './open-source-section.module.css';
@@ -19,14 +20,14 @@ export const OpenSourceSection = () => (
         aside={`contributing as @${openSource.handle} since ${openSource.since}`}
       />
 
-      <dl className={styles.stats}>
+      <Reveal as="dl" className={styles.stats}>
         {openSource.stats.map(stat => (
           <div className={styles.stat} key={stat.label}>
             <dt className={styles.statValue}>{stat.value}</dt>
             <dd className={styles.statLabel}>{stat.label}</dd>
           </div>
         ))}
-      </dl>
+      </Reveal>
 
       <div className={styles.layout}>
         <div className={styles.column}>

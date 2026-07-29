@@ -120,7 +120,7 @@ export const ParticleField = props => {
     const pointMaterial = new ShaderMaterial({
       uniforms: {
         time: { value: 0 },
-        color: { value: new Color(0x5ee7f5) },
+        color: { value: new Color(0xcc785c) },
         opacity: { value: 0.9 },
       },
       vertexShader: pointVertex,
@@ -140,7 +140,7 @@ export const ParticleField = props => {
     lineGeometry.setDrawRange(0, 0);
 
     const lineMaterial = new LineBasicMaterial({
-      color: new Color(0x5ee7f5),
+      color: new Color(0x5db8a6),
       transparent: true,
       opacity: 0.16,
       depthWrite: false,
@@ -168,12 +168,12 @@ export const ParticleField = props => {
     if (!points.current) return;
 
     const isLight = theme === 'light';
-    const color = new Color(isLight ? 0x1f6f8b : 0x5ee7f5);
+    const color = new Color(isLight ? 0xa9583e : 0xe08a6a);
 
     points.current.material.uniforms.color.value = color;
     points.current.material.uniforms.opacity.value = isLight ? 0.55 : 0.9;
-    lines.current.material.color = color;
-    lines.current.material.opacity = isLight ? 0.12 : 0.16;
+    lines.current.material.color = new Color(0x5db8a6);
+    lines.current.material.opacity = isLight ? 0.14 : 0.18;
   }, [theme]);
 
   useEffect(() => {

@@ -1,7 +1,9 @@
 import { Nav } from '@/components/nav/nav';
 import { PageHeader } from '@/components/page-header/page-header';
 import { Polaroid } from '@/components/polaroid/polaroid';
+import { Reveal, RevealGroup, RevealItem } from '@/components/reveal/reveal';
 import { SiteFooter } from '@/components/site-footer/site-footer';
+import { SkillConstellation } from '@/components/skill-constellation/skill-constellation';
 import { certifications, education, profile, skillGroups } from '@/lib/content';
 import styles from './page.module.css';
 
@@ -35,7 +37,7 @@ export default function AboutPage() {
       />
 
       <main className={styles.main}>
-        <div className={styles.layout}>
+        <Reveal as="div" className={styles.layout}>
           <div className={styles.prose}>
             <p>
               I spend my time where research meets production. That has meant leading a
@@ -69,12 +71,12 @@ export default function AboutPage() {
               tape="corner"
             />
           </aside>
-        </div>
+        </Reveal>
 
         {/* Education and certifications sit side by side across the full width
             rather than stacking in a narrow column beside short prose. */}
-        <div className={styles.credentials}>
-          <div className={styles.block}>
+        <RevealGroup className={styles.credentials}>
+          <RevealItem className={styles.block}>
             <h2 className={styles.blockTitle}>Education</h2>
             <ul className={styles.educationList}>
               {education.map(item => (
@@ -85,9 +87,9 @@ export default function AboutPage() {
                 </li>
               ))}
             </ul>
-          </div>
+          </RevealItem>
 
-          <div className={styles.block}>
+          <RevealItem className={styles.block}>
             <h2 className={styles.blockTitle}>
               Certifications
               <span className={styles.count}>{certifications.length}</span>
@@ -100,19 +102,29 @@ export default function AboutPage() {
                 </li>
               ))}
             </ul>
-          </div>
-        </div>
+          </RevealItem>
+        </RevealGroup>
 
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>What I work with</h2>
           <p className={styles.sectionNote}>
             Grouped by layer rather than ranked. Where a certification backs a group, it is
-            named — that is verifiable, unlike a self-assigned skill rating.
+            named — that is verifiable, unlike a self-assigned skill rating. Drag the sphere
+            below to spin through the same stack in three dimensions.
           </p>
 
-          <div className={styles.grid}>
+          <Reveal as="div" className={styles.constellation}>
+            <div className={styles.constellationInner}>
+              <SkillConstellation />
+            </div>
+            <p className={styles.constellationCaption}>
+              Every technology named across the roles and projects on this site.
+            </p>
+          </Reveal>
+
+          <RevealGroup className={styles.grid}>
             {skillGroups.map(group => (
-              <section className={styles.group} key={group.id}>
+              <RevealItem as="section" className={styles.group} key={group.id}>
                 <h3 className={styles.groupTitle}>
                   {group.title}
                   <span className={styles.count}>{group.items.length}</span>
@@ -131,9 +143,9 @@ export default function AboutPage() {
                     </li>
                   ))}
                 </ul>
-              </section>
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
         </section>
       </main>
 

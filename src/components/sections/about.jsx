@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Polaroid } from '@/components/polaroid/polaroid';
+import { Reveal } from '@/components/reveal/reveal';
 import { SectionHeading } from '@/components/section-heading/section-heading';
 import { certifications, education, profile } from '@/lib/content';
 import styles from './about.module.css';
@@ -14,7 +15,7 @@ export const About = () => (
         lede={profile.headline}
       />
 
-      <div className={styles.layout}>
+      <Reveal className={styles.layout}>
         <div className={styles.prose}>
           <p>
             I spend my time where research meets production. That has meant leading a team
@@ -59,7 +60,7 @@ export const About = () => (
             </div>
           </dl>
         </aside>
-      </div>
+      </Reveal>
     </div>
   </section>
 );

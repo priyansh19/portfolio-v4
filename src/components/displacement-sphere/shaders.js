@@ -295,9 +295,17 @@ void main() {
 
 	#include <clipping_planes_fragment>
 
-  vec3 color = vec3(vUv * (0.2 - 2.0 * noise), 1.0);
-  vec3 finalColors = vec3(color.b * 1.5, color.r, color.r);
-  vec4 diffuseColor = vec4(cos(finalColors * noise * 3.0), 1.0);
+  // Claude palette: warm cream base, coral and teal riding the noise field —
+  // recoloured from the original blue/violet so the sphere reads as organic
+  // and warm rather than cool and mechanical.
+  vec3 cream = vec3(0.980, 0.976, 0.961);
+  vec3 coral = vec3(0.800, 0.471, 0.361);
+  vec3 teal = vec3(0.365, 0.722, 0.651);
+
+  float wave = cos(noise * 3.0);
+  vec3 blend = mix(coral, teal, 0.5 + 0.5 * sin(noise * 2.2 + vUv.x * 3.0));
+  vec3 color = mix(cream, blend, clamp(0.4 + 0.6 * abs(wave), 0.0, 1.0));
+  vec4 diffuseColor = vec4(color, 1.0);
   ReflectedLight reflectedLight = ReflectedLight(vec3(0.0), vec3(0.0), vec3(0.0), vec3(0.0));
   vec3 totalEmissiveRadiance = emissive;
 

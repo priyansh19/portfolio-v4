@@ -1,6 +1,6 @@
 .header {
-  padding: clamp(30px, 5vw, 56px) var(--gutter) clamp(26px, 4vw, 40px);
-  border-bottom: 2px solid var(--rule);
+  padding: clamp(40px, 6vw, 64px) var(--gutter) clamp(32px, 4vw, 48px);
+  background: var(--canvas);
 }
 
 .inner {
@@ -9,33 +9,36 @@
 }
 
 .kicker {
-  margin: 0 0 8px;
-  font-family: var(--font-hand);
-  font-size: 1.3rem;
-  color: var(--accent-ink);
+  margin: 0 0 var(--space-sm);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--primary);
 }
 
 .title {
   max-width: 20ch;
   margin: 0;
-  font-size: clamp(2.2rem, 6vw, 3.7rem);
-  letter-spacing: -0.03em;
+  font-size: clamp(2.2rem, 6vw, 3.6rem);
+  letter-spacing: -0.02em;
 }
 
 .tagline {
   max-width: 62ch;
-  margin: 16px 0 0;
+  margin: var(--space-md) 0 0;
   font-size: clamp(1.02rem, 1.6vw, 1.18rem);
-  color: var(--ink-body);
+  color: var(--body);
 }
 
 .meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px 40px;
-  margin: 30px 0 0;
-  padding-top: 20px;
-  border-top: 1px dashed var(--rule);
+  gap: var(--space-sm) var(--space-xxl);
+  margin: var(--space-xl) 0 0;
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--hairline);
 }
 
 .metaItem {
@@ -45,16 +48,18 @@
 }
 
 .metaLabel {
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.16em;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--ink-soft);
+  color: var(--muted);
 }
 
 .metaValue {
   margin: 0;
   font-family: var(--font-display);
-  font-size: 0.98rem;
+  font-size: 1rem;
+  letter-spacing: -0.01em;
   color: var(--ink);
 }

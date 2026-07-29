@@ -1,6 +1,7 @@
 .section {
-  padding: clamp(48px, 7vw, 84px) var(--gutter);
-  border-top: 1px solid var(--rule);
+  padding: var(--space-section) var(--gutter);
+  border-top: 1px solid var(--hairline);
+  background: var(--canvas);
 }
 
 .inner {
@@ -13,10 +14,9 @@
   flex-wrap: wrap;
   gap: 20px 46px;
   margin: 0 0 clamp(28px, 4vw, 40px);
-  padding: 20px 22px;
-  background: var(--card-alt);
-  border: 1px solid var(--rule-soft);
-  border-radius: var(--radius);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--surface-card);
+  border-radius: var(--radius-lg);
 }
 
 .stat {
@@ -28,17 +28,14 @@
 .statValue {
   font-family: var(--font-display);
   font-size: 1.7rem;
-  font-weight: 600;
+  letter-spacing: -0.01em;
   color: var(--ink);
 }
 
 .statLabel {
   margin: 0;
-  font-family: var(--font-mono);
-  font-size: 0.61rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
+  font-size: 0.76rem;
+  color: var(--muted);
 }
 
 .layout {
@@ -53,14 +50,14 @@
 }
 
 .subheading {
-  margin: 0 0 16px;
-  padding-bottom: 9px;
-  border-bottom: 1px solid var(--rule-soft);
+  margin: 0 0 var(--space-md);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--hairline);
   font-size: 1.02rem;
 }
 
 .subheadingSpaced {
-  margin-top: 30px;
+  margin-top: var(--space-xl);
 }
 
 /* Upstream orgs */
@@ -76,8 +73,8 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
-  padding: 13px 0;
-  border-bottom: 1px dashed var(--rule-soft);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--hairline);
 }
 
 .org:last-child {
@@ -87,35 +84,34 @@
 .orgName {
   font-family: var(--font-mono);
   font-size: 0.88rem;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--ink);
 }
 
 .orgDescription {
   font-size: 0.89rem;
-  color: var(--ink-soft);
+  color: var(--muted);
 }
 
 .orgCounts {
   display: flex;
-  gap: 8px;
+  gap: var(--space-xs);
   margin-top: 3px;
 }
 
 .orgCount {
-  padding: 2px 9px;
-  border: 1px solid var(--rule);
-  border-radius: 999px;
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-cream-strong);
+  font-family: var(--font-body);
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
+  color: var(--muted);
 }
 
 .orgCount[data-merged='true'] {
-  border-color: var(--stamp);
-  color: var(--stamp);
+  background: color-mix(in srgb, var(--accent-teal) 22%, var(--surface-cream-strong));
+  color: var(--body-strong);
 }
 
 /* Featured pull requests */
@@ -123,38 +119,38 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
-  padding: 16px;
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
+  padding: var(--space-md);
+  background: var(--surface-card);
+  border-radius: var(--radius-lg);
 }
 
 .pr + .pr {
-  margin-top: 10px;
+  margin-top: var(--space-sm);
 }
 
 .prHead {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: var(--space-sm);
 }
 
 .prNumber {
   font-family: var(--font-mono);
-  font-size: 0.66rem;
-  color: var(--ink-soft);
+  font-size: 0.72rem;
+  color: var(--muted);
 }
 
 .prBadge {
-  padding: 2px 9px;
-  border: 1px solid var(--stamp);
-  border-radius: 999px;
-  font-family: var(--font-mono);
-  font-size: 0.56rem;
-  letter-spacing: 0.12em;
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--accent-teal);
+  font-family: var(--font-body);
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--stamp);
+  color: var(--on-primary);
 }
 
 .prTitle {
@@ -166,7 +162,7 @@
 .prNote {
   font-size: 0.89rem;
   line-height: 1.6;
-  color: var(--ink-body);
+  color: var(--body);
 }
 
 /* Maintained repos */
@@ -174,9 +170,9 @@
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 12px;
-  padding: 10px 0;
-  border-bottom: 1px dashed var(--rule-soft);
+  gap: var(--space-sm);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--hairline);
 }
 
 .repo:last-child {
@@ -190,11 +186,11 @@
 }
 
 .repoNote {
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.1em;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--accent-ink);
+  color: var(--primary);
   white-space: nowrap;
 }
 
@@ -204,35 +200,37 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  gap: var(--space-lg);
   margin-top: clamp(28px, 4vw, 40px);
-  padding-top: 24px;
-  border-top: 2px solid var(--rule);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--hairline);
 }
 
 .ctaNote {
   max-width: 52ch;
   margin: 0;
-  font-family: var(--font-hand);
-  font-size: 1.32rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.1rem;
   line-height: 1.4;
-  color: var(--accent-ink);
+  color: var(--body-strong);
 }
 
 .ctaButton {
-  display: inline-block;
-  padding: 12px 24px;
-  background: var(--accent);
-  border: 1px solid var(--accent);
-  border-radius: var(--radius);
-  font-family: var(--font-display);
-  font-size: 0.98rem;
-  color: #fdf6ea;
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 22px;
+  background: var(--primary);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--on-primary);
   white-space: nowrap;
-  transition: background-color 0.15s ease;
+  transition: background-color 0.2s var(--ease-warm);
 }
 
 .ctaButton:hover {
-  background: var(--accent-ink);
-  border-color: var(--accent-ink);
+  background: var(--primary-active);
 }

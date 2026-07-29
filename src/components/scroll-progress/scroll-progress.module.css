@@ -4,13 +4,13 @@
   left: 0;
   right: 0;
   z-index: 60;
-  height: 2px;
+  height: 3px;
   transform-origin: left;
   background: linear-gradient(
     90deg,
-    var(--accent),
-    var(--accent-violet),
-    var(--accent-magenta)
+    var(--primary),
+    var(--accent-amber),
+    var(--accent-teal)
   );
-  box-shadow: 0 0 12px var(--glow);
+  box-shadow: 0 0 10px var(--focus-ring);
 }

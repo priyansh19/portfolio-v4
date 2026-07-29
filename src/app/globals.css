@@ -1,62 +1,128 @@
 @import 'tailwindcss';
 
 /*
- * Slam-book / scrapbook direction: warm paper, ink, tape and ruled lines.
- * Layout-first phase — no 3D scenes, no scroll animation.
+ * Claude-editorial direction: tinted cream canvas, serif display headlines,
+ * warm coral CTAs, dark navy product surfaces as a pacing device.
+ * Motion is warm and unhurried — eased, organic, never snappy.
  */
 
 :root {
-  --font-display: var(--font-fraunces), Georgia, 'Times New Roman', serif;
-  --font-body: var(--font-lora), Georgia, 'Times New Roman', serif;
-  --font-hand: var(--font-caveat), 'Segoe Script', cursive;
-  --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --font-display: var(--font-fraunces), 'Iowan Old Style', Georgia, serif;
+  --font-body: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: var(--font-jbmono), ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
   /* The page fills the viewport — only the gutter holds content off the edge.
      Long-form text is still capped by --prose-width so lines stay readable. */
   --page-width: 100%;
   --prose-width: 72ch;
   --gutter: clamp(20px, 4vw, 72px);
-  --radius: 3px;
+
+  /* Border radius — hierarchical, per the design system. */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-pill: 9999px;
+  --radius: var(--radius-md);
+
+  /* Spacing scale, base unit 4px. */
+  --space-xxs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-xxl: 48px;
+  --space-section: clamp(56px, 9vw, 96px);
+
+  /* Warm, unhurried easing — motion brief default. */
+  --ease-warm: cubic-bezier(0.22, 1, 0.36, 1);
+  --bezier: var(--ease-warm);
 }
 
 :root,
 [data-theme='light'] {
-  --paper: #efe4ce;
-  --paper-deep: #e4d5b8;
-  --card: #fbf6ea;
-  --card-alt: #f6eeda;
-  --ink: #2c2418;
-  --ink-body: #4a3f2e;
-  --ink-soft: #7d6e57;
-  --rule: #d8c6a3;
-  --rule-soft: #e3d5b9;
-  --tape: rgba(224, 205, 158, 0.85);
-  --accent: #b0432c;
-  --accent-soft: #d9a08d;
-  --accent-ink: #8c3320;
-  --marker: #e8c96a;
-  --stamp: #2f6560;
-  --shadow: rgba(80, 62, 34, 0.18);
+  --canvas: #faf9f5;
+  --surface-soft: #f5f0e8;
+  --surface-card: #efe9de;
+  --surface-cream-strong: #e8e0d2;
+  --surface-dark: #181715;
+  --surface-dark-elevated: #252320;
+  --surface-dark-soft: #1f1e1b;
+
+  --hairline: #e6dfd8;
+  --hairline-soft: #ebe6df;
+
+  --ink: #141413;
+  --body-strong: #252523;
+  --body: #3d3d3a;
+  --muted: #6c6a64;
+  --muted-soft: #8e8b82;
+
+  --on-primary: #ffffff;
+  --on-dark: #faf9f5;
+  --on-dark-soft: #a09d96;
+
+  --primary: #cc785c;
+  --primary-active: #a9583e;
+  --primary-disabled: #e6dfd8;
+
+  --accent-teal: #5db8a6;
+  --accent-amber: #e8a55a;
+
+  --success: #5db872;
+  --warning: #d4a017;
+  --error: #c64545;
+
+  --shadow: rgba(20, 20, 19, 0.08);
+  --shadow-strong: rgba(20, 20, 19, 0.16);
+  --focus-ring: rgba(204, 120, 92, 0.35);
+  --selection: rgba(232, 165, 90, 0.4);
+
   color-scheme: light;
 }
 
+/* Dark theme: the whole canvas becomes the brand's dark product surface —
+   the same navy the light theme reserves for code windows and the footer. */
 [data-theme='dark'] {
-  --paper: #1c1813;
-  --paper-deep: #15120e;
-  --card: #262019;
-  --card-alt: #2d2620;
-  --ink: #f3e9d6;
-  --ink-body: #ddd0b8;
-  --ink-soft: #a29175;
-  --rule: #453b2e;
-  --rule-soft: #362e24;
-  --tape: rgba(120, 102, 66, 0.6);
-  --accent: #e08163;
-  --accent-soft: #7c4433;
-  --accent-ink: #f0a186;
-  --marker: #7a6530;
-  --stamp: #6aa9a2;
-  --shadow: rgba(0, 0, 0, 0.5);
+  --canvas: #181715;
+  --surface-soft: #1f1e1b;
+  --surface-card: #252320;
+  --surface-cream-strong: #2c2a25;
+  --surface-dark: #100f0e;
+  --surface-dark-elevated: #211f1c;
+  --surface-dark-soft: #1a1917;
+
+  --hairline: #35322c;
+  --hairline-soft: #2a2822;
+
+  --ink: #faf9f5;
+  --body-strong: #ece7dc;
+  --body: #cbc4b7;
+  --muted: #a09d96;
+  --muted-soft: #7d7a72;
+
+  --on-primary: #ffffff;
+  --on-dark: #faf9f5;
+  --on-dark-soft: #a09d96;
+
+  --primary: #e08a6a;
+  --primary-active: #c96a48;
+  --primary-disabled: #3a352c;
+
+  --accent-teal: #7bcdbb;
+  --accent-amber: #f0b876;
+
+  --success: #6bcf87;
+  --warning: #e0b840;
+  --error: #e07070;
+
+  --shadow: rgba(0, 0, 0, 0.35);
+  --shadow-strong: rgba(0, 0, 0, 0.55);
+  --focus-ring: rgba(224, 138, 106, 0.4);
+  --selection: rgba(240, 184, 118, 0.28);
+
   color-scheme: dark;
 }
 
@@ -92,17 +158,15 @@ body::-webkit-scrollbar,
 }
 
 body {
-  background-color: var(--paper);
-  /* Faint fibre speckle so the beige reads as paper, not a flat fill.
-     Inline SVG keeps it self-contained — no image request. */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
-  color: var(--ink-body);
+  background-color: var(--canvas);
+  color: var(--body);
   font-family: var(--font-body);
-  font-size: 17px;
-  line-height: 1.72;
+  font-size: 16px;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  transition: background-color 0.4s var(--ease-warm), color 0.4s var(--ease-warm);
 }
 
 h1,
@@ -111,9 +175,9 @@ h3,
 h4 {
   font-family: var(--font-display);
   color: var(--ink);
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1.15;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.02em;
   text-wrap: balance;
 }
 
@@ -124,50 +188,47 @@ a {
 
 p a,
 .prose a {
-  color: var(--accent-ink);
+  color: var(--primary);
   text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-thickness: 1px;
-  text-decoration-color: var(--accent-soft);
+  text-decoration-color: color-mix(in srgb, var(--primary) 45%, transparent);
 }
 
 ::selection {
-  background: var(--marker);
+  background: var(--selection);
   color: var(--ink);
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--primary);
   outline-offset: 3px;
+  border-radius: var(--radius-xs);
 }
 
-/* ---- Shared paper primitives ---- */
+/* ---- Shared editorial primitives ---- */
 
-/* A sheet of paper: off-white card, hairline border, soft drop shadow. */
+/* A card surface: cream card, hairline border, faint shadow. */
 .sheet {
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  box-shadow: 0 1px 0 var(--rule-soft), 0 10px 24px -18px var(--shadow);
+  background: var(--surface-card);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 1px 0 var(--hairline-soft), 0 10px 24px -18px var(--shadow);
 }
 
-/* Notebook ruling, used behind long-form text blocks. */
+/* Retained for compatibility with pages that still reference it; renders as a
+   quiet divider rather than notebook ruling in this design language. */
 .ruled {
-  background-image: repeating-linear-gradient(
-    to bottom,
-    transparent 0,
-    transparent 33px,
-    var(--rule-soft) 33px,
-    var(--rule-soft) 34px
-  );
+  background-image: none;
 }
 
-/* Handwritten aside, as if scribbled in the margin. */
+/* Small accent label — replaces the handwritten-aside role in the new system. */
 .hand {
-  font-family: var(--font-hand);
-  font-size: 1.32em;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.15em;
   line-height: 1.4;
-  color: var(--accent-ink);
+  color: var(--primary);
 }
 
 /* Long-form article body, used on every blog-style page. Global rather than a
@@ -175,8 +236,8 @@ p a,
 .prose {
   max-width: var(--prose-width);
   font-size: 1.06rem;
-  line-height: 1.78;
-  color: var(--ink-body);
+  line-height: 1.75;
+  color: var(--body);
 }
 
 .prose > * + * {
@@ -202,11 +263,12 @@ p a,
   margin-left: 0;
   margin-right: 0;
   padding: 4px 0 4px 20px;
-  border-left: 2px solid var(--accent-soft);
-  font-family: var(--font-hand);
-  font-size: 1.34rem;
+  border-left: 2px solid var(--primary);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.3rem;
   line-height: 1.45;
-  color: var(--accent-ink);
+  color: var(--body-strong);
 }
 
 .prose ul {
@@ -224,5 +286,6 @@ p a,
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

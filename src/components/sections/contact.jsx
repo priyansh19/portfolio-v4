@@ -1,3 +1,4 @@
+import { Reveal } from '@/components/reveal/reveal';
 import { SectionHeading } from '@/components/section-heading/section-heading';
 import { contactMeta, links } from '@/lib/content';
 import styles from './contact.module.css';
@@ -18,7 +19,7 @@ export const Contact = () => (
         lede="Open to consulting engagements and full-time forward-deployed roles. Email is the fastest way to reach me."
       />
 
-      <div className={styles.layout}>
+      <Reveal className={styles.layout}>
         <ul className={styles.channels}>
           {channels.map(channel => (
             <li className={styles.channel} key={channel.id}>
@@ -66,7 +67,7 @@ export const Contact = () => (
             Start a conversation
           </a>
         </div>
-      </div>
+      </Reveal>
     </div>
   </section>
 );

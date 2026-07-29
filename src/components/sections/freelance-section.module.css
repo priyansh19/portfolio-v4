@@ -1,9 +1,22 @@
 .section {
-  padding: clamp(48px, 7vw, 84px) var(--gutter);
-  border-top: 1px solid var(--rule);
+  position: relative;
+  overflow: hidden;
+  padding: var(--space-section) var(--gutter);
+  background: var(--surface-dark);
+  color: var(--on-dark-soft);
+}
+
+.scene {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 .inner {
+  position: relative;
+  z-index: 1;
   max-width: var(--page-width);
   margin: 0 auto;
 }
@@ -16,17 +29,18 @@
 }
 
 .subheading {
-  margin: 0 0 16px;
-  padding-bottom: 9px;
-  border-bottom: 1px solid var(--rule-soft);
+  margin: 0 0 var(--space-md);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--hairline);
   font-size: 1.02rem;
+  color: var(--on-dark);
 }
 
 /* Services */
 .services {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
-  gap: 14px;
+  gap: var(--space-sm);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -36,41 +50,39 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
-  padding: 18px;
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
+  padding: var(--space-md);
+  background: var(--surface-dark-elevated);
+  border-radius: var(--radius-lg);
 }
 
 .serviceTitle {
   font-family: var(--font-display);
   font-size: 1.02rem;
-  font-weight: 600;
-  color: var(--ink);
+  letter-spacing: -0.01em;
+  color: var(--on-dark);
 }
 
 .serviceBody {
   font-size: 0.92rem;
   line-height: 1.65;
-  color: var(--ink-body);
+  color: var(--on-dark-soft);
 }
 
 /* Sidebar */
 .side {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: var(--space-xl);
 }
 
 .stats {
   display: flex;
   flex-wrap: wrap;
-  gap: 26px;
+  gap: var(--space-lg);
   margin: 0;
-  padding: 18px;
-  background: var(--card-alt);
-  border: 1px solid var(--rule-soft);
-  border-radius: var(--radius);
+  padding: var(--space-md);
+  background: var(--surface-dark-elevated);
+  border-radius: var(--radius-lg);
 }
 
 .stat {
@@ -82,17 +94,14 @@
 .statValue {
   font-family: var(--font-display);
   font-size: 1.6rem;
-  font-weight: 600;
-  color: var(--ink);
+  letter-spacing: -0.01em;
+  color: var(--on-dark);
 }
 
 .statLabel {
   margin: 0;
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
+  font-size: 0.72rem;
+  color: var(--on-dark-soft);
 }
 
 .processList {
@@ -104,9 +113,9 @@
 .phase {
   display: flex;
   align-items: baseline;
-  gap: 14px;
-  padding: 10px 0;
-  border-bottom: 1px dashed var(--rule-soft);
+  gap: var(--space-md);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--hairline);
 }
 
 .phase:last-child {
@@ -114,15 +123,15 @@
 }
 
 .phaseStep {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--accent);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: var(--accent-amber);
 }
 
 .phaseTitle {
   font-family: var(--font-display);
   font-size: 1rem;
-  color: var(--ink);
+  color: var(--on-dark);
 }
 
 /* Call to action */
@@ -131,37 +140,39 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  gap: var(--space-lg);
   margin-top: clamp(28px, 4vw, 40px);
-  padding-top: 24px;
-  border-top: 2px solid var(--rule);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--hairline);
 }
 
 .ctaNote {
   max-width: 52ch;
   margin: 0;
-  font-family: var(--font-hand);
-  font-size: 1.32rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.15rem;
   line-height: 1.4;
-  color: var(--accent-ink);
+  color: var(--on-dark);
 }
 
 .ctaButton {
-  display: inline-block;
-  padding: 12px 24px;
-  background: var(--accent);
-  border: 1px solid var(--accent);
-  border-radius: var(--radius);
-  font-family: var(--font-display);
-  font-size: 0.98rem;
-  color: #fdf6ea;
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 22px;
+  background: var(--primary);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--on-primary);
   white-space: nowrap;
-  transition: background-color 0.15s ease;
+  transition: background-color 0.2s var(--ease-warm);
 }
 
 .ctaButton:hover {
-  background: var(--accent-ink);
-  border-color: var(--accent-ink);
+  background: var(--primary-active);
 }
 
 @media (max-width: 900px) {

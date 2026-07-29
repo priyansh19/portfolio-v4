@@ -25,6 +25,26 @@ export const Nav = () => {
     <header className={styles.header}>
       <div className={styles.inner}>
         <Link className={styles.brand} href="/" onClick={close}>
+          <svg
+            className={styles.brandMark}
+            aria-hidden
+            width="18"
+            height="18"
+            viewBox="0 0 48 48"
+          >
+            {Array.from({ length: 8 }).map((_, i) => (
+              <rect
+                key={i}
+                x="22.5"
+                y="4"
+                width="3"
+                height="16"
+                rx="1.5"
+                fill="currentColor"
+                transform={`rotate(${i * 45} 24 24)`}
+              />
+            ))}
+          </svg>
           <span className={styles.brandName}>{profile.name}</span>
           <span className={styles.brandRole}>{profile.role}</span>
         </Link>

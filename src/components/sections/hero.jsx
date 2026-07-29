@@ -1,11 +1,10 @@
-import { Polaroid } from '@/components/polaroid/polaroid';
+import { DisplacementSphere } from '@/components/displacement-sphere/displacement-sphere';
+import { Reveal, RevealGroup, RevealItem } from '@/components/reveal/reveal';
 import { links, profile, stats } from '@/lib/content';
 import styles from './hero.module.css';
 
-/** Slam-book front page: the "about me" entries filled in by hand. */
+/** Quick facts, presented as a compact editorial fact sheet. */
 const entries = [
-  { label: 'Name', value: profile.name },
-  { label: 'Currently', value: profile.status.headline },
   { label: 'Based in', value: `${profile.location} · ${profile.timezone}` },
   { label: 'Working on', value: 'Agentic AI platforms & the infra under them' },
   { label: 'Studied', value: 'M.Sc. Artificial Intelligence, Heriot-Watt' },
@@ -14,15 +13,25 @@ const entries = [
 
 export const Hero = () => (
   <section className={styles.hero} id="top">
+    <div className={styles.scene} aria-hidden>
+      <DisplacementSphere />
+    </div>
+
     <div className={styles.inner}>
-      <div className={styles.head}>
-        <p className={styles.kicker}>This book belongs to</p>
-        <h1 className={styles.title}>{profile.name}</h1>
-        <p className={styles.subtitle}>{profile.headline}</p>
-      </div>
+      <Reveal as="p" className={styles.kicker}>
+        {profile.role}
+      </Reveal>
+
+      <Reveal as="h1" className={styles.title} delay={0.05}>
+        {profile.name}
+      </Reveal>
+
+      <Reveal as="p" className={styles.subtitle} delay={0.1}>
+        {profile.headline}
+      </Reveal>
 
       {/* The first question every visitor has, answered above the fold */}
-      <div className={styles.status}>
+      <Reveal className={styles.status} delay={0.16}>
         <p className={styles.statusHead}>
           <span className={styles.statusDot} aria-hidden />
           {profile.status.headline}
@@ -35,63 +44,51 @@ export const Hero = () => (
             </li>
           ))}
         </ul>
-      </div>
+      </Reveal>
 
       <div className={styles.body}>
-        <div className={styles.entryCard}>
+        <RevealGroup className={styles.entryCard}>
           <dl className={styles.entries}>
             {entries.map(entry => (
-              <div className={styles.entry} key={entry.label}>
+              <RevealItem as="div" className={styles.entry} key={entry.label}>
                 <dt className={styles.entryLabel}>{entry.label}</dt>
                 <dd className={styles.entryValue}>{entry.value}</dd>
-              </div>
+              </RevealItem>
             ))}
           </dl>
 
           <p className={styles.note}>
             Five years of building things that have to survive Monday morning.
           </p>
-        </div>
+        </RevealGroup>
 
-        <aside className={styles.photos}>
-          <Polaroid
-            alt="Portrait of Priyansh"
-            caption="me, allegedly"
-            tilt="right"
-            size="lg"
-            tape="corner"
-          />
-        </aside>
-      </div>
-
-      <div className={styles.footRow}>
-        <dl className={styles.stats}>
+        <RevealGroup className={styles.stats} as="dl">
           {stats.map(stat => (
-            <div className={styles.stat} key={stat.label}>
+            <RevealItem as="div" className={styles.stat} key={stat.label}>
               <dt className={styles.statValue}>{stat.value}</dt>
               <dd className={styles.statLabel}>{stat.label}</dd>
-            </div>
+            </RevealItem>
           ))}
-        </dl>
-
-        <div className={styles.actions}>
-          <a className={styles.primary} href="#contact">
-            Get in touch
-          </a>
-          {/* Only rendered once a real file exists, so it never 404s */}
-          {links.resume && (
-            <a className={styles.secondary} href={links.resume} download>
-              Download CV
-            </a>
-          )}
-          <a className={styles.secondary} href={links.github} target="_blank" rel="noreferrer">
-            GitHub
-          </a>
-          <a className={styles.secondary} href={links.linkedin} target="_blank" rel="noreferrer">
-            LinkedIn
-          </a>
-        </div>
+        </RevealGroup>
       </div>
+
+      <Reveal className={styles.actions} delay={0.1}>
+        <a className={styles.primary} href="#contact">
+          Get in touch
+        </a>
+        {/* Only rendered once a real file exists, so it never 404s */}
+        {links.resume && (
+          <a className={styles.secondary} href={links.resume} download>
+            Download CV
+          </a>
+        )}
+        <a className={styles.secondary} href={links.github} target="_blank" rel="noreferrer">
+          GitHub
+        </a>
+        <a className={styles.secondary} href={links.linkedin} target="_blank" rel="noreferrer">
+          LinkedIn
+        </a>
+      </Reveal>
     </div>
   </section>
 );

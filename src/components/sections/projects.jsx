@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Polaroid } from '@/components/polaroid/polaroid';
+import { RevealGroup, RevealItem } from '@/components/reveal/reveal';
 import { SectionHeading } from '@/components/section-heading/section-heading';
 import { projects } from '@/lib/content';
 import styles from './projects.module.css';
@@ -17,9 +18,9 @@ export const Projects = () => (
         aside="turn the page for the full story →"
       />
 
-      <ul className={styles.list}>
+      <RevealGroup as="ul" className={styles.list}>
         {featured.map(project => (
-          <li key={project.id}>
+          <RevealItem as="li" key={project.id}>
             <article className={styles.card}>
               <div className={styles.photo}>
                 <Polaroid
@@ -62,9 +63,9 @@ export const Projects = () => (
                 </Link>
               </div>
             </article>
-          </li>
+          </RevealItem>
         ))}
-      </ul>
+      </RevealGroup>
 
       <div className={styles.foot}>
         <Link className={styles.footLink} href="/projects">
