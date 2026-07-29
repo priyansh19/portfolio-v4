@@ -1,7 +1,11 @@
 import styles from './polaroid.module.css';
 
 /**
- * A taped-down photo with a handwritten caption.
+ * A product-screenshot tile: a white card with a 16px radius framing an
+ * image, matching the design system's product-mockup-card treatment.
+ *
+ * `tilt` and `tape` are accepted so existing call sites keep working, but
+ * they are no-ops here — Intercom's mockup cards sit flat, untaped.
  *
  * Drop real images in /public/photos and pass `src`. Without one it renders a
  * labelled placeholder rather than a stock photo, so it is obvious what is
@@ -11,18 +15,12 @@ export const Polaroid = ({
   src,
   alt = '',
   caption,
-  tilt = 'left',
-  tape = 'top',
+  // tilt/tape are accepted for API compatibility but are intentional no-ops
+  // in the Intercom treatment — see file header.
   size = 'md',
   className = '',
 }) => (
-  <figure
-    className={`${styles.polaroid} ${className}`}
-    data-tilt={tilt}
-    data-size={size}
-  >
-    {tape !== 'none' && <span className={styles.tape} data-tape={tape} aria-hidden />}
-
+  <figure className={`${styles.polaroid} ${className}`} data-size={size}>
     <div className={styles.window}>
       {src ? (
         // eslint-disable-next-line @next/next/no-img-element
@@ -30,7 +28,7 @@ export const Polaroid = ({
       ) : (
         <div className={styles.placeholder} role="img" aria-label={alt || 'Photo placeholder'}>
           <span className={styles.placeholderMark} aria-hidden>
-            ✦
+            ▢
           </span>
           <span className={styles.placeholderText}>{alt || 'photo'}</span>
         </div>

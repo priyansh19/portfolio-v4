@@ -1,6 +1,6 @@
 .header {
   padding: clamp(30px, 5vw, 56px) var(--gutter) clamp(26px, 4vw, 40px);
-  border-bottom: 2px solid var(--rule);
+  border-bottom: 1px solid var(--hairline);
 }
 
 .inner {
@@ -10,9 +10,10 @@
 
 .kicker {
   margin: 0 0 8px;
-  font-family: var(--font-hand);
-  font-size: 1.3rem;
-  color: var(--accent-ink);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--ink-muted);
 }
 
 .title {
@@ -26,7 +27,7 @@
   max-width: 62ch;
   margin: 16px 0 0;
   font-size: clamp(1.02rem, 1.6vw, 1.18rem);
-  color: var(--ink-body);
+  color: var(--ink-muted);
 }
 
 .meta {
@@ -35,7 +36,7 @@
   gap: 12px 40px;
   margin: 30px 0 0;
   padding-top: 20px;
-  border-top: 1px dashed var(--rule);
+  border-top: 1px solid var(--hairline);
 }
 
 .metaItem {
@@ -45,11 +46,10 @@
 }
 
 .metaLabel {
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ink-subtle);
 }
 
 .metaValue {

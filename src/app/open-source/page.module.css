@@ -10,7 +10,7 @@
   gap: 38px;
   margin: 30px 0 0;
   padding-top: 22px;
-  border-top: 1px dashed var(--rule);
+  border-top: 1px solid var(--hairline);
 }
 
 .stat {
@@ -22,23 +22,22 @@
 .statValue {
   font-family: var(--font-display);
   font-size: 1.8rem;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--ink);
 }
 
 .statLabel {
   margin: 0;
-  font-family: var(--font-mono);
-  font-size: 0.63rem;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ink-subtle);
 }
 
 .section {
   margin-top: clamp(44px, 6vw, 70px);
   padding-top: clamp(32px, 4vw, 44px);
-  border-top: 1px solid var(--rule);
+  border-top: 1px solid var(--hairline);
 }
 
 .sectionTitle {
@@ -50,7 +49,7 @@
   max-width: var(--prose-width);
   margin: 0 0 26px;
   font-size: 0.97rem;
-  color: var(--ink-body);
+  color: var(--ink-muted);
 }
 
 /* Upstream repos */
@@ -65,9 +64,9 @@
 
 .repo {
   padding: clamp(18px, 2.5vw, 24px);
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-card);
 }
 
 .repoHead {
@@ -77,19 +76,19 @@
   justify-content: space-between;
   gap: 16px;
   padding-bottom: 14px;
-  border-bottom: 1px solid var(--rule-soft);
+  border-bottom: 1px solid var(--hairline-soft);
 }
 
 .repoName {
   margin: 0;
-  font-family: var(--font-mono);
-  font-size: 1rem;
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 500;
   color: var(--ink);
 }
 
 .repoName a:hover {
-  color: var(--accent-ink);
+  color: var(--ink);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -97,7 +96,7 @@
 .repoDescription {
   margin: 4px 0 0;
   font-size: 0.92rem;
-  color: var(--ink-soft);
+  color: var(--ink-subtle);
 }
 
 .repoCounts {
@@ -114,18 +113,17 @@
 }
 
 .repoCountLabel {
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--ink-subtle);
 }
 
 .repoCountValue {
   margin: 0;
   font-family: var(--font-display);
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--ink);
 }
 
@@ -137,7 +135,7 @@
 }
 
 .pr {
-  border-bottom: 1px dashed var(--rule-soft);
+  border-bottom: 1px solid var(--hairline-soft);
 }
 
 .pr:last-child {
@@ -153,15 +151,16 @@
 }
 
 .prLink:hover .prTitle {
-  color: var(--accent-ink);
+  color: var(--ink);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 
 .prNumber {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--ink-soft);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ink-subtle);
 }
 
 .prBody {
@@ -178,24 +177,23 @@
 .prNote {
   font-size: 0.88rem;
   line-height: 1.6;
-  color: var(--ink-body);
+  color: var(--ink-muted);
 }
 
 .prState {
   padding: 2px 10px;
-  border: 1px solid var(--rule);
-  border-radius: 999px;
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-chip);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--ink-subtle);
   white-space: nowrap;
 }
 
 .prState[data-merged='true'] {
-  border-color: var(--stamp);
-  color: var(--stamp);
+  border-color: var(--fin-orange);
+  color: var(--fin-orange);
 }
 
 /* Earlier, lower-signal contributions */
@@ -214,34 +212,34 @@
   gap: 3px;
   height: 100%;
   padding: 14px 16px;
-  background: var(--card-alt);
-  border: 1px solid var(--rule-soft);
-  border-radius: var(--radius);
+  background: var(--surface-2);
+  border: 1px solid var(--hairline-soft);
+  border-radius: var(--radius-card);
   transition: border-color 0.15s ease;
 }
 
 .earlyLink:hover {
-  border-color: var(--accent-soft);
+  border-color: var(--hairline-strong);
 }
 
 .earlyOrg {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 0.85rem;
   color: var(--ink);
 }
 
 .earlyDescription {
   font-size: 0.85rem;
-  color: var(--ink-soft);
+  color: var(--ink-subtle);
 }
 
 .earlyMeta {
   margin-top: 4px;
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--ink-subtle);
 }
 
 /* Maintained projects */
@@ -260,15 +258,15 @@
   gap: 8px;
   height: 100%;
   padding: 20px;
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-card);
   transition: border-color 0.15s ease, background-color 0.15s ease;
 }
 
 .projectLink:hover {
-  border-color: var(--accent-soft);
-  background: var(--card-alt);
+  border-color: var(--hairline-strong);
+  background: var(--surface-2);
 }
 
 .projectHead {
@@ -279,18 +277,17 @@
 }
 
 .projectName {
-  font-family: var(--font-mono);
-  font-size: 0.95rem;
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 500;
   color: var(--ink);
 }
 
 .projectNote {
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--accent-ink);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--fin-orange);
   white-space: nowrap;
 }
 
@@ -298,26 +295,25 @@
   flex: 1;
   font-size: 0.91rem;
   line-height: 1.64;
-  color: var(--ink-body);
+  color: var(--ink-muted);
 }
 
 .projectLanguage {
   padding-top: 10px;
-  border-top: 1px dashed var(--rule-soft);
-  font-family: var(--font-mono);
-  font-size: 0.63rem;
-  letter-spacing: 0.1em;
-  color: var(--ink-soft);
+  border-top: 1px solid var(--hairline-soft);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ink-subtle);
 }
 
 .footnote {
   margin: clamp(38px, 5vw, 56px) 0 0;
   padding-top: 20px;
-  border-top: 1px solid var(--rule);
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.08em;
-  color: var(--ink-soft);
+  border-top: 1px solid var(--hairline);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: var(--ink-subtle);
 }
 
 @media (max-width: 620px) {

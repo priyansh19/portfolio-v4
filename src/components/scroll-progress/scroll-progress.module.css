@@ -8,9 +8,9 @@
   transform-origin: left;
   background: linear-gradient(
     90deg,
-    var(--accent),
-    var(--accent-violet),
-    var(--accent-magenta)
+    var(--fin-orange),
+    var(--fin-orange-violet),
+    var(--fin-orange-magenta)
   );
   box-shadow: 0 0 12px var(--glow);
 }

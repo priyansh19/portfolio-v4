@@ -18,7 +18,7 @@
 .block + .block {
   margin-top: clamp(40px, 5vw, 60px);
   padding-top: clamp(32px, 4vw, 46px);
-  border-top: 1px solid var(--rule);
+  border-top: 1px solid var(--hairline);
 }
 
 .blockTitle {
@@ -28,9 +28,10 @@
 
 .caption {
   margin: -8px 0 20px;
-  font-family: var(--font-hand);
-  font-size: 1.24rem;
-  color: var(--accent-ink);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--ink-muted);
 }
 
 /* Numbered build steps */
@@ -45,7 +46,7 @@
   grid-template-columns: 46px minmax(0, 1fr);
   gap: 18px;
   padding: 20px 0;
-  border-bottom: 1px dashed var(--rule);
+  border-bottom: 1px solid var(--hairline-soft);
 }
 
 .step:last-child {
@@ -53,9 +54,10 @@
 }
 
 .stepNumber {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  color: var(--accent);
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--fin-orange);
   padding-top: 3px;
 }
 
@@ -85,9 +87,9 @@
   gap: 16px;
   align-items: center;
   padding: 14px 16px;
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-card);
 }
 
 .layer + .layer {
@@ -103,15 +105,14 @@
   left: 44px;
   width: 1px;
   height: 8px;
-  background: var(--rule);
+  background: var(--hairline);
 }
 
 .layerLabel {
-  font-family: var(--font-mono);
-  font-size: 0.64rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ink-subtle);
 }
 
 .layerNodes {
@@ -122,9 +123,9 @@
 
 .node {
   padding: 5px 12px;
-  background: var(--card-alt);
-  border: 1px solid var(--rule-soft);
-  border-radius: var(--radius);
+  background: var(--surface-2);
+  border: 1px solid var(--hairline-soft);
+  border-radius: var(--radius-chip);
   font-size: 0.87rem;
   color: var(--ink);
 }
@@ -139,7 +140,7 @@
 .highlight {
   position: relative;
   padding: 11px 0 11px 24px;
-  border-bottom: 1px solid var(--rule-soft);
+  border-bottom: 1px solid var(--hairline-soft);
   font-size: 1rem;
 }
 
@@ -151,7 +152,7 @@
   content: '✓';
   position: absolute;
   left: 0;
-  color: var(--stamp);
+  color: var(--fin-orange);
 }
 
 /* Sidebar. Not sticky — with two photos it is taller than the viewport, and a
@@ -171,15 +172,15 @@
 
 .card {
   padding: 20px;
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-card);
 }
 
 .cardTitle {
   margin: 0 0 14px;
   padding-bottom: 10px;
-  border-bottom: 1px solid var(--rule-soft);
+  border-bottom: 1px solid var(--hairline-soft);
   font-size: 1rem;
 }
 
@@ -190,20 +191,20 @@
 .outcome + .outcome {
   margin-top: 16px;
   padding-top: 16px;
-  border-top: 1px dashed var(--rule-soft);
+  border-top: 1px solid var(--hairline-soft);
 }
 
 .outcomeValue {
   font-family: var(--font-display);
   font-size: 1.3rem;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--ink);
 }
 
 .outcomeLabel {
   margin: 3px 0 0;
   font-size: 0.87rem;
-  color: var(--ink-body);
+  color: var(--ink-muted);
 }
 
 /* Evidence */
@@ -211,37 +212,36 @@
   display: inline-block;
   margin: 0 0 10px;
   padding: 3px 11px;
-  border: 1px solid var(--rule);
-  border-radius: 999px;
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-chip);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--ink-subtle);
 }
 
 .evidenceKind[data-kind='open-source'] {
-  border-color: var(--stamp);
-  color: var(--stamp);
+  border-color: var(--fin-orange);
+  color: var(--fin-orange);
 }
 
 .evidenceKind[data-kind='proprietary'] {
-  border-color: var(--accent-soft);
-  color: var(--accent-ink);
+  border-color: var(--hairline-strong);
+  color: var(--ink);
 }
 
 .evidenceNote {
   margin: 0;
   font-size: 0.91rem;
   line-height: 1.66;
-  color: var(--ink-body);
+  color: var(--ink-muted);
 }
 
 .outcomeBasis {
   margin: 6px 0 0;
   font-size: 0.79rem;
   line-height: 1.55;
-  color: var(--ink-soft);
+  color: var(--ink-subtle);
 }
 
 /* Jump to any other project */
@@ -256,9 +256,9 @@
   align-items: baseline;
   gap: 10px;
   padding: 9px 0;
-  border-bottom: 1px dashed var(--rule-soft);
+  border-bottom: 1px solid var(--hairline-soft);
   font-size: 0.93rem;
-  color: var(--ink-body);
+  color: var(--ink-muted);
 }
 
 .jumpList li:last-child .jumpLink {
@@ -266,13 +266,14 @@
 }
 
 .jumpLink:hover {
-  color: var(--accent-ink);
+  color: var(--ink);
 }
 
 .jumpIndex {
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  color: var(--ink-soft);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ink-subtle);
 }
 
 .stack {
@@ -286,20 +287,22 @@
 
 .tech {
   padding: 4px 10px;
-  background: var(--card-alt);
-  border: 1px solid var(--rule-soft);
-  border-radius: 999px;
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  color: var(--ink-soft);
+  background: var(--surface-2);
+  border: 1px solid var(--hairline-soft);
+  border-radius: var(--radius-chip);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ink-subtle);
 }
 
 .repoLink {
   display: inline-block;
   margin-top: 16px;
   font-family: var(--font-display);
+  font-weight: 500;
   font-size: 0.92rem;
-  color: var(--accent-ink);
+  color: var(--ink);
 }
 
 .repoLink:hover {
@@ -316,7 +319,7 @@
   max-width: var(--page-width);
   margin: clamp(48px, 6vw, 72px) auto 0;
   padding-top: 26px;
-  border-top: 2px solid var(--rule);
+  border-top: 1px solid var(--hairline);
 }
 
 .pagerLink {
@@ -334,37 +337,38 @@
 .pagerUp {
   flex-shrink: 0;
   padding: 9px 18px;
-  border: 1px solid var(--rule);
+  border: 1px solid var(--hairline);
   border-radius: var(--radius);
-  background: var(--card);
+  background: var(--surface-1);
   font-family: var(--font-display);
+  font-weight: 500;
   font-size: 0.9rem;
   color: var(--ink);
   transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 
 .pagerUp:hover {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #fdf6ea;
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--on-ink);
 }
 
 .pagerLabel {
-  font-family: var(--font-mono);
-  font-size: 0.63rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ink-subtle);
 }
 
 .pagerName {
   font-family: var(--font-display);
+  font-weight: 500;
   font-size: 1.1rem;
   color: var(--ink);
 }
 
 .pagerLink:hover .pagerName {
-  color: var(--accent-ink);
+  color: var(--ink);
 }
 
 @media (max-width: 940px) {

@@ -9,14 +9,15 @@
 
 .head {
   padding-bottom: 26px;
-  border-bottom: 2px solid var(--rule);
+  border-bottom: 1px solid var(--hairline);
 }
 
 .kicker {
   margin: 0 0 6px;
-  font-family: var(--font-hand);
-  font-size: 1.35rem;
-  color: var(--accent-ink);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--ink-muted);
 }
 
 .title {
@@ -29,17 +30,17 @@
   max-width: 56ch;
   margin: 14px 0 0;
   font-size: clamp(1rem, 1.5vw, 1.14rem);
-  color: var(--ink-body);
+  color: var(--ink-muted);
 }
 
 /* Availability — the answer to "what are you doing right now" */
 .status {
   margin-top: clamp(24px, 3.5vw, 36px);
   padding: clamp(18px, 2.5vw, 24px);
-  background: var(--card-alt);
-  border: 1px solid var(--rule);
-  border-left: 3px solid var(--stamp);
-  border-radius: var(--radius);
+  background: var(--surface-2);
+  border: 1px solid var(--hairline);
+  border-left: 3px solid var(--fin-orange);
+  border-radius: var(--radius-card);
 }
 
 .statusHead {
@@ -49,7 +50,7 @@
   margin: 0;
   font-family: var(--font-display);
   font-size: 1.08rem;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--ink);
 }
 
@@ -58,7 +59,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--stamp);
+  background: var(--fin-orange);
 }
 
 .statusDetail {
@@ -79,13 +80,13 @@
 
 .openToItem {
   padding: 3px 11px;
-  border: 1px solid var(--rule);
-  border-radius: 999px;
-  background: var(--card);
-  font-family: var(--font-mono);
-  font-size: 0.63rem;
-  letter-spacing: 0.08em;
-  color: var(--ink-soft);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-chip);
+  background: var(--surface-1);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ink-subtle);
 }
 
 /* Entry card + photos */
@@ -99,10 +100,9 @@
 
 .entryCard {
   padding: clamp(22px, 3.5vw, 38px);
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  box-shadow: 0 10px 26px -20px var(--shadow);
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-card);
 }
 
 .entries {
@@ -115,7 +115,7 @@
   gap: 16px;
   align-items: baseline;
   padding: 13px 0;
-  border-bottom: 1px solid var(--rule-soft);
+  border-bottom: 1px solid var(--hairline-soft);
 }
 
 .entry:last-of-type {
@@ -123,17 +123,17 @@
 }
 
 .entryLabel {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ink-subtle);
 }
 
 .entryValue {
   margin: 0;
-  font-family: var(--font-hand);
-  font-size: 1.42rem;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.125rem;
   line-height: 1.35;
   color: var(--ink);
 }
@@ -141,9 +141,9 @@
 .note {
   margin: 22px 0 0;
   padding-top: 18px;
-  border-top: 1px dashed var(--rule);
+  border-top: 1px solid var(--hairline);
   font-size: 0.97rem;
-  color: var(--ink-body);
+  color: var(--ink-muted);
 }
 
 .photos {
@@ -169,7 +169,7 @@
   gap: 28px;
   margin-top: clamp(36px, 5vw, 56px);
   padding-top: 26px;
-  border-top: 2px solid var(--rule);
+  border-top: 1px solid var(--hairline);
 }
 
 .stats {
@@ -188,17 +188,16 @@
 .statValue {
   font-family: var(--font-display);
   font-size: 1.75rem;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--ink);
 }
 
 .statLabel {
   margin: 0;
-  font-family: var(--font-mono);
-  font-size: 0.64rem;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ink-subtle);
 }
 
 .actions {
@@ -211,32 +210,33 @@
 .secondary {
   display: inline-block;
   padding: 11px 20px;
-  border: 1px solid var(--rule);
+  border: 1px solid var(--hairline);
   border-radius: var(--radius);
   font-family: var(--font-display);
+  font-weight: 500;
   font-size: 0.94rem;
   transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 
 .primary {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #fdf6ea;
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--on-ink);
 }
 
 .primary:hover {
-  background: var(--accent-ink);
-  border-color: var(--accent-ink);
+  background: var(--ink-pressed);
+  border-color: var(--ink-pressed);
 }
 
 .secondary {
-  background: var(--card);
+  background: var(--surface-1);
   color: var(--ink);
 }
 
 .secondary:hover {
-  border-color: var(--accent-soft);
-  color: var(--accent-ink);
+  border-color: var(--hairline-strong);
+  color: var(--ink);
 }
 
 @media (max-width: 900px) {

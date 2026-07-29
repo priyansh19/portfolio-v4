@@ -1,6 +1,6 @@
 .footer {
   padding: 28px var(--gutter) 44px;
-  border-top: 2px solid var(--rule);
+  border-top: 1px solid var(--hairline);
 }
 
 .inner {
@@ -24,11 +24,10 @@
 }
 
 .location {
-  font-family: var(--font-mono);
-  font-size: 0.63rem;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ink-subtle);
 }
 
 .links {
@@ -39,11 +38,11 @@
 
 .link {
   font-size: 0.9rem;
-  color: var(--ink-body);
+  color: var(--ink-muted);
 }
 
 .link:hover {
-  color: var(--accent-ink);
+  color: var(--ink);
   text-decoration: underline;
   text-underline-offset: 3px;
 }

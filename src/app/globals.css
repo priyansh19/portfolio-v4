@@ -1,62 +1,95 @@
 @import 'tailwindcss';
 
 /*
- * Slam-book / scrapbook direction: warm paper, ink, tape and ruled lines.
- * Layout-first phase — no 3D scenes, no scroll animation.
+ * Intercom design system direction: cream canvas, floating white cards,
+ * charcoal type, a single Fin Orange accent used sparingly. Saans is
+ * proprietary, so display + body run on Inter at weight 500/400 and the
+ * mono role runs on JetBrains Mono (see layout.js for the font loaders).
  */
 
 :root {
-  --font-display: var(--font-fraunces), Georgia, 'Times New Roman', serif;
-  --font-body: var(--font-lora), Georgia, 'Times New Roman', serif;
-  --font-hand: var(--font-caveat), 'Segoe Script', cursive;
-  --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --font-display: var(--font-inter), 'Saans Fallback', ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-inter), 'Saans Fallback', ui-sans-serif, system-ui, sans-serif;
+  --font-hand: var(--font-inter), 'Saans Fallback', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), 'SaansMono Fallback', ui-monospace, 'SF Mono', Menlo,
+    Consolas, monospace;
 
   /* The page fills the viewport — only the gutter holds content off the edge.
      Long-form text is still capped by --prose-width so lines stay readable. */
   --page-width: 100%;
   --prose-width: 72ch;
   --gutter: clamp(20px, 4vw, 72px);
-  --radius: 3px;
+
+  /* Radius scale — 8px buttons/inputs, 12px cards, 16px product tiles.
+     Never pill-round CTAs; pill is reserved for tab-style toggles. */
+  --radius-xs: 4px;
+  --radius-chip: 6px;
+  --radius: 8px;
+  --radius-card: 12px;
+  --radius-tile: 16px;
+  --radius-xxl: 24px;
+  --radius-pill: 9999px;
 }
 
 :root,
 [data-theme='light'] {
-  --paper: #efe4ce;
-  --paper-deep: #e4d5b8;
-  --card: #fbf6ea;
-  --card-alt: #f6eeda;
-  --ink: #2c2418;
-  --ink-body: #4a3f2e;
-  --ink-soft: #7d6e57;
-  --rule: #d8c6a3;
-  --rule-soft: #e3d5b9;
-  --tape: rgba(224, 205, 158, 0.85);
-  --accent: #b0432c;
-  --accent-soft: #d9a08d;
-  --accent-ink: #8c3320;
-  --marker: #e8c96a;
-  --stamp: #2f6560;
-  --shadow: rgba(80, 62, 34, 0.18);
+  /* Surfaces */
+  --canvas: #f5f1ec;
+  --surface-1: #ffffff;
+  --surface-2: #ebe7e1;
+  --hairline: #d3cec6;
+  --hairline-soft: #ebe7e1;
+  --hairline-strong: #b7b0a4;
+
+  /* Text */
+  --ink: #111111;
+  --ink-muted: #626260;
+  --ink-subtle: #7b7b78;
+  --ink-tertiary: #9c9fa5;
+  --on-primary: #ffffff;
+  --on-ink: #ffffff;
+
+  /* Accent + semantic (Fin Orange is a CTA/emphasis accent only) */
+  --fin-orange: #ff5600;
+  --fin-orange-tint: rgba(255, 86, 0, 0.14);
+  --semantic-error: #c41c1c;
+  --semantic-success: #0bdf50;
+  --marker: rgba(255, 86, 0, 0.24);
+
+  /* Pressed state for charcoal CTAs — button-primary-pressed inverts to
+     pure black per the spec's inverse-canvas token. */
+  --ink-pressed: #000000;
+
   color-scheme: light;
 }
 
 [data-theme='dark'] {
-  --paper: #1c1813;
-  --paper-deep: #15120e;
-  --card: #262019;
-  --card-alt: #2d2620;
-  --ink: #f3e9d6;
-  --ink-body: #ddd0b8;
-  --ink-soft: #a29175;
-  --rule: #453b2e;
-  --rule-soft: #362e24;
-  --tape: rgba(120, 102, 66, 0.6);
-  --accent: #e08163;
-  --accent-soft: #7c4433;
-  --accent-ink: #f0a186;
-  --marker: #7a6530;
-  --stamp: #6aa9a2;
-  --shadow: rgba(0, 0, 0, 0.5);
+  /* Derived from the spec's own inverse tokens: inverse-canvas #000000,
+     inverse-surface-1 #313130, inverse-ink #ffffff, inverse-ink-muted #9c9fa5. */
+  --canvas: #000000;
+  --surface-1: #313130;
+  --surface-2: #1c1c1b;
+  --hairline: #423f3d;
+  --hairline-soft: #2a2827;
+  --hairline-strong: #57534f;
+
+  --ink: #ffffff;
+  --ink-muted: #9c9fa5;
+  --ink-subtle: #7d7f83;
+  --ink-tertiary: #5c5e62;
+  --on-primary: #ffffff;
+  --on-ink: #111111;
+
+  --fin-orange: #ff5600;
+  --fin-orange-tint: rgba(255, 86, 0, 0.22);
+  --semantic-error: #e5484d;
+  --semantic-success: #0bdf50;
+  --marker: rgba(255, 86, 0, 0.32);
+
+  /* Ink is already white in dark mode, so "pressed" steps down to a light
+     gray rather than pure white. */
+  --ink-pressed: #e5e5e5;
+
   color-scheme: dark;
 }
 
@@ -92,17 +125,15 @@ body::-webkit-scrollbar,
 }
 
 body {
-  background-color: var(--paper);
-  /* Faint fibre speckle so the beige reads as paper, not a flat fill.
-     Inline SVG keeps it self-contained — no image request. */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
-  color: var(--ink-body);
+  background-color: var(--canvas);
+  color: var(--ink-muted);
   font-family: var(--font-body);
-  font-size: 17px;
-  line-height: 1.72;
+  font-size: 16px;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  transition: background-color 0.15s ease, color 0.15s ease;
 }
 
 h1,
@@ -111,9 +142,9 @@ h3,
 h4 {
   font-family: var(--font-display);
   color: var(--ink);
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.15;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.02em;
   text-wrap: balance;
 }
 
@@ -124,11 +155,11 @@ a {
 
 p a,
 .prose a {
-  color: var(--accent-ink);
+  color: var(--ink);
   text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-thickness: 1px;
-  text-decoration-color: var(--accent-soft);
+  text-decoration-color: var(--hairline-strong);
 }
 
 ::selection {
@@ -137,46 +168,42 @@ p a,
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--ink);
   outline-offset: 3px;
 }
 
-/* ---- Shared paper primitives ---- */
+/* ---- Shared surface primitives ---- */
 
-/* A sheet of paper: off-white card, hairline border, soft drop shadow. */
+/* A white card lifted off the cream canvas — depth comes from the surface
+   change, not a shadow. */
 .sheet {
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  box-shadow: 0 1px 0 var(--rule-soft), 0 10px 24px -18px var(--shadow);
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-card);
 }
 
-/* Notebook ruling, used behind long-form text blocks. */
+/* Formerly notebook ruling; now a plain hairline divider so pages that still
+   reference it keep working without reintroducing paper texture. */
 .ruled {
-  background-image: repeating-linear-gradient(
-    to bottom,
-    transparent 0,
-    transparent 33px,
-    var(--rule-soft) 33px,
-    var(--rule-soft) 34px
-  );
+  border-top: 1px solid var(--hairline-soft);
 }
 
-/* Handwritten aside, as if scribbled in the margin. */
+/* Small sentence-case accent line, used sparingly as inline emphasis. */
 .hand {
-  font-family: var(--font-hand);
-  font-size: 1.32em;
-  line-height: 1.4;
-  color: var(--accent-ink);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 1em;
+  line-height: 1.5;
+  color: var(--ink);
 }
 
 /* Long-form article body, used on every blog-style page. Global rather than a
    CSS module so the sub-pages can share one set of typographic rules. */
 .prose {
   max-width: var(--prose-width);
-  font-size: 1.06rem;
-  line-height: 1.78;
-  color: var(--ink-body);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--ink-muted);
 }
 
 .prose > * + * {
@@ -185,28 +212,30 @@ p a,
 
 .prose h2 {
   margin-top: 2em;
-  font-size: 1.6rem;
+  font-size: 1.75rem;
+  letter-spacing: -0.02em;
 }
 
 .prose h3 {
   margin-top: 1.7em;
-  font-size: 1.22rem;
+  font-size: 1.375rem;
+  letter-spacing: -0.015em;
 }
 
 .prose strong {
   color: var(--ink);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .prose blockquote {
   margin-left: 0;
   margin-right: 0;
   padding: 4px 0 4px 20px;
-  border-left: 2px solid var(--accent-soft);
-  font-family: var(--font-hand);
-  font-size: 1.34rem;
-  line-height: 1.45;
-  color: var(--accent-ink);
+  border-left: 2px solid var(--fin-orange);
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--ink);
 }
 
 .prose ul {
@@ -215,6 +244,11 @@ p a,
 
 .prose li + li {
   margin-top: 0.5em;
+}
+
+.prose code,
+.prose pre {
+  font-family: var(--font-mono);
 }
 
 @media (prefers-reduced-motion: reduce) {

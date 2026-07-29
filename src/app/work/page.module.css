@@ -12,7 +12,7 @@
 .section {
   margin-top: clamp(44px, 6vw, 70px);
   padding-top: clamp(32px, 4vw, 44px);
-  border-top: 1px solid var(--rule);
+  border-top: 1px solid var(--hairline);
 }
 
 .sectionTitle {
@@ -24,10 +24,11 @@
   max-width: var(--prose-width);
   margin: -8px 0 26px;
   padding: 14px 18px;
-  background: var(--card-alt);
-  border-left: 2px solid var(--accent-soft);
+  background: var(--surface-2);
+  border-left: 2px solid var(--fin-orange);
+  border-radius: var(--radius);
   font-size: 0.96rem;
-  color: var(--ink-body);
+  color: var(--ink-muted);
 }
 
 .list {
@@ -56,30 +57,27 @@
 
 .period {
   margin: 0;
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ink-subtle);
 }
 
 .badge {
   padding: 2px 9px;
-  border: 1px solid var(--stamp);
-  border-radius: 999px;
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--stamp);
+  border: 1px solid var(--fin-orange);
+  border-radius: var(--radius-chip);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--fin-orange);
 }
 
 .card {
   padding: clamp(20px, 3vw, 30px);
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  box-shadow: 0 8px 22px -20px var(--shadow);
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-card);
 }
 
 .role {
@@ -94,15 +92,14 @@
   gap: 10px;
   margin: 5px 0 18px;
   font-size: 0.97rem;
-  color: var(--accent-ink);
+  color: var(--ink);
 }
 
 .scope {
-  font-family: var(--font-mono);
-  font-size: 0.64rem;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ink-subtle);
 }
 
 .points {
@@ -125,7 +122,7 @@
   content: '—';
   position: absolute;
   left: 0;
-  color: var(--accent-soft);
+  color: var(--hairline-strong);
 }
 
 .tags {
@@ -134,17 +131,18 @@
   gap: 6px;
   margin: 20px 0 0;
   padding: 16px 0 0;
-  border-top: 1px dashed var(--rule);
+  border-top: 1px solid var(--hairline-soft);
   list-style: none;
 }
 
 .tag {
   padding: 3px 10px;
-  border: 1px solid var(--rule);
-  border-radius: 999px;
-  font-family: var(--font-mono);
-  font-size: 0.64rem;
-  color: var(--ink-soft);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-chip);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--ink-subtle);
 }
 
 @media (max-width: 760px) {

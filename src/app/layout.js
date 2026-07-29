@@ -1,24 +1,23 @@
-import { Caveat, Fraunces, Lora } from 'next/font/google';
+import { Inter, JetBrains_Mono } from 'next/font/google';
 import { ThemeProvider } from '@/components/theme-provider';
 import { links, profile } from '@/lib/content';
 import { siteUrl } from '@/lib/site';
 import './globals.css';
 
-const fraunces = Fraunces({
-  variable: '--font-fraunces',
+// Saans is proprietary to Intercom — Inter at weight 500 is the closest free
+// substitute for display type, per the design system's own substitution note.
+const inter = Inter({
+  variable: '--font-inter',
   subsets: ['latin'],
+  weight: ['400', '500', '600'],
   display: 'swap',
 });
 
-const lora = Lora({
-  variable: '--font-lora',
+// SaansMono substitute — only used for code-like content inside .prose.
+const jetbrainsMono = JetBrains_Mono({
+  variable: '--font-jetbrains-mono',
   subsets: ['latin'],
-  display: 'swap',
-});
-
-const caveat = Caveat({
-  variable: '--font-caveat',
-  subsets: ['latin'],
+  weight: ['400'],
   display: 'swap',
 });
 
@@ -71,8 +70,8 @@ export const metadata = {
 
 export const viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#efe4ce' },
-    { media: '(prefers-color-scheme: dark)', color: '#1c1813' },
+    { media: '(prefers-color-scheme: light)', color: '#f5f1ec' },
+    { media: '(prefers-color-scheme: dark)', color: '#000000' },
   ],
 };
 
@@ -81,7 +80,7 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       data-theme="light"
-      className={`${fraunces.variable} ${lora.variable} ${caveat.variable}`}
+      className={`${inter.variable} ${jetbrainsMono.variable}`}
       suppressHydrationWarning
     >
       <head>

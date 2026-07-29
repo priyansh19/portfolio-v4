@@ -19,15 +19,14 @@
   gap: clamp(22px, 4vw, 44px);
   align-items: center;
   padding: clamp(20px, 3vw, 30px);
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  box-shadow: 0 8px 22px -20px var(--shadow);
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-card);
   transition: border-color 0.15s ease;
 }
 
 .card:hover {
-  border-color: var(--accent-soft);
+  border-color: var(--hairline-strong);
 }
 
 .text {
@@ -38,11 +37,10 @@
 
 .index {
   margin: 0;
-  font-family: var(--font-mono);
-  font-size: 0.64rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ink-subtle);
 }
 
 .name {
@@ -56,7 +54,7 @@
 }
 
 .nameLink:hover {
-  color: var(--accent-ink);
+  color: var(--ink);
   text-decoration: underline;
   text-underline-offset: 4px;
   text-decoration-thickness: 1px;
@@ -64,9 +62,10 @@
 
 .subtitle {
   margin: 4px 0 0;
-  font-family: var(--font-hand);
-  font-size: 1.2rem;
-  color: var(--accent-ink);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--ink-muted);
 }
 
 .description {
@@ -74,7 +73,7 @@
   margin: 12px 0 0;
   font-size: 0.98rem;
   line-height: 1.66;
-  color: var(--ink-body);
+  color: var(--ink-muted);
 }
 
 .stack {
@@ -88,11 +87,12 @@
 
 .tech {
   padding: 3px 10px;
-  border: 1px solid var(--rule);
-  border-radius: 999px;
-  font-family: var(--font-mono);
-  font-size: 0.63rem;
-  color: var(--ink-soft);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-chip);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--ink-subtle);
 }
 
 .button {
@@ -101,10 +101,11 @@
   gap: 9px;
   margin-top: 20px;
   padding: 10px 20px;
-  background: var(--card-alt);
-  border: 1px solid var(--rule);
+  background: var(--surface-2);
+  border: 1px solid var(--hairline);
   border-radius: var(--radius);
   font-family: var(--font-display);
+  font-weight: 500;
   font-size: 0.94rem;
   color: var(--ink);
   transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
@@ -112,9 +113,9 @@
 
 .button:hover,
 .button:focus-visible {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #fdf6ea;
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--on-ink);
 }
 
 .buttonArrow {
@@ -140,13 +141,14 @@
 .foot {
   margin-top: clamp(36px, 5vw, 52px);
   padding-top: 24px;
-  border-top: 2px solid var(--rule);
+  border-top: 1px solid var(--hairline);
 }
 
 .footLink {
   font-family: var(--font-display);
+  font-weight: 500;
   font-size: 0.98rem;
-  color: var(--accent-ink);
+  color: var(--ink);
 }
 
 .footLink:hover {

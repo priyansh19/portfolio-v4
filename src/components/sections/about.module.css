@@ -1,6 +1,6 @@
 .section {
   padding: clamp(48px, 7vw, 84px) var(--gutter);
-  border-top: 1px solid var(--rule);
+  border-top: 1px solid var(--hairline);
 }
 
 .inner {
@@ -29,31 +29,33 @@
   margin: 0.1em 0.12em 0 0;
   font-family: var(--font-display);
   font-size: 3.4em;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 0.8;
-  color: var(--accent);
+  color: var(--fin-orange);
 }
 
 .scribble {
   margin-top: 26px !important;
   padding-left: 18px;
-  border-left: 2px solid var(--accent-soft);
-  font-family: var(--font-hand);
-  font-size: 1.34rem;
-  line-height: 1.4;
-  color: var(--accent-ink);
+  border-left: 2px solid var(--fin-orange);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  color: var(--ink);
 }
 
 .foot {
   margin-top: 26px;
   padding-top: 20px;
-  border-top: 1px dashed var(--rule);
+  border-top: 1px solid var(--hairline);
 }
 
 .footLink {
   font-family: var(--font-display);
+  font-weight: 500;
   font-size: 0.98rem;
-  color: var(--accent-ink);
+  color: var(--ink);
 }
 
 .footLink:hover {
@@ -73,9 +75,9 @@
 .quick {
   margin: 0;
   padding: 18px;
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-card);
 }
 
 .quickRow {
@@ -83,7 +85,7 @@
   flex-direction: column;
   gap: 3px;
   padding: 9px 0;
-  border-bottom: 1px solid var(--rule-soft);
+  border-bottom: 1px solid var(--hairline-soft);
 }
 
 .quickRow:last-child {
@@ -91,11 +93,10 @@
 }
 
 .quickLabel {
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ink-subtle);
 }
 
 .quickValue {

@@ -2,8 +2,8 @@
   position: sticky;
   top: 0;
   z-index: 40;
-  background: var(--paper);
-  border-bottom: 1px solid var(--rule);
+  background: var(--canvas);
+  border-bottom: 1px solid var(--hairline);
 }
 
 .inner {
@@ -13,7 +13,8 @@
   gap: 24px;
   max-width: var(--page-width);
   margin: 0 auto;
-  padding: 14px var(--gutter);
+  min-height: 56px;
+  padding: 10px var(--gutter);
 }
 
 .brand {
@@ -25,23 +26,22 @@
 
 .brandName {
   font-family: var(--font-display);
-  font-size: 1.06rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
   color: var(--ink);
 }
 
 .brandRole {
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--ink-subtle);
 }
 
-/* Index tabs down the side of a notebook */
 .tabList {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   gap: 4px;
   list-style: none;
   margin: 0;
@@ -50,26 +50,25 @@
 
 .tab {
   display: inline-block;
-  padding: 7px 14px;
-  border: 1px solid var(--rule);
-  border-bottom: 0;
-  border-radius: 6px 6px 0 0;
-  background: var(--card-alt);
-  font-family: var(--font-display);
-  font-size: 0.9rem;
-  color: var(--ink-body);
+  padding: 7px 13px;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--ink-muted);
   transition: background-color 0.15s ease, color 0.15s ease;
 }
 
 .tab:hover {
-  background: var(--card);
+  background: var(--surface-2);
   color: var(--ink);
 }
 
 .tab[data-current='true'] {
-  background: var(--card);
+  background: var(--surface-1);
   color: var(--ink);
-  box-shadow: inset 0 3px 0 var(--accent);
+  border-color: var(--hairline);
 }
 
 .actions {
@@ -81,19 +80,20 @@
 .menuButton {
   display: none;
   padding: 8px 14px;
-  border: 1px solid var(--rule);
+  border: 1px solid var(--hairline);
   border-radius: var(--radius);
-  background: var(--card);
-  font-family: var(--font-display);
-  font-size: 0.88rem;
+  background: var(--surface-1);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.875rem;
   color: var(--ink);
   cursor: pointer;
 }
 
 .sheet {
   display: none;
-  border-top: 1px solid var(--rule);
-  background: var(--card);
+  border-top: 1px solid var(--hairline);
+  background: var(--surface-1);
 }
 
 .sheetList {
@@ -105,9 +105,10 @@
 .sheetLink {
   display: block;
   padding: 13px 0;
-  border-bottom: 1px solid var(--rule-soft);
+  border-bottom: 1px solid var(--hairline-soft);
   font-family: var(--font-display);
-  font-size: 1.2rem;
+  font-weight: 500;
+  font-size: 1.1rem;
   color: var(--ink);
 }
 

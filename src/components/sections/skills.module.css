@@ -1,6 +1,6 @@
 .section {
   padding: clamp(48px, 7vw, 84px) var(--gutter);
-  border-top: 1px solid var(--rule);
+  border-top: 1px solid var(--hairline);
 }
 
 .inner {
@@ -16,9 +16,9 @@
 
 .group {
   padding: clamp(18px, 2.5vw, 24px);
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-card);
 }
 
 .groupTitle {
@@ -28,14 +28,15 @@
   gap: 12px;
   margin: 0 0 14px;
   padding-bottom: 10px;
-  border-bottom: 1px solid var(--rule-soft);
+  border-bottom: 1px solid var(--hairline-soft);
   font-size: 1.08rem;
 }
 
 .count {
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  color: var(--ink-soft);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ink-subtle);
 }
 
 .items {
@@ -49,9 +50,9 @@
 
 .item {
   padding: 5px 11px;
-  background: var(--card-alt);
-  border: 1px solid var(--rule-soft);
-  border-radius: var(--radius);
+  background: var(--surface-2);
+  border: 1px solid var(--hairline-soft);
+  border-radius: var(--radius-chip);
   font-size: 0.86rem;
-  color: var(--ink-body);
+  color: var(--ink-muted);
 }

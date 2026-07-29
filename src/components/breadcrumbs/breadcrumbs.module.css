@@ -20,19 +20,18 @@
 .link,
 .current,
 .separator {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
 }
 
 .link {
-  color: var(--ink-soft);
+  color: var(--ink-subtle);
   transition: color 0.15s ease;
 }
 
 .link:hover {
-  color: var(--accent-ink);
+  color: var(--ink);
   text-decoration: underline;
   text-underline-offset: 4px;
 }
@@ -43,5 +42,5 @@
 
 .separator {
   margin: 0 10px;
-  color: var(--rule);
+  color: var(--hairline);
 }

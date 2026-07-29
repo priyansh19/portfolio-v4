@@ -17,7 +17,7 @@
   gap: 34px;
   margin: 30px 0 0;
   padding-top: 22px;
-  border-top: 1px dashed var(--rule);
+  border-top: 1px solid var(--hairline);
 }
 
 .stat {
@@ -29,23 +29,22 @@
 .statValue {
   font-family: var(--font-display);
   font-size: 1.7rem;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--ink);
 }
 
 .statLabel {
   margin: 0;
-  font-family: var(--font-mono);
-  font-size: 0.63rem;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ink-subtle);
 }
 
 .section {
   margin-top: clamp(44px, 6vw, 70px);
   padding-top: clamp(32px, 4vw, 44px);
-  border-top: 1px solid var(--rule);
+  border-top: 1px solid var(--hairline);
 }
 
 .sectionTitle {
@@ -63,18 +62,17 @@
 
 .availabilityRow {
   padding: 18px;
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-left: 3px solid var(--stamp);
-  border-radius: var(--radius);
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+  border-left: 3px solid var(--fin-orange);
+  border-radius: var(--radius-card);
 }
 
 .availabilityLabel {
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ink-subtle);
 }
 
 .availabilityValue {
@@ -97,18 +95,17 @@
 
 .caseStudy {
   padding: 22px;
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-card);
 }
 
 .caseSector {
   margin: 0 0 6px;
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--accent-ink);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ink-muted);
 }
 
 .caseTitle {
@@ -125,42 +122,42 @@
 .caseResult {
   margin: 0;
   padding-top: 12px;
-  border-top: 1px dashed var(--rule-soft);
+  border-top: 1px solid var(--hairline-soft);
   font-size: 0.95rem;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--ink);
 }
 
 .caseDuration {
   margin: 8px 0 0;
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--ink-subtle);
 }
 
 .testimonial {
   padding: 22px;
-  background: var(--card-alt);
-  border: 1px solid var(--rule-soft);
-  border-radius: var(--radius);
+  background: var(--surface-2);
+  border: 1px solid var(--hairline-soft);
+  border-radius: var(--radius-card);
 }
 
 .quote {
   margin: 0 0 12px;
-  font-family: var(--font-hand);
-  font-size: 1.3rem;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.125rem;
   line-height: 1.45;
-  color: var(--accent-ink);
+  color: var(--ink);
 }
 
 .attribution {
   margin: 0;
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.1em;
-  color: var(--ink-soft);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ink-subtle);
 }
 
 /* Services */
@@ -175,9 +172,9 @@
 
 .service {
   padding: 22px;
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-card);
 }
 
 .serviceTitle {
@@ -197,17 +194,18 @@
   gap: 6px;
   margin: 16px 0 0;
   padding: 14px 0 0;
-  border-top: 1px dashed var(--rule-soft);
+  border-top: 1px solid var(--hairline-soft);
   list-style: none;
 }
 
 .tag {
   padding: 3px 10px;
-  border: 1px solid var(--rule);
-  border-radius: 999px;
-  font-family: var(--font-mono);
-  font-size: 0.63rem;
-  color: var(--ink-soft);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-chip);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--ink-subtle);
 }
 
 /* Process */
@@ -222,7 +220,7 @@
   grid-template-columns: 62px minmax(0, 1fr);
   gap: 20px;
   padding: 20px 0;
-  border-bottom: 1px dashed var(--rule);
+  border-bottom: 1px solid var(--hairline-soft);
 }
 
 .phase:last-child {
@@ -232,8 +230,8 @@
 .phaseStep {
   font-family: var(--font-display);
   font-size: 1.7rem;
-  font-weight: 600;
-  color: var(--accent-soft);
+  font-weight: 500;
+  color: var(--fin-orange);
   line-height: 1;
 }
 
@@ -261,9 +259,9 @@
 
 .engagement {
   padding: 20px;
-  background: var(--card-alt);
-  border: 1px solid var(--rule-soft);
-  border-radius: var(--radius);
+  background: var(--surface-2);
+  border: 1px solid var(--hairline-soft);
+  border-radius: var(--radius-card);
 }
 
 .engagementTitle {
@@ -281,17 +279,18 @@
 .cta {
   margin-top: clamp(44px, 6vw, 70px);
   padding: clamp(28px, 4vw, 40px);
-  background: var(--card);
-  border: 1px dashed var(--rule);
-  border-radius: var(--radius);
+  background: var(--surface-1);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-card);
   text-align: center;
 }
 
 .ctaHand {
   margin: 0 0 10px;
-  font-family: var(--font-hand);
-  font-size: 1.7rem;
-  color: var(--accent-ink);
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.5rem;
+  color: var(--ink);
 }
 
 .ctaBody {
@@ -303,18 +302,19 @@
 .ctaButton {
   display: inline-block;
   padding: 12px 26px;
-  background: var(--accent);
-  border: 1px solid var(--accent);
+  background: var(--ink);
+  border: 1px solid var(--ink);
   border-radius: var(--radius);
   font-family: var(--font-display);
+  font-weight: 500;
   font-size: 0.98rem;
-  color: #fdf6ea;
-  transition: background-color 0.15s ease;
+  color: var(--on-ink);
+  transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 
 .ctaButton:hover {
-  background: var(--accent-ink);
-  border-color: var(--accent-ink);
+  background: var(--ink-pressed);
+  border-color: var(--ink-pressed);
 }
 
 @media (max-width: 860px) {
