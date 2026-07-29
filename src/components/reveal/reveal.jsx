@@ -2,29 +2,20 @@
 
 import { motion, useReducedMotion } from 'framer-motion';
 
+/** A damped mechanical snap — panels click into place, they don't ease in. */
+const snap = { type: 'spring', stiffness: 340, damping: 26, mass: 0.9 };
+
 /**
- * Scroll-triggered reveal. Fires once, respects prefers-reduced-motion
- * (which collapses to a plain fade so content never pops in unannounced).
+ * Scroll-triggered reveal styled as a UI plate snapping into its slot: a
+ * short drop plus a spring settle, no blur or cinematic easing. Fires once,
+ * respects prefers-reduced-motion (which collapses to a plain instant fade).
  */
-export const Reveal = ({
-  children,
-  as = 'div',
-  delay = 0,
-  y = 28,
-  blur = true,
-  className,
-  ...rest
-}) => {
+export const Reveal = ({ children, as = 'div', delay = 0, y = 22, className, ...rest }) => {
   const reduceMotion = useReducedMotion();
   const MotionTag = motion[as] ?? motion.div;
 
-  const hidden = reduceMotion
-    ? { opacity: 0 }
-    : { opacity: 0, y, filter: blur ? 'blur(8px)' : 'blur(0px)' };
-
-  const shown = reduceMotion
-    ? { opacity: 1 }
-    : { opacity: 1, y: 0, filter: 'blur(0px)' };
+  const hidden = reduceMotion ? { opacity: 0 } : { opacity: 0, y, scale: 0.98 };
+  const shown = reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 };
 
   return (
     <MotionTag
@@ -32,7 +23,7 @@ export const Reveal = ({
       initial={hidden}
       whileInView={shown}
       viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.75, delay, ease: [0.16, 1, 0.3, 1] }}
+      transition={reduceMotion ? { duration: 0.01 } : { ...snap, delay }}
       {...rest}
     >
       {children}
@@ -43,7 +34,7 @@ export const Reveal = ({
 /**
  * Staggers direct children. Pair with <RevealItem>.
  */
-export const RevealGroup = ({ children, className, stagger = 0.08, ...rest }) => (
+export const RevealGroup = ({ children, className, stagger = 0.07, ...rest }) => (
   <motion.div
     className={className}
     initial="hidden"
@@ -56,7 +47,7 @@ export const RevealGroup = ({ children, className, stagger = 0.08, ...rest }) =>
   </motion.div>
 );
 
-export const RevealItem = ({ children, as = 'div', className, y = 24, ...rest }) => {
+export const RevealItem = ({ children, as = 'div', className, y = 20, ...rest }) => {
   const reduceMotion = useReducedMotion();
   const MotionTag = motion[as] ?? motion.div;
 
@@ -64,11 +55,12 @@ export const RevealItem = ({ children, as = 'div', className, y = 24, ...rest })
     <MotionTag
       className={className}
       variants={{
-        hidden: reduceMotion ? { opacity: 0 } : { opacity: 0, y },
+        hidden: reduceMotion ? { opacity: 0 } : { opacity: 0, y, scale: 0.98 },
         shown: {
           opacity: 1,
           y: 0,
-          transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+          scale: 1,
+          transition: snap,
         },
       }}
       {...rest}

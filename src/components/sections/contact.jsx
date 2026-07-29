@@ -1,3 +1,4 @@
+import { RevealGroup, RevealItem, Reveal } from '@/components/reveal/reveal';
 import { SectionHeading } from '@/components/section-heading/section-heading';
 import { contactMeta, links } from '@/lib/content';
 import styles from './contact.module.css';
@@ -13,15 +14,15 @@ export const Contact = () => (
   <section className={styles.section} id="contact">
     <div className={styles.inner}>
       <SectionHeading
-        eyebrow="Last page"
-        title="Sign my book"
+        eyebrow="Final stage"
+        title="Continue?"
         lede="Open to consulting engagements and full-time forward-deployed roles. Email is the fastest way to reach me."
       />
 
       <div className={styles.layout}>
-        <ul className={styles.channels}>
+        <RevealGroup as="ul" className={styles.channels}>
           {channels.map(channel => (
-            <li className={styles.channel} key={channel.id}>
+            <RevealItem as="li" className={styles.channel} key={channel.id}>
               <a
                 className={styles.channelLink}
                 href={channel.href}
@@ -31,11 +32,11 @@ export const Contact = () => (
                 <span className={styles.channelLabel}>{channel.label}</span>
                 <span className={styles.channelValue}>{channel.value}</span>
               </a>
-            </li>
+            </RevealItem>
           ))}
-        </ul>
+        </RevealGroup>
 
-        <div className={styles.note}>
+        <Reveal as="div" className={styles.note} delay={0.08}>
           <p className={styles.noteHand}>
             Stay in touch — and tell me what you are building.
           </p>
@@ -65,7 +66,7 @@ export const Contact = () => (
           <a className={styles.cta} href={`mailto:${links.email}`}>
             Start a conversation
           </a>
-        </div>
+        </Reveal>
       </div>
     </div>
   </section>

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Polaroid } from '@/components/polaroid/polaroid';
+import { Reveal } from '@/components/reveal/reveal';
 import { SectionHeading } from '@/components/section-heading/section-heading';
 import { certifications, education, profile } from '@/lib/content';
 import styles from './about.module.css';
@@ -9,13 +10,13 @@ export const About = () => (
   <section className={styles.section} id="about">
     <div className={styles.inner}>
       <SectionHeading
-        eyebrow="Chapter five"
+        eyebrow="Stage 05"
         title="A bit more about me"
         lede={profile.headline}
       />
 
       <div className={styles.layout}>
-        <div className={styles.prose}>
+        <Reveal as="div" className={styles.prose}>
           <p>
             I spend my time where research meets production. That has meant leading a team
             of ten through 20+ enterprise RAG rollouts, designing an LLM gateway that turned
@@ -33,9 +34,9 @@ export const About = () => (
               Read the full bio, skills and certifications →
             </Link>
           </div>
-        </div>
+        </Reveal>
 
-        <aside className={styles.side}>
+        <Reveal as="aside" className={styles.side} delay={0.08}>
           <Polaroid
             alt="Graduation or campus photo"
             caption="Heriot-Watt, 2026"
@@ -58,7 +59,7 @@ export const About = () => (
               <dd className={styles.quickValue}>Dubai · {profile.timezone}</dd>
             </div>
           </dl>
-        </aside>
+        </Reveal>
       </div>
     </div>
   </section>

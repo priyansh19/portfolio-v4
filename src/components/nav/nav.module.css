@@ -2,8 +2,20 @@
   position: sticky;
   top: 0;
   z-index: 40;
-  background: var(--paper);
-  border-bottom: 1px solid var(--rule);
+  background-color: var(--carbon);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.09) 1px, transparent 1.3px);
+  background-size: 5px 5px;
+  border-bottom: 3px solid var(--chrome-indigo);
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.5), 0 2px 0 var(--carbon-deep);
+}
+
+/* Pale-sky hairline under the carbon bar — a nod to the source's dual
+   nav-bar structure without adding a second interactive row. */
+.header::after {
+  content: '';
+  display: block;
+  height: 4px;
+  background: var(--canvas-soft);
 }
 
 .inner {
@@ -13,35 +25,49 @@
   gap: 24px;
   max-width: var(--page-width);
   margin: 0 auto;
-  padding: 14px var(--gutter);
+  padding: 10px var(--gutter);
 }
 
 .brand {
   display: flex;
-  flex-direction: column;
-  gap: 1px;
-  line-height: 1.2;
+  align-items: center;
+  gap: 10px;
+  line-height: 1.15;
 }
 
 .brandName {
+  padding: 3px 16px;
+  border-radius: 9999px;
+  background: var(--surface);
+  border: 1px solid var(--chrome-indigo);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 1px 0 rgba(0, 0, 0, 0.35);
   font-family: var(--font-display);
-  font-size: 1.06rem;
-  font-weight: 600;
-  color: var(--ink);
+  font-size: 0.92rem;
+  font-weight: 900;
+  color: var(--nintendo-red);
+  white-space: nowrap;
 }
 
 .brandRole {
+  display: none;
   font-family: var(--font-mono);
   font-size: 0.6rem;
-  letter-spacing: 0.16em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--ink-soft);
+  color: var(--canvas-soft);
 }
 
-/* Index tabs down the side of a notebook */
+@media (min-width: 620px) {
+  .brandRole {
+    display: inline-block;
+  }
+}
+
+/* Primary nav — nav-gold words glowing on the carbon slab */
 .tabList {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   gap: 4px;
   list-style: none;
   margin: 0;
@@ -50,26 +76,28 @@
 
 .tab {
   display: inline-block;
-  padding: 7px 14px;
-  border: 1px solid var(--rule);
-  border-bottom: 0;
-  border-radius: 6px 6px 0 0;
-  background: var(--card-alt);
-  font-family: var(--font-display);
-  font-size: 0.9rem;
-  color: var(--ink-body);
-  transition: background-color 0.15s ease, color 0.15s ease;
+  padding: 7px 13px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--nav-gold);
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  transition: color 0.1s steps(2, end), background-color 0.1s steps(2, end);
 }
 
 .tab:hover {
-  background: var(--card);
-  color: var(--ink);
+  color: var(--amber);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .tab[data-current='true'] {
-  background: var(--card);
-  color: var(--ink);
-  box-shadow: inset 0 3px 0 var(--accent);
+  color: var(--amber);
+  background: rgba(0, 0, 0, 0.35);
+  border-color: var(--chrome-indigo);
+  box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.5), inset 0 -2px 0 var(--signal);
 }
 
 .actions {
@@ -80,20 +108,24 @@
 
 .menuButton {
   display: none;
-  padding: 8px 14px;
-  border: 1px solid var(--rule);
+  padding: 7px 14px;
+  border: 1px solid var(--chrome-indigo);
   border-radius: var(--radius);
-  background: var(--card);
-  font-family: var(--font-display);
-  font-size: 0.88rem;
-  color: var(--ink);
+  background: var(--amber);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), inset 0 -2px 0 rgba(0, 0, 0, 0.3);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--carbon);
   cursor: pointer;
 }
 
 .sheet {
   display: none;
-  border-top: 1px solid var(--rule);
-  background: var(--card);
+  border-top: 2px solid var(--chrome-indigo);
+  background: var(--carbon);
 }
 
 .sheetList {
@@ -105,10 +137,13 @@
 .sheetLink {
   display: block;
   padding: 13px 0;
-  border-bottom: 1px solid var(--rule-soft);
-  font-family: var(--font-display);
-  font-size: 1.2rem;
-  color: var(--ink);
+  border-bottom: 1px solid var(--muted-indigo);
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--nav-gold);
 }
 
 @media (max-width: 940px) {

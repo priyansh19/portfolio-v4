@@ -1,8 +1,11 @@
+import { HardwareRig } from '@/components/hardware-rig/hardware-rig';
+import { ParticleField } from '@/components/particle-field/particle-field';
 import { Polaroid } from '@/components/polaroid/polaroid';
+import { Reveal } from '@/components/reveal/reveal';
 import { links, profile, stats } from '@/lib/content';
 import styles from './hero.module.css';
 
-/** Slam-book front page: the "about me" entries filled in by hand. */
+/** System info readout — the "about me" facts as a console status panel. */
 const entries = [
   { label: 'Name', value: profile.name },
   { label: 'Currently', value: profile.status.headline },
@@ -14,15 +17,24 @@ const entries = [
 
 export const Hero = () => (
   <section className={styles.hero} id="top">
+    <div className={styles.stage} aria-hidden>
+      <div className={styles.circuit}>
+        <ParticleField />
+      </div>
+      <div className={styles.rig}>
+        <HardwareRig />
+      </div>
+    </div>
+
     <div className={styles.inner}>
-      <div className={styles.head}>
-        <p className={styles.kicker}>This book belongs to</p>
+      <Reveal as="div" className={styles.head}>
+        <p className={styles.kicker}>Player file</p>
         <h1 className={styles.title}>{profile.name}</h1>
         <p className={styles.subtitle}>{profile.headline}</p>
-      </div>
+      </Reveal>
 
       {/* The first question every visitor has, answered above the fold */}
-      <div className={styles.status}>
+      <Reveal as="div" className={styles.status} delay={0.05}>
         <p className={styles.statusHead}>
           <span className={styles.statusDot} aria-hidden />
           {profile.status.headline}
@@ -35,10 +47,11 @@ export const Hero = () => (
             </li>
           ))}
         </ul>
-      </div>
+      </Reveal>
 
       <div className={styles.body}>
-        <div className={styles.entryCard}>
+        <Reveal as="div" className={styles.entryCard} delay={0.1}>
+          <p className={styles.entryTitle}>System info</p>
           <dl className={styles.entries}>
             {entries.map(entry => (
               <div className={styles.entry} key={entry.label}>
@@ -51,9 +64,9 @@ export const Hero = () => (
           <p className={styles.note}>
             Five years of building things that have to survive Monday morning.
           </p>
-        </div>
+        </Reveal>
 
-        <aside className={styles.photos}>
+        <Reveal as="aside" className={styles.photos} delay={0.15}>
           <Polaroid
             alt="Portrait of Priyansh"
             caption="me, allegedly"
@@ -61,10 +74,10 @@ export const Hero = () => (
             size="lg"
             tape="corner"
           />
-        </aside>
+        </Reveal>
       </div>
 
-      <div className={styles.footRow}>
+      <Reveal as="div" className={styles.footRow} delay={0.05}>
         <dl className={styles.stats}>
           {stats.map(stat => (
             <div className={styles.stat} key={stat.label}>
@@ -91,7 +104,7 @@ export const Hero = () => (
             LinkedIn
           </a>
         </div>
-      </div>
+      </Reveal>
     </div>
   </section>
 );

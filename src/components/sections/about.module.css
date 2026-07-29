@@ -1,6 +1,8 @@
 .section {
   padding: clamp(48px, 7vw, 84px) var(--gutter);
-  border-top: 1px solid var(--rule);
+  background: var(--card);
+  border-top: 3px solid var(--chrome-indigo);
+  box-shadow: inset 0 2px 0 var(--bevel-hi);
 }
 
 .inner {
@@ -73,9 +75,10 @@
 .quick {
   margin: 0;
   padding: 18px;
-  background: var(--card);
-  border: 1px solid var(--rule);
+  background: var(--card-alt);
+  border: 1px solid var(--chrome-indigo);
   border-radius: var(--radius);
+  box-shadow: inset 0 1px 0 var(--bevel-hi);
 }
 
 .quickRow {

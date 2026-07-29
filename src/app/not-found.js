@@ -28,8 +28,8 @@ export default function NotFound() {
       <Nav />
 
       <main className={styles.main}>
-        <p className={styles.kicker}>Page 404</p>
-        <h1 className={styles.title}>This page came loose from the binding.</h1>
+        <p className={styles.kicker}>Error 404</p>
+        <h1 className={styles.title}>This cartridge won&apos;t load.</h1>
         <p className={styles.body}>
           Whatever was here has moved or never existed. Here is everything else.
         </p>

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { RevealGroup, RevealItem } from '@/components/reveal/reveal';
 import { SectionHeading } from '@/components/section-heading/section-heading';
 import { openSource } from '@/lib/content';
 import styles from './open-source-section.module.css';
@@ -13,7 +14,7 @@ export const OpenSourceSection = () => (
   <section className={styles.section} id="open-source">
     <div className={styles.inner}>
       <SectionHeading
-        eyebrow="Chapter four"
+        eyebrow="Stage 04"
         title="Open source"
         lede={openSource.intro}
         aside={`contributing as @${openSource.handle} since ${openSource.since}`}
@@ -31,9 +32,9 @@ export const OpenSourceSection = () => (
       <div className={styles.layout}>
         <div className={styles.column}>
           <h3 className={styles.subheading}>Projects I contribute to</h3>
-          <ul className={styles.orgs}>
+          <RevealGroup as="ul" className={styles.orgs}>
             {openSource.upstream.map(repo => (
-              <li className={styles.org} key={repo.id}>
+              <RevealItem as="li" className={styles.org} key={repo.id}>
                 <span className={styles.orgName}>{repo.org}</span>
                 <span className={styles.orgDescription}>{repo.description}</span>
                 <span className={styles.orgCounts}>
@@ -42,9 +43,9 @@ export const OpenSourceSection = () => (
                   </span>
                   <span className={styles.orgCount}>{repo.opened} opened</span>
                 </span>
-              </li>
+              </RevealItem>
             ))}
-          </ul>
+          </RevealGroup>
         </div>
 
         <div className={styles.column}>

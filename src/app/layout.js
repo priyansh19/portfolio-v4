@@ -1,23 +1,16 @@
-import { Caveat, Fraunces, Lora } from 'next/font/google';
+import { VT323 } from 'next/font/google';
+import { BootScreen } from '@/components/boot-screen/boot-screen';
+import { ScrollProgress } from '@/components/scroll-progress/scroll-progress';
 import { ThemeProvider } from '@/components/theme-provider';
 import { links, profile } from '@/lib/content';
 import { siteUrl } from '@/lib/site';
 import './globals.css';
 
-const fraunces = Fraunces({
-  variable: '--font-fraunces',
-  subsets: ['latin'],
-  display: 'swap',
-});
-
-const lora = Lora({
-  variable: '--font-lora',
-  subsets: ['latin'],
-  display: 'swap',
-});
-
-const caveat = Caveat({
-  variable: '--font-caveat',
+// The pixel-legend voice for micro chrome labels — this era's bitmap Arial,
+// stood in for by a real pixel face rather than disabled anti-aliasing.
+const vt323 = VT323({
+  weight: '400',
+  variable: '--font-vt323',
   subsets: ['latin'],
   display: 'swap',
 });
@@ -71,24 +64,23 @@ export const metadata = {
 
 export const viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#efe4ce' },
-    { media: '(prefers-color-scheme: dark)', color: '#1c1813' },
+    { media: '(prefers-color-scheme: light)', color: '#7a8aba' },
+    { media: '(prefers-color-scheme: dark)', color: '#2a3252' },
   ],
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html
-      lang="en"
-      data-theme="light"
-      className={`${fraunces.variable} ${lora.variable} ${caveat.variable}`}
-      suppressHydrationWarning
-    >
+    <html lang="en" data-theme="light" className={vt323.variable} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <BootScreen />
+          <ScrollProgress />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

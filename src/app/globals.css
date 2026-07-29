@@ -1,62 +1,110 @@
 @import 'tailwindcss';
 
 /*
- * Slam-book / scrapbook direction: warm paper, ink, tape and ruled lines.
- * Layout-first phase — no 3D scenes, no scroll animation.
+ * Nintendo.com (2001) "console chrome" direction — a periwinkle-metallic
+ * faceplate built from beveled plates, a carbon-navy command layer, and
+ * warm nav-gold / amber / signal-orange wayfinding. Every legacy variable
+ * name below is kept so every component module still resolves — only the
+ * *values* changed, which is what actually re-skins the site.
  */
 
 :root {
-  --font-display: var(--font-fraunces), Georgia, 'Times New Roman', serif;
-  --font-body: var(--font-lora), Georgia, 'Times New Roman', serif;
-  --font-hand: var(--font-caveat), 'Segoe Script', cursive;
-  --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  /* ---- Type voices, remapped onto the old slots ----
+     --font-display : bold box-art / heading voice (Arial Black)
+     --font-body    : body copy (Arial)
+     --font-hand    : pixel legend voice (VT323) — was the handwritten script
+     --font-mono    : uppercase chrome label voice (Arial, tracked at call sites) */
+  --font-display: 'Arial Black', Arial, 'Helvetica Neue', sans-serif;
+  --font-body: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  --font-hand: var(--font-vt323, 'VT323'), 'Courier New', monospace;
+  --font-mono: Arial, 'Helvetica Neue', Helvetica, sans-serif;
 
-  /* The page fills the viewport — only the gutter holds content off the edge.
-     Long-form text is still capped by --prose-width so lines stay readable. */
   --page-width: 100%;
   --prose-width: 72ch;
   --gutter: clamp(20px, 4vw, 72px);
-  --radius: 3px;
+  --radius: 2px;
+
+  /* Chrome-specific tokens, new in this phase */
+  --canvas: #7a8aba;
+  --canvas-soft: #9fbee7;
+  --periwinkle: #8ba1d4;
+  --chrome-indigo: #3d4f97;
+  --muted-indigo: #60619c;
+  --platinum: #dedede;
+  --carbon: #21242e;
+  --carbon-deep: #14161c;
+  --surface: #ffffff;
+  --lavender: #acace7;
+  --ice: #c0d5e6;
+  --nintendo-red: #e60012;
+  --signal: #f68d1f;
+  --amber: #ecab37;
+  --nav-gold: #e48600;
+  --on-primary: #ffffff;
+  --hairline: #5a5f8c;
+  --bevel-hi: rgba(255, 255, 255, 0.55);
+  --bevel-lo: var(--chrome-indigo);
 }
 
 :root,
 [data-theme='light'] {
-  --paper: #efe4ce;
-  --paper-deep: #e4d5b8;
-  --card: #fbf6ea;
-  --card-alt: #f6eeda;
-  --ink: #2c2418;
-  --ink-body: #4a3f2e;
-  --ink-soft: #7d6e57;
-  --rule: #d8c6a3;
-  --rule-soft: #e3d5b9;
-  --tape: rgba(224, 205, 158, 0.85);
-  --accent: #b0432c;
-  --accent-soft: #d9a08d;
-  --accent-ink: #8c3320;
-  --marker: #e8c96a;
-  --stamp: #2f6560;
-  --shadow: rgba(80, 62, 34, 0.18);
+  --paper: var(--canvas);
+  --paper-deep: var(--chrome-indigo);
+  --card: var(--surface);
+  --card-alt: var(--platinum);
+  --ink: var(--carbon);
+  --ink-body: #262a38;
+  --ink-soft: var(--chrome-indigo);
+  --rule: var(--chrome-indigo);
+  --rule-soft: var(--muted-indigo);
+  --tape: rgba(61, 79, 151, 0.55);
+  --accent: var(--signal);
+  --accent-soft: var(--amber);
+  --accent-ink: var(--chrome-indigo);
+  --marker: var(--amber);
+  --stamp: var(--signal);
+  --shadow: rgba(33, 36, 46, 0.4);
+  --glow: rgba(230, 134, 0, 0.55);
+  --accent-violet: var(--amber);
+  --accent-magenta: var(--nintendo-red);
   color-scheme: light;
 }
 
 [data-theme='dark'] {
-  --paper: #1c1813;
-  --paper-deep: #15120e;
-  --card: #262019;
-  --card-alt: #2d2620;
-  --ink: #f3e9d6;
-  --ink-body: #ddd0b8;
-  --ink-soft: #a29175;
-  --rule: #453b2e;
-  --rule-soft: #362e24;
-  --tape: rgba(120, 102, 66, 0.6);
-  --accent: #e08163;
-  --accent-soft: #7c4433;
-  --accent-ink: #f0a186;
-  --marker: #7a6530;
-  --stamp: #6aa9a2;
-  --shadow: rgba(0, 0, 0, 0.5);
+  --canvas: #2a3252;
+  --canvas-soft: #333d68;
+  --periwinkle: #3a4570;
+  --chrome-indigo: #4a5590;
+  --muted-indigo: #5a659c;
+  --platinum: #262c46;
+  --carbon: #0f1119;
+  --carbon-deep: #08090d;
+  --surface: #1e2236;
+  --lavender: #4b4f8a;
+  --ice: #33475c;
+  --hairline: #4a5590;
+  --bevel-hi: rgba(255, 255, 255, 0.12);
+  --bevel-lo: rgba(0, 0, 0, 0.6);
+
+  --paper: var(--canvas);
+  --paper-deep: var(--carbon-deep);
+  --card: var(--surface);
+  --card-alt: var(--platinum);
+  --ink: #eef1fb;
+  --ink-body: #d7ddf2;
+  --ink-soft: #a9b7e6;
+  --rule: var(--chrome-indigo);
+  --rule-soft: var(--muted-indigo);
+  --tape: rgba(74, 85, 144, 0.6);
+  --accent: var(--signal);
+  --accent-soft: var(--amber);
+  --accent-ink: var(--nav-gold);
+  --marker: var(--amber);
+  --stamp: var(--signal);
+  --shadow: rgba(0, 0, 0, 0.65);
+  --glow: rgba(246, 141, 31, 0.55);
+  --accent-violet: var(--amber);
+  --accent-magenta: var(--nintendo-red);
   color-scheme: dark;
 }
 
@@ -93,13 +141,15 @@ body::-webkit-scrollbar,
 
 body {
   background-color: var(--paper);
-  /* Faint fibre speckle so the beige reads as paper, not a flat fill.
-     Inline SVG keeps it self-contained — no image request. */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+  /* Halftone dot-matrix over the periwinkle chrome — the speaker-grille
+     texture this system uses instead of paper grain. Inline SVG keeps it
+     self-contained. */
+  background-image: radial-gradient(rgba(33, 36, 46, 0.16) 1px, transparent 1.3px);
+  background-size: 5px 5px;
   color: var(--ink-body);
   font-family: var(--font-body);
-  font-size: 17px;
-  line-height: 1.72;
+  font-size: 16px;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -111,9 +161,9 @@ h3,
 h4 {
   font-family: var(--font-display);
   color: var(--ink);
-  font-weight: 600;
-  line-height: 1.15;
-  letter-spacing: -0.015em;
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
   text-wrap: balance;
 }
 
@@ -133,25 +183,27 @@ p a,
 
 ::selection {
   background: var(--marker);
-  color: var(--ink);
+  color: var(--carbon);
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--signal);
   outline-offset: 3px;
 }
 
-/* ---- Shared paper primitives ---- */
+/* ---- Shared chrome primitives ---- */
 
-/* A sheet of paper: off-white card, hairline border, soft drop shadow. */
+/* A beveled metal plate: flush panel with a bright top edge and a chrome-indigo
+   shadow line beneath — the "assembled machine" surface used everywhere a
+   `.sheet` card used to sit flat. */
 .sheet {
   background: var(--card);
   border: 1px solid var(--rule);
   border-radius: var(--radius);
-  box-shadow: 0 1px 0 var(--rule-soft), 0 10px 24px -18px var(--shadow);
+  box-shadow: inset 0 1px 0 var(--bevel-hi), 0 2px 0 var(--rule), 0 3px 8px -4px var(--shadow);
 }
 
-/* Notebook ruling, used behind long-form text blocks. */
+/* Circuit-board ruling behind long-form text blocks. */
 .ruled {
   background-image: repeating-linear-gradient(
     to bottom,
@@ -162,11 +214,12 @@ p a,
   );
 }
 
-/* Handwritten aside, as if scribbled in the margin. */
+/* Pixel-legend aside, the console micro-label voice. */
 .hand {
   font-family: var(--font-hand);
-  font-size: 1.32em;
-  line-height: 1.4;
+  font-size: 1.5em;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
   color: var(--accent-ink);
 }
 
@@ -174,38 +227,38 @@ p a,
    CSS module so the sub-pages can share one set of typographic rules. */
 .prose {
   max-width: var(--prose-width);
-  font-size: 1.06rem;
-  line-height: 1.78;
+  font-size: 1rem;
+  line-height: 1.68;
   color: var(--ink-body);
 }
 
 .prose > * + * {
-  margin-top: 1.15em;
+  margin-top: 1.1em;
 }
 
 .prose h2 {
   margin-top: 2em;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
 }
 
 .prose h3 {
-  margin-top: 1.7em;
-  font-size: 1.22rem;
+  margin-top: 1.6em;
+  font-size: 1.15rem;
 }
 
 .prose strong {
   color: var(--ink);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .prose blockquote {
   margin-left: 0;
   margin-right: 0;
   padding: 4px 0 4px 20px;
-  border-left: 2px solid var(--accent-soft);
+  border-left: 3px solid var(--accent);
   font-family: var(--font-hand);
-  font-size: 1.34rem;
-  line-height: 1.45;
+  font-size: 1.4rem;
+  line-height: 1.3;
   color: var(--accent-ink);
 }
 

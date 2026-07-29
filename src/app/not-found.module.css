@@ -2,6 +2,9 @@
   max-width: var(--page-width);
   margin: 0 auto;
   padding: clamp(56px, 9vw, 110px) var(--gutter) clamp(56px, 8vw, 90px);
+  background: var(--card);
+  border-top: 4px solid var(--nintendo-red);
+  box-shadow: inset 0 2px 0 var(--bevel-hi);
 }
 
 .kicker {
@@ -41,15 +44,16 @@
   gap: 5px;
   height: 100%;
   padding: 20px;
-  background: var(--card);
-  border: 1px solid var(--rule);
+  background: var(--card-alt);
+  border: 1px solid var(--chrome-indigo);
   border-radius: var(--radius);
-  transition: border-color 0.15s ease, background-color 0.15s ease;
+  box-shadow: inset 0 1px 0 var(--bevel-hi);
+  transition: border-color 0.1s steps(2, end), background-color 0.1s steps(2, end);
 }
 
 .card:hover {
-  border-color: var(--accent-soft);
-  background: var(--card-alt);
+  border-color: var(--accent);
+  background: var(--amber);
 }
 
 .cardLabel {

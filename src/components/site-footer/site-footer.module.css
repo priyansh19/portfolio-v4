@@ -1,6 +1,9 @@
 .footer {
-  padding: 28px var(--gutter) 44px;
-  border-top: 2px solid var(--rule);
+  padding: 26px var(--gutter) 34px;
+  background-color: var(--carbon);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1.3px);
+  background-size: 5px 5px;
+  border-top: 3px solid var(--chrome-indigo);
 }
 
 .inner {
@@ -20,30 +23,38 @@
   gap: 12px;
   margin: 0;
   font-family: var(--font-display);
-  color: var(--ink);
+  font-weight: 900;
+  color: var(--canvas-soft);
 }
 
 .location {
   font-family: var(--font-mono);
-  font-size: 0.63rem;
-  letter-spacing: 0.13em;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--ink-soft);
+  color: var(--muted-indigo);
 }
 
 .links {
   display: flex;
   flex-wrap: wrap;
-  gap: 18px;
+  gap: 4px;
 }
 
 .link {
-  font-size: 0.9rem;
-  color: var(--ink-body);
+  padding: 5px 10px;
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--nav-gold);
+  transition: color 0.1s steps(2, end), background-color 0.1s steps(2, end);
 }
 
 .link:hover {
-  color: var(--accent-ink);
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  color: var(--amber);
+  background: rgba(255, 255, 255, 0.07);
 }

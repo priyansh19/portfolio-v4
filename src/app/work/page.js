@@ -1,3 +1,4 @@
+import { ExperienceSequence } from '@/components/experience-sequence/experience-sequence';
 import { Nav } from '@/components/nav/nav';
 import { PageHeader } from '@/components/page-header/page-header';
 import { SiteFooter } from '@/components/site-footer/site-footer';
@@ -42,40 +43,7 @@ export default function WorkPage() {
 
           {experienceNote && <p className={styles.note}>{experienceNote}</p>}
 
-          <ol className={styles.list}>
-            {experience.map(job => (
-              <li className={styles.item} key={job.id}>
-                <div className={styles.meta}>
-                  <p className={styles.period}>{job.period}</p>
-                  {job.current && <span className={styles.badge}>Current</span>}
-                </div>
-
-                <div className={styles.card}>
-                  <h3 className={styles.role}>{job.role}</h3>
-                  <p className={styles.company}>
-                    {job.company}
-                    <span className={styles.scope}>{job.scope}</span>
-                  </p>
-
-                  <ul className={styles.points}>
-                    {job.points.map(point => (
-                      <li className={styles.point} key={point}>
-                        {point}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <ul className={styles.tags}>
-                    {job.tags.map(tag => (
-                      <li className={styles.tag} key={tag}>
-                        {tag}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </li>
-            ))}
-          </ol>
+          <ExperienceSequence />
         </section>
       </main>
 

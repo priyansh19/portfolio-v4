@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { RevealGroup, RevealItem } from '@/components/reveal/reveal';
 import { SectionHeading } from '@/components/section-heading/section-heading';
 import { experience } from '@/lib/content';
 import styles from './work.module.css';
@@ -11,14 +12,14 @@ export const Work = () => (
   <section className={styles.section} id="work">
     <div className={styles.inner}>
       <SectionHeading
-        eyebrow="Chapter one"
+        eyebrow="Stage 01"
         title="Where I've worked"
         lede="Five years at one company, moving from Terraform modules to leading enterprise GenAI delivery — with consulting alongside it."
       />
 
-      <ol className={styles.list}>
+      <RevealGroup as="ol" className={styles.list}>
         {experience.map(job => (
-          <li className={styles.item} key={job.id}>
+          <RevealItem as="li" className={styles.item} key={job.id}>
             <p className={styles.period}>{job.period}</p>
 
             <div className={styles.detail}>
@@ -32,9 +33,9 @@ export const Work = () => (
               </p>
               <p className={styles.summary}>{job.points[0]}</p>
             </div>
-          </li>
+          </RevealItem>
         ))}
-      </ol>
+      </RevealGroup>
 
       <div className={styles.foot}>
         <Link className={styles.footLink} href="/work">
