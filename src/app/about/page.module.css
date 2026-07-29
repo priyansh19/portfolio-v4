@@ -21,24 +21,15 @@
   margin: 0 0 18px;
 }
 
-.prose p:first-child::first-letter {
-  float: left;
-  margin: 0.1em 0.12em 0 0;
-  font-family: var(--font-display);
-  font-size: 3.4em;
-  font-weight: 600;
-  line-height: 0.8;
-  color: var(--accent);
-}
-
 .prose blockquote {
   margin: 26px 0 0;
   padding: 4px 0 4px 20px;
-  border-left: 2px solid var(--accent-soft);
-  font-family: var(--font-hand);
-  font-size: 1.36rem;
-  line-height: 1.45;
-  color: var(--accent-ink);
+  border-left: 2px solid var(--primary);
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--body-strong);
 }
 
 .side {
@@ -88,7 +79,7 @@
 }
 
 .count {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.66rem;
   font-weight: 400;
   color: var(--ink-soft);
@@ -111,7 +102,7 @@
   margin: 0;
   font-family: var(--font-display);
   font-size: 0.99rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--ink);
 }
 
@@ -122,7 +113,7 @@
 
 .period {
   margin: 4px 0 0;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.65rem;
   letter-spacing: 0.1em;
   color: var(--ink-soft);
@@ -143,7 +134,7 @@
 .certCode {
   flex-shrink: 0;
   width: 58px;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.7rem;
   color: var(--accent-ink);
 }
@@ -197,7 +188,7 @@
 
 .backed {
   margin: 0 0 12px;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.62rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;

@@ -17,7 +17,7 @@
   gap: 34px;
   margin: 30px 0 0;
   padding-top: 22px;
-  border-top: 1px dashed var(--rule);
+  border-top: 1px solid var(--rule);
 }
 
 .stat {
@@ -29,13 +29,13 @@
 .statValue {
   font-family: var(--font-display);
   font-size: 1.7rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--ink);
 }
 
 .statLabel {
   margin: 0;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.63rem;
   letter-spacing: 0.13em;
   text-transform: uppercase;
@@ -70,7 +70,7 @@
 }
 
 .availabilityLabel {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.62rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -104,7 +104,7 @@
 
 .caseSector {
   margin: 0 0 6px;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.62rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -125,15 +125,15 @@
 .caseResult {
   margin: 0;
   padding-top: 12px;
-  border-top: 1px dashed var(--rule-soft);
+  border-top: 1px solid var(--rule-soft);
   font-size: 0.95rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--ink);
 }
 
 .caseDuration {
   margin: 8px 0 0;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.62rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -149,15 +149,16 @@
 
 .quote {
   margin: 0 0 12px;
-  font-family: var(--font-hand);
-  font-size: 1.3rem;
-  line-height: 1.45;
-  color: var(--accent-ink);
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--body-strong);
 }
 
 .attribution {
   margin: 0;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.66rem;
   letter-spacing: 0.1em;
   color: var(--ink-soft);
@@ -197,15 +198,15 @@
   gap: 6px;
   margin: 16px 0 0;
   padding: 14px 0 0;
-  border-top: 1px dashed var(--rule-soft);
+  border-top: 1px solid var(--rule-soft);
   list-style: none;
 }
 
 .tag {
   padding: 3px 10px;
   border: 1px solid var(--rule);
-  border-radius: 999px;
-  font-family: var(--font-mono);
+  border-radius: var(--radius);
+  font-family: var(--font-sans);
   font-size: 0.63rem;
   color: var(--ink-soft);
 }
@@ -222,7 +223,7 @@
   grid-template-columns: 62px minmax(0, 1fr);
   gap: 20px;
   padding: 20px 0;
-  border-bottom: 1px dashed var(--rule);
+  border-bottom: 1px solid var(--rule);
 }
 
 .phase:last-child {
@@ -232,7 +233,7 @@
 .phaseStep {
   font-family: var(--font-display);
   font-size: 1.7rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--accent-soft);
   line-height: 1;
 }
@@ -282,39 +283,43 @@
   margin-top: clamp(44px, 6vw, 70px);
   padding: clamp(28px, 4vw, 40px);
   background: var(--card);
-  border: 1px dashed var(--rule);
+  border: 1px solid var(--rule);
   border-radius: var(--radius);
   text-align: center;
 }
 
 .ctaHand {
   margin: 0 0 10px;
-  font-family: var(--font-hand);
-  font-size: 1.7rem;
-  color: var(--accent-ink);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--ink);
 }
 
 .ctaBody {
   max-width: 46ch;
   margin: 0 auto 22px;
   font-size: 1rem;
+  font-weight: 300;
 }
 
 .ctaButton {
-  display: inline-block;
-  padding: 12px 26px;
-  background: var(--accent);
-  border: 1px solid var(--accent);
-  border-radius: var(--radius);
-  font-family: var(--font-display);
-  font-size: 0.98rem;
-  color: #fdf6ea;
-  transition: background-color 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  height: 48px;
+  padding: 0 32px;
+  background: var(--primary);
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--on-primary);
+  transition: background-color 0.2s var(--bezier);
 }
 
-.ctaButton:hover {
-  background: var(--accent-ink);
-  border-color: var(--accent-ink);
+.ctaButton:hover,
+.ctaButton:focus-visible {
+  background: var(--primary-active);
 }
 
 @media (max-width: 860px) {

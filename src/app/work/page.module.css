@@ -56,7 +56,7 @@
 
 .period {
   margin: 0;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.68rem;
   letter-spacing: 0.13em;
   text-transform: uppercase;
@@ -66,8 +66,8 @@
 .badge {
   padding: 2px 9px;
   border: 1px solid var(--stamp);
-  border-radius: 999px;
-  font-family: var(--font-mono);
+  border-radius: var(--radius);
+  font-family: var(--font-sans);
   font-size: 0.58rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -79,7 +79,6 @@
   background: var(--card);
   border: 1px solid var(--rule);
   border-radius: var(--radius);
-  box-shadow: 0 8px 22px -20px var(--shadow);
 }
 
 .role {
@@ -98,7 +97,7 @@
 }
 
 .scope {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.64rem;
   letter-spacing: 0.13em;
   text-transform: uppercase;
@@ -134,15 +133,15 @@
   gap: 6px;
   margin: 20px 0 0;
   padding: 16px 0 0;
-  border-top: 1px dashed var(--rule);
+  border-top: 1px solid var(--rule);
   list-style: none;
 }
 
 .tag {
   padding: 3px 10px;
   border: 1px solid var(--rule);
-  border-radius: 999px;
-  font-family: var(--font-mono);
+  border-radius: var(--radius);
+  font-family: var(--font-sans);
   font-size: 0.64rem;
   color: var(--ink-soft);
 }

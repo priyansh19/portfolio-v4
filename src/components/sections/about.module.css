@@ -24,41 +24,37 @@
   margin: 0 0 18px;
 }
 
-.prose p:first-child::first-letter {
-  float: left;
-  margin: 0.1em 0.12em 0 0;
-  font-family: var(--font-display);
-  font-size: 3.4em;
-  font-weight: 600;
-  line-height: 0.8;
-  color: var(--accent);
-}
-
 .scribble {
   margin-top: 26px !important;
   padding-left: 18px;
-  border-left: 2px solid var(--accent-soft);
-  font-family: var(--font-hand);
-  font-size: 1.34rem;
-  line-height: 1.4;
-  color: var(--accent-ink);
+  border-left: 2px solid var(--primary);
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--body-strong);
 }
 
 .foot {
   margin-top: 26px;
   padding-top: 20px;
-  border-top: 1px dashed var(--rule);
+  border-top: 1px solid var(--hairline-strong);
 }
 
 .footLink {
-  font-family: var(--font-display);
-  font-size: 0.98rem;
-  color: var(--accent-ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--ink);
+  transition: color 0.2s var(--bezier);
 }
 
-.footLink:hover {
-  text-decoration: underline;
-  text-underline-offset: 4px;
+.footLink:hover,
+.footLink:focus-visible {
+  color: var(--primary);
 }
 
 /* Photo and quick facts sit side by side so the column matches the short
@@ -91,7 +87,7 @@
 }
 
 .quickLabel {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.62rem;
   letter-spacing: 0.13em;
   text-transform: uppercase;

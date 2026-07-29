@@ -40,12 +40,18 @@
   background: var(--card);
   border: 1px solid var(--rule);
   border-radius: var(--radius);
+  transition: border-color 0.2s var(--bezier);
+}
+
+.service:hover,
+.service:focus-within {
+  border-color: var(--primary);
 }
 
 .serviceTitle {
   font-family: var(--font-display);
   font-size: 1.02rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--ink);
 }
 
@@ -82,13 +88,13 @@
 .statValue {
   font-family: var(--font-display);
   font-size: 1.6rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--ink);
 }
 
 .statLabel {
   margin: 0;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.6rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -106,7 +112,7 @@
   align-items: baseline;
   gap: 14px;
   padding: 10px 0;
-  border-bottom: 1px dashed var(--rule-soft);
+  border-bottom: 1px solid var(--rule-soft);
 }
 
 .phase:last-child {
@@ -114,7 +120,7 @@
 }
 
 .phaseStep {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.72rem;
   color: var(--accent);
 }
@@ -140,28 +146,32 @@
 .ctaNote {
   max-width: 52ch;
   margin: 0;
-  font-family: var(--font-hand);
-  font-size: 1.32rem;
-  line-height: 1.4;
-  color: var(--accent-ink);
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--body-strong);
 }
 
 .ctaButton {
-  display: inline-block;
-  padding: 12px 24px;
-  background: var(--accent);
-  border: 1px solid var(--accent);
-  border-radius: var(--radius);
-  font-family: var(--font-display);
-  font-size: 0.98rem;
-  color: #fdf6ea;
+  display: inline-flex;
+  align-items: center;
+  height: 48px;
+  padding: 0 32px;
+  background: var(--primary);
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--on-primary);
   white-space: nowrap;
-  transition: background-color 0.15s ease;
+  transition: background-color 0.2s var(--bezier);
 }
 
-.ctaButton:hover {
-  background: var(--accent-ink);
-  border-color: var(--accent-ink);
+.ctaButton:hover,
+.ctaButton:focus-visible {
+  background: var(--primary-active);
 }
 
 @media (max-width: 900px) {

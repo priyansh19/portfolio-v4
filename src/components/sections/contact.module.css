@@ -45,13 +45,14 @@
   transition: border-color 0.15s ease, background-color 0.15s ease;
 }
 
-.channelLink:hover {
-  border-color: var(--accent-soft);
+.channelLink:hover,
+.channelLink:focus-within {
+  border-color: var(--primary);
   background: var(--card-alt);
 }
 
 .channelLabel {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.63rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -68,22 +69,23 @@
 .note {
   padding: clamp(22px, 3vw, 30px);
   background: var(--card-alt);
-  border: 1px dashed var(--rule);
+  border: 1px solid var(--rule);
   border-radius: var(--radius);
 }
 
 .noteHand {
   margin: 0 0 18px;
-  font-family: var(--font-hand);
-  font-size: 1.42rem;
-  line-height: 1.4;
-  color: var(--accent-ink);
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--body-strong);
 }
 
 .expect {
   margin: 0 0 18px;
   padding-bottom: 14px;
-  border-bottom: 1px dashed var(--rule);
+  border-bottom: 1px solid var(--rule);
 }
 
 .expectRow {
@@ -95,7 +97,7 @@
 }
 
 .expectLabel {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.62rem;
   letter-spacing: 0.13em;
   text-transform: uppercase;
@@ -110,7 +112,7 @@
 
 .helpfulTitle {
   margin: 0 0 8px;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.62rem;
   letter-spacing: 0.13em;
   text-transform: uppercase;
@@ -132,20 +134,23 @@
 }
 
 .cta {
-  display: inline-block;
-  padding: 11px 22px;
-  background: var(--accent);
-  border: 1px solid var(--accent);
-  border-radius: var(--radius);
-  font-family: var(--font-display);
-  font-size: 0.96rem;
-  color: #fdf6ea;
-  transition: background-color 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  height: 48px;
+  padding: 0 32px;
+  background: var(--primary);
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--on-primary);
+  transition: background-color 0.2s var(--bezier);
 }
 
-.cta:hover {
-  background: var(--accent-ink);
-  border-color: var(--accent-ink);
+.cta:hover,
+.cta:focus-visible {
+  background: var(--primary-active);
 }
 
 @media (max-width: 820px) {

@@ -10,7 +10,7 @@
   gap: 38px;
   margin: 30px 0 0;
   padding-top: 22px;
-  border-top: 1px dashed var(--rule);
+  border-top: 1px solid var(--rule);
 }
 
 .stat {
@@ -22,13 +22,13 @@
 .statValue {
   font-family: var(--font-display);
   font-size: 1.8rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--ink);
 }
 
 .statLabel {
   margin: 0;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.63rem;
   letter-spacing: 0.13em;
   text-transform: uppercase;
@@ -82,9 +82,9 @@
 
 .repoName {
   margin: 0;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--ink);
 }
 
@@ -114,7 +114,7 @@
 }
 
 .repoCountLabel {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.58rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -125,7 +125,7 @@
   margin: 0;
   font-family: var(--font-display);
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--ink);
 }
 
@@ -137,7 +137,7 @@
 }
 
 .pr {
-  border-bottom: 1px dashed var(--rule-soft);
+  border-bottom: 1px solid var(--rule-soft);
 }
 
 .pr:last-child {
@@ -159,7 +159,7 @@
 }
 
 .prNumber {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.72rem;
   color: var(--ink-soft);
 }
@@ -184,8 +184,8 @@
 .prState {
   padding: 2px 10px;
   border: 1px solid var(--rule);
-  border-radius: 999px;
-  font-family: var(--font-mono);
+  border-radius: var(--radius);
+  font-family: var(--font-sans);
   font-size: 0.58rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -225,7 +225,7 @@
 }
 
 .earlyOrg {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.8rem;
   color: var(--ink);
 }
@@ -237,7 +237,7 @@
 
 .earlyMeta {
   margin-top: 4px;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.6rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -279,14 +279,14 @@
 }
 
 .projectName {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.95rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--ink);
 }
 
 .projectNote {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.58rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -303,8 +303,8 @@
 
 .projectLanguage {
   padding-top: 10px;
-  border-top: 1px dashed var(--rule-soft);
-  font-family: var(--font-mono);
+  border-top: 1px solid var(--rule-soft);
+  font-family: var(--font-sans);
   font-size: 0.63rem;
   letter-spacing: 0.1em;
   color: var(--ink-soft);
@@ -314,7 +314,7 @@
   margin: clamp(38px, 5vw, 56px) 0 0;
   padding-top: 20px;
   border-top: 1px solid var(--rule);
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.66rem;
   letter-spacing: 0.08em;
   color: var(--ink-soft);

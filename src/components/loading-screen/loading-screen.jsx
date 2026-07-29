@@ -25,9 +25,12 @@ export const LoadingScreen = () => {
       typeof window !== 'undefined' &&
       window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
+    // Deferred rather than called synchronously in the effect body — the CSS
+    // media query already hides the overlay outright for reduced motion, this
+    // just settles the JS-tracked phase a tick later.
     if (reduceMotion) {
-      setPhase('done');
-      return undefined;
+      const immediateTimer = setTimeout(() => setPhase('done'), 0);
+      return () => clearTimeout(immediateTimer);
     }
 
     const revealTimer = setTimeout(() => setPhase('done'), FILL_MS + HOLD_MS);
