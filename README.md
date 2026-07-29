@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# portfolio-v4
 
-## Getting Started
+Personal portfolio for **Priyansh Gupta** — Forward Deployed Engineer.
+Next.js 16 · React 19 · CSS Modules.
 
-First, run the development server:
+Live content is sourced from the public [tsenta profile](https://tsenta.com/u/priyansh-gupta)
+and the GitHub API.
+
+---
+
+## One design per branch
+
+Content, routing and page structure are shared. **Only the visual layer changes
+between branches**, so a design can be swapped without touching a word of copy.
+
+| Branch | Design |
+| --- | --- |
+| `main` | Baseline — beige paper "slam book" |
+| `design/slam-book` | Snapshot of the baseline design |
+| `design/<name>` | One branch per additional design |
 
 ```bash
+git branch -a          # list every design
+git switch design/x    # try one
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### How a new design gets added
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+1. `git switch main && git switch -c design/<name>`
+2. Restyle — see *What a design may change* below
+3. `npm run build` must pass, then push the branch
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Content fixes always land on `main` and are merged **into** the design branches,
+never the other way round. That keeps one source of truth for the copy.
 
-## Learn More
+### What a design may change
 
-To learn more about Next.js, take a look at the following resources:
+| Safe to change | Leave alone |
+| --- | --- |
+| `src/app/globals.css` — all tokens: palette, fonts, spacing, radius, gutters | `src/lib/content.js` — every word of copy and all data |
+| Any `*.module.css` | Route structure under `src/app/` |
+| Component markup, where structure demands it | Breadcrumbs, nav destinations, sitemap, OG images |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Most of a design lands in `globals.css` alone — it holds the full token set.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Routes
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Path | Purpose |
+| --- | --- |
+| `/` | Teasers only; every section links to its own page |
+| `/work` | Full experience + career narrative |
+| `/projects` | Index of all write-ups |
+| `/projects/[slug]` | Per-project deep dive, prev/next, jump-to-any |
+| `/freelance` | Services, process, availability, case studies |
+| `/open-source` | Upstream contributions + maintained repos |
+| `/about` | Bio, skills, education, certifications |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Plus a custom 404, `sitemap.xml`, `robots.txt` and generated OG images.
+
+Nothing appears on two URLs — the home page never duplicates a page's content.
+
+---
+
+## Getting started
+
+```bash
+npm install
+npm run dev
+```
+
+Then <http://localhost:3000>.
+
+## Before deploying
+
+Set the canonical origin, or every OG tag and sitemap URL will point at
+localhost:
+
+```bash
+NEXT_PUBLIC_SITE_URL=https://your-domain.com
+```
+
+See [`src/lib/site.js`](src/lib/site.js).
+
+## Outstanding content
+
+[`CONTENT-TODO.md`](CONTENT-TODO.md) lists the facts that still need filling in —
+CV, photos, how the headline metrics were measured, and freelance proof. Every
+field is already wired up: fill it in and it renders, leave it blank and its
+section stays hidden.
