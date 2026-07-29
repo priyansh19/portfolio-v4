@@ -1,7 +1,9 @@
 import Link from 'next/link';
+import { GeometricForm } from '@/components/geometric-form/geometric-form';
 import { Nav } from '@/components/nav/nav';
 import { PageHeader } from '@/components/page-header/page-header';
 import { Polaroid } from '@/components/polaroid/polaroid';
+import { Reveal, RevealGroup, RevealItem } from '@/components/reveal/reveal';
 import { SiteFooter } from '@/components/site-footer/site-footer';
 import { projects } from '@/lib/content';
 import styles from './page.module.css';
@@ -26,20 +28,19 @@ export default function ProjectsIndexPage() {
           { label: 'Count', value: `${projects.length} write-ups` },
           { label: 'Span', value: '2021 — 2026' },
         ]}
+        visual={<GeometricForm shape="graph" />}
       />
 
       <main className={styles.main}>
-        <ul className={styles.list}>
+        <RevealGroup as="ul" className={styles.list}>
           {projects.map(project => (
-            <li key={project.id}>
+            <RevealItem as="li" key={project.id}>
               <article className={styles.card}>
                 <div className={styles.photo}>
                   <Polaroid
                     alt={`${project.name} screenshot`}
-                    caption={project.name}
-                    tilt={project.index % 2 ? 'left' : 'right'}
+                    caption={project.subtitle}
                     size="md"
-                    tape="top"
                   />
                 </div>
 
@@ -52,11 +53,10 @@ export default function ProjectsIndexPage() {
                     </Link>
                   </h2>
 
-                  <p className={styles.subtitle}>{project.subtitle}</p>
                   <p className={styles.description}>{project.description}</p>
 
                   <ul className={styles.stack}>
-                    {project.stack.slice(0, 5).map(tech => (
+                    {project.stack.slice(0, 4).map(tech => (
                       <li className={styles.tech} key={tech}>
                         {tech}
                       </li>
@@ -66,21 +66,21 @@ export default function ProjectsIndexPage() {
                   <Link className={styles.button} href={`/projects/${project.slug}`}>
                     Read the full write-up
                     <span className={styles.buttonArrow} aria-hidden>
-                      →
+                      ›
                     </span>
                     <span className={styles.srOnly}> about {project.name}</span>
                   </Link>
                 </div>
               </article>
-            </li>
+            </RevealItem>
           ))}
-        </ul>
+        </RevealGroup>
 
-        <div className={styles.foot}>
+        <Reveal as="div" className={styles.foot}>
           <Link className={styles.footLink} href="/">
             ← Back to the home page
           </Link>
-        </div>
+        </Reveal>
       </main>
 
       <SiteFooter />

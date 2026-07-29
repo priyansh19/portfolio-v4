@@ -1,33 +1,41 @@
 .heading {
-  margin-bottom: clamp(28px, 4vw, 46px);
-  padding-bottom: 18px;
-  border-bottom: 2px solid var(--rule);
+  margin-bottom: clamp(28px, 4vw, var(--space-xxl));
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--hairline-strong);
 }
 
 .eyebrow {
-  margin: 0 0 8px;
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.2em;
+  margin: 0 0 var(--space-xs);
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
-  color: var(--accent-ink);
+  color: var(--primary);
 }
 
 .title {
   margin: 0;
-  font-size: clamp(1.9rem, 4.2vw, 2.9rem);
+  font-size: clamp(1.9rem, 4.2vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.15;
 }
 
 .lede {
   max-width: var(--prose-width);
-  margin: 14px 0 0;
+  margin: var(--space-md) 0 0;
   font-size: 1.03rem;
-  color: var(--ink-body);
+  font-weight: 300;
+  line-height: 1.55;
+  color: var(--body);
 }
 
 .aside {
-  margin: 12px 0 0;
-  font-family: var(--font-hand);
-  font-size: 1.25rem;
-  color: var(--accent-ink);
+  margin: var(--space-sm) 0 0;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
 }

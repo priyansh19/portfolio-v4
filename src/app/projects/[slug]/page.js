@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { GeometricForm } from '@/components/geometric-form/geometric-form';
 import { Nav } from '@/components/nav/nav';
 import { PageHeader } from '@/components/page-header/page-header';
 import { Polaroid } from '@/components/polaroid/polaroid';
@@ -58,6 +59,7 @@ export default async function ProjectPage({ params }) {
           { label: 'Context', value: project.context },
           { label: 'Role', value: project.role },
         ]}
+        visual={<GeometricForm shape={project.shape} />}
       />
 
       <main className={styles.main}>

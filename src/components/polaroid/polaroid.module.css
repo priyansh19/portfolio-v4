@@ -1,64 +1,30 @@
+/* A precise render frame — the BMW model-card-photo pattern. Flat, rectangular,
+   no shadow, no tape. `tilt`/`tape` remain accepted props but no longer paint
+   anything; the frame stays perfectly level, in keeping with "engineered
+   precision" over the scrapbook original. */
 .polaroid {
   position: relative;
   margin: 0;
-  padding: 12px 12px 0;
-  background: var(--card);
-  border: 1px solid var(--rule);
-  box-shadow: 0 12px 26px -18px var(--shadow), 0 2px 0 var(--rule-soft);
-}
-
-.polaroid[data-tilt='left'] {
-  transform: rotate(-1.8deg);
-}
-
-.polaroid[data-tilt='right'] {
-  transform: rotate(1.6deg);
-}
-
-.polaroid[data-tilt='none'] {
-  transform: none;
+  width: 100%;
 }
 
 .polaroid[data-size='sm'] {
-  width: 180px;
+  max-width: 180px;
 }
 
 .polaroid[data-size='md'] {
-  width: 240px;
+  max-width: 100%;
 }
 
 .polaroid[data-size='lg'] {
-  width: 100%;
-  max-width: 380px;
-}
-
-/* Strip of masking tape */
-.tape {
-  position: absolute;
-  width: 88px;
-  height: 26px;
-  background: var(--tape);
-  border-left: 1px dashed rgba(255, 255, 255, 0.35);
-  border-right: 1px dashed rgba(255, 255, 255, 0.35);
-  box-shadow: 0 1px 3px -1px var(--shadow);
-}
-
-.tape[data-tape='top'] {
-  top: -13px;
-  left: 50%;
-  transform: translateX(-50%) rotate(-2deg);
-}
-
-.tape[data-tape='corner'] {
-  top: -14px;
-  left: -22px;
-  transform: rotate(-38deg);
+  max-width: 100%;
 }
 
 .window {
   aspect-ratio: 4 / 3;
   overflow: hidden;
-  background: var(--paper-deep);
+  background: var(--surface-card);
+  border: 1px solid var(--hairline);
 }
 
 .image {
@@ -73,32 +39,35 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: var(--space-xs);
   width: 100%;
   height: 100%;
-  border: 1px dashed var(--rule);
-  color: var(--ink-soft);
+  color: var(--muted);
 }
 
 .placeholderMark {
   font-size: 1.1rem;
-  color: var(--accent-soft);
+  color: var(--primary);
 }
 
 .placeholderText {
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.14em;
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   text-align: center;
-  padding: 0 10px;
+  padding: 0 var(--space-sm);
 }
 
 .caption {
-  padding: 10px 2px 14px;
-  font-family: var(--font-hand);
-  font-size: 1.15rem;
-  line-height: 1.3;
-  text-align: center;
-  color: var(--ink-body);
+  margin: var(--space-sm) 0 0;
+  padding-top: var(--space-xs);
+  border-top: 1px solid var(--hairline);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+  color: var(--muted);
 }

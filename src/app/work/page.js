@@ -1,5 +1,7 @@
+import { GeometricForm } from '@/components/geometric-form/geometric-form';
 import { Nav } from '@/components/nav/nav';
 import { PageHeader } from '@/components/page-header/page-header';
+import { RevealGroup, RevealItem } from '@/components/reveal/reveal';
 import { SiteFooter } from '@/components/site-footer/site-footer';
 import { careerNarrative, experience, experienceNote } from '@/lib/content';
 import styles from './page.module.css';
@@ -25,6 +27,7 @@ export default function WorkPage() {
           { label: 'Roles', value: `${experience.length} positions` },
           { label: 'Based', value: 'Dubai, UAE' },
         ]}
+        visual={<GeometricForm shape="dodecahedron" />}
       />
 
       <main className={styles.main}>

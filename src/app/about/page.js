@@ -1,7 +1,9 @@
+import { GeometricForm } from '@/components/geometric-form/geometric-form';
 import { Nav } from '@/components/nav/nav';
 import { PageHeader } from '@/components/page-header/page-header';
 import { Polaroid } from '@/components/polaroid/polaroid';
 import { SiteFooter } from '@/components/site-footer/site-footer';
+import { SkillConstellation } from '@/components/skill-constellation/skill-constellation';
 import { certifications, education, profile, skillGroups } from '@/lib/content';
 import styles from './page.module.css';
 
@@ -32,6 +34,7 @@ export default function AboutPage() {
           { label: 'Timezone', value: profile.timezone },
           { label: 'Status', value: profile.status.headline },
         ]}
+        visual={<GeometricForm shape="icosahedron" />}
       />
 
       <main className={styles.main}>
@@ -109,6 +112,8 @@ export default function AboutPage() {
             Grouped by layer rather than ranked. Where a certification backs a group, it is
             named — that is verifiable, unlike a self-assigned skill rating.
           </p>
+
+          <SkillConstellation className={styles.constellation} />
 
           <div className={styles.grid}>
             {skillGroups.map(group => (

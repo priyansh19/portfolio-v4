@@ -5,61 +5,66 @@
 }
 
 .kicker {
-  margin: 0 0 8px;
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.2em;
+  margin: 0 0 var(--space-xs);
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
-  color: var(--accent-ink);
+  color: var(--primary);
 }
 
 .title {
   max-width: 18ch;
   margin: 0;
   font-size: clamp(2rem, 5.5vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.15;
 }
 
 .body {
   max-width: 52ch;
-  margin: 16px 0 0;
+  margin: var(--space-md) 0 0;
   font-size: 1.04rem;
-  color: var(--ink-body);
+  font-weight: 300;
+  color: var(--body);
 }
 
 .list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
-  gap: 14px;
-  margin: clamp(32px, 5vw, 48px) 0 0;
+  gap: 1px;
+  margin: clamp(32px, 5vw, var(--space-xxl)) 0 0;
   padding: 0;
   list-style: none;
+  background: var(--hairline);
+  border: 1px solid var(--hairline);
 }
 
 .card {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 4px;
   height: 100%;
-  padding: 20px;
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  transition: border-color 0.15s ease, background-color 0.15s ease;
+  padding: var(--space-lg);
+  background: var(--canvas);
+  transition: background-color 0.2s var(--bezier);
 }
 
-.card:hover {
-  border-color: var(--accent-soft);
-  background: var(--card-alt);
+.card:hover,
+.card:focus-visible {
+  background: var(--surface-soft);
 }
 
 .cardLabel {
-  font-family: var(--font-display);
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 700;
   color: var(--ink);
 }
 
 .cardNote {
-  font-size: 0.9rem;
-  color: var(--ink-soft);
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: var(--muted);
 }

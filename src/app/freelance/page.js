@@ -1,3 +1,4 @@
+import { GeometricForm } from '@/components/geometric-form/geometric-form';
 import { Nav } from '@/components/nav/nav';
 import { PageHeader } from '@/components/page-header/page-header';
 import { Polaroid } from '@/components/polaroid/polaroid';
@@ -33,6 +34,7 @@ export default function FreelancePage() {
           { label: 'Through', value: freelance.channel },
           { label: 'Status', value: 'Taking selected work' },
         ]}
+        visual={<GeometricForm shape="octahedron" />}
       />
 
       <main className={styles.main}>

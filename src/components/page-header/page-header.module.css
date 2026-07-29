@@ -1,60 +1,110 @@
+/* Every sub-page opens on the dark navy band — the BMW structural signature.
+   `.visual` (an optional 3D scene) sits full-bleed behind the copy; `.inner`
+   sits above it. No shadow, no rounded corner — depth comes from the
+   colour-block contrast between this band and the light canvas below it. */
 .header {
-  padding: clamp(30px, 5vw, 56px) var(--gutter) clamp(26px, 4vw, 40px);
-  border-bottom: 2px solid var(--rule);
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-dark);
+  isolation: isolate;
+}
+
+.visual {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.9;
+}
+
+.visual::after {
+  /* Left-to-right scrim so body text never fights the render for contrast */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--surface-dark) 0%, rgba(26, 33, 41, 0.55) 42%, transparent 78%);
 }
 
 .inner {
+  position: relative;
+  z-index: 1;
   max-width: var(--page-width);
   margin: 0 auto;
+  padding: clamp(40px, 6vw, var(--space-section)) var(--gutter) clamp(40px, 6vw, 64px);
 }
 
 .kicker {
-  margin: 0 0 8px;
-  font-family: var(--font-hand);
-  font-size: 1.3rem;
-  color: var(--accent-ink);
+  margin: 0 0 var(--space-sm);
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--on-dark-soft);
 }
 
 .title {
-  max-width: 20ch;
+  max-width: 18ch;
   margin: 0;
-  font-size: clamp(2.2rem, 6vw, 3.7rem);
-  letter-spacing: -0.03em;
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: 0;
+  color: var(--on-dark);
 }
 
 .tagline {
-  max-width: 62ch;
-  margin: 16px 0 0;
-  font-size: clamp(1.02rem, 1.6vw, 1.18rem);
-  color: var(--ink-body);
+  max-width: 60ch;
+  margin: var(--space-md) 0 0;
+  font-size: clamp(1rem, 1.6vw, 1.14rem);
+  font-weight: 300;
+  line-height: 1.55;
+  color: var(--on-dark-soft);
 }
 
 .meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px 40px;
-  margin: 30px 0 0;
-  padding-top: 20px;
-  border-top: 1px dashed var(--rule);
+  gap: var(--space-sm) var(--space-xxl);
+  margin: var(--space-xl) 0 0;
+  padding-top: var(--space-lg);
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
 }
 
 .metaItem {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
 }
 
 .metaLabel {
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.16em;
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--ink-soft);
+  color: var(--on-dark-soft);
 }
 
 .metaValue {
   margin: 0;
-  font-family: var(--font-display);
-  font-size: 0.98rem;
-  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--on-dark);
+}
+
+@media (max-width: 900px) {
+  .visual {
+    opacity: 0.5;
+  }
+
+  .title {
+    max-width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .visual {
+    opacity: 0.35;
+  }
 }

@@ -1,56 +1,75 @@
-.hero {
-  padding: clamp(40px, 7vw, 76px) var(--gutter) clamp(48px, 7vw, 80px);
+/* ---- Dark band: sticky — the light panel below scrolls up and over it ---- */
+.darkBand {
+  position: sticky;
+  top: 0;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+  background: var(--surface-dark);
 }
 
-.inner {
+.sphere {
+  position: absolute;
+  inset: 0;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.darkInner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
   max-width: var(--page-width);
   margin: 0 auto;
-}
-
-.head {
-  padding-bottom: 26px;
-  border-bottom: 2px solid var(--rule);
+  padding: clamp(90px, 12vw, 160px) var(--gutter) clamp(56px, 8vw, 96px);
 }
 
 .kicker {
-  margin: 0 0 6px;
-  font-family: var(--font-hand);
-  font-size: 1.35rem;
-  color: var(--accent-ink);
+  margin: 0 0 var(--space-sm);
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--on-dark-soft);
 }
 
 .title {
   margin: 0;
-  font-size: clamp(2.7rem, 8vw, 5rem);
-  letter-spacing: -0.03em;
+  font-size: clamp(2.6rem, 8vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--on-dark);
 }
 
 .subtitle {
   max-width: 56ch;
-  margin: 14px 0 0;
+  margin: var(--space-md) 0 0;
   font-size: clamp(1rem, 1.5vw, 1.14rem);
-  color: var(--ink-body);
+  font-weight: 300;
+  line-height: 1.55;
+  color: var(--on-dark-soft);
 }
 
-/* Availability — the answer to "what are you doing right now" */
 .status {
-  margin-top: clamp(24px, 3.5vw, 36px);
-  padding: clamp(18px, 2.5vw, 24px);
-  background: var(--card-alt);
-  border: 1px solid var(--rule);
-  border-left: 3px solid var(--stamp);
-  border-radius: var(--radius);
+  margin-top: clamp(28px, 4vw, 40px);
+  padding: clamp(18px, 2.5vw, var(--space-lg));
+  max-width: 640px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.16);
 }
 
 .statusHead {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--space-sm);
   margin: 0;
-  font-family: var(--font-display);
-  font-size: 1.08rem;
-  font-weight: 600;
-  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--on-dark);
 }
 
 .statusDot {
@@ -58,51 +77,102 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--stamp);
+  background: var(--primary);
 }
 
 .statusDetail {
-  max-width: 68ch;
-  margin: 8px 0 0;
-  font-size: 0.97rem;
-  line-height: 1.68;
+  max-width: 62ch;
+  margin: var(--space-sm) 0 0;
+  font-size: 0.94rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--on-dark-soft);
 }
 
 .openTo {
   display: flex;
   flex-wrap: wrap;
-  gap: 7px;
-  margin: 14px 0 0;
+  gap: var(--space-xs);
+  margin: var(--space-md) 0 0;
   padding: 0;
   list-style: none;
 }
 
 .openToItem {
-  padding: 3px 11px;
-  border: 1px solid var(--rule);
-  border-radius: 999px;
-  background: var(--card);
-  font-family: var(--font-mono);
-  font-size: 0.63rem;
-  letter-spacing: 0.08em;
-  color: var(--ink-soft);
+  padding: 4px var(--space-sm);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--on-dark-soft);
 }
 
-/* Entry card + photos */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: clamp(28px, 4vw, 40px);
+}
+
+.primary,
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  height: 48px;
+  padding: 0 var(--space-xl);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transition: background-color 0.2s var(--bezier), border-color 0.2s var(--bezier), color 0.2s var(--bezier);
+}
+
+.primary {
+  background: var(--primary);
+  color: var(--on-primary);
+}
+
+.primary:hover,
+.primary:focus-visible {
+  background: var(--primary-active);
+}
+
+.secondary {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: var(--on-dark);
+}
+
+.secondary:hover,
+.secondary:focus-visible {
+  border-color: var(--on-dark);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ---- Light panel: slides up over the pinned dark band ---- */
+.lightPanel {
+  position: relative;
+  background: var(--canvas);
+}
+
+.inner {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: clamp(48px, 7vw, 80px) var(--gutter);
+}
+
 .body {
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.85fr);
   gap: clamp(28px, 5vw, 56px);
   align-items: start;
-  margin-top: clamp(32px, 5vw, 52px);
 }
 
 .entryCard {
-  padding: clamp(22px, 3.5vw, 38px);
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  box-shadow: 0 10px 26px -20px var(--shadow);
+  padding: clamp(22px, 3.5vw, var(--space-xl));
+  background: var(--surface-card);
+  border: 1px solid var(--hairline);
 }
 
 .entries {
@@ -112,10 +182,10 @@
 .entry {
   display: grid;
   grid-template-columns: 150px minmax(0, 1fr);
-  gap: 16px;
+  gap: var(--space-md);
   align-items: baseline;
   padding: 13px 0;
-  border-bottom: 1px solid var(--rule-soft);
+  border-bottom: 1px solid var(--hairline);
 }
 
 .entry:last-of-type {
@@ -123,60 +193,34 @@
 }
 
 .entryLabel {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.15em;
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--ink-soft);
+  color: var(--muted);
 }
 
 .entryValue {
   margin: 0;
-  font-family: var(--font-hand);
-  font-size: 1.42rem;
-  line-height: 1.35;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.4;
   color: var(--ink);
 }
 
-.note {
-  margin: 22px 0 0;
-  padding-top: 18px;
-  border-top: 1px dashed var(--rule);
-  font-size: 0.97rem;
-  color: var(--ink-body);
-}
-
 .photos {
-  display: flex;
-  flex-direction: column;
-  gap: 34px;
-  padding-top: 10px;
-}
-
-/* Fill the column rather than sitting at the default cap, so the photo reaches
-   roughly the height of the entry card beside it. */
-.photos > * {
-  max-width: none;
-  width: 100%;
-}
-
-/* Stats + actions */
-.footRow {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 28px;
-  margin-top: clamp(36px, 5vw, 56px);
-  padding-top: 26px;
-  border-top: 2px solid var(--rule);
+  padding-top: var(--space-xs);
 }
 
 .stats {
   display: flex;
   flex-wrap: wrap;
-  gap: 34px;
-  margin: 0;
+  gap: clamp(24px, 4vw, 40px);
+  margin: clamp(36px, 5vw, 56px) 0 0;
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--hairline-strong);
 }
 
 .stat {
@@ -186,57 +230,20 @@
 }
 
 .statValue {
-  font-family: var(--font-display);
-  font-size: 1.75rem;
-  font-weight: 600;
+  font-family: var(--font-sans);
+  font-size: 1.85rem;
+  font-weight: 700;
   color: var(--ink);
 }
 
 .statLabel {
   margin: 0;
-  font-family: var(--font-mono);
-  font-size: 0.64rem;
-  letter-spacing: 0.13em;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--ink-soft);
-}
-
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.primary,
-.secondary {
-  display: inline-block;
-  padding: 11px 20px;
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  font-family: var(--font-display);
-  font-size: 0.94rem;
-  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
-}
-
-.primary {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #fdf6ea;
-}
-
-.primary:hover {
-  background: var(--accent-ink);
-  border-color: var(--accent-ink);
-}
-
-.secondary {
-  background: var(--card);
-  color: var(--ink);
-}
-
-.secondary:hover {
-  border-color: var(--accent-soft);
-  color: var(--accent-ink);
+  color: var(--muted);
 }
 
 @media (max-width: 900px) {
@@ -245,19 +252,12 @@
   }
 
   .photos {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 24px;
-  }
-
-  .photos > * {
-    flex: 1 1 220px;
+    max-width: 360px;
   }
 }
 
-@media (max-width: 560px) {
-  .entry {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 3px;
+@media (prefers-reduced-motion: reduce) {
+  .darkBand {
+    position: static;
   }
 }

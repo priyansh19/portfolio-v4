@@ -1,5 +1,6 @@
 import { Inter } from 'next/font/google';
 import { LoadingScreen } from '@/components/loading-screen/loading-screen';
+import { ScrollProgress } from '@/components/scroll-progress/scroll-progress';
 import { ThemeProvider } from '@/components/theme-provider';
 import { links, profile } from '@/lib/content';
 import { siteUrl } from '@/lib/site';
@@ -77,6 +78,7 @@ export default function RootLayout({ children }) {
       <body>
         <ThemeProvider>
           <LoadingScreen />
+          <ScrollProgress />
           {children}
         </ThemeProvider>
       </body>

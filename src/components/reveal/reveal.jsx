@@ -41,20 +41,26 @@ export const Reveal = ({
 };
 
 /**
- * Staggers direct children. Pair with <RevealItem>.
+ * Staggers direct children. Pair with <RevealItem>. `as` lets the wrapper
+ * match its content's semantics (e.g. `dl`, `ul`) instead of always being a
+ * bare `div`.
  */
-export const RevealGroup = ({ children, className, stagger = 0.08, ...rest }) => (
-  <motion.div
-    className={className}
-    initial="hidden"
-    whileInView="shown"
-    viewport={{ once: true, margin: '-60px' }}
-    variants={{ shown: { transition: { staggerChildren: stagger } } }}
-    {...rest}
-  >
-    {children}
-  </motion.div>
-);
+export const RevealGroup = ({ children, as = 'div', className, stagger = 0.08, ...rest }) => {
+  const MotionTag = motion[as] ?? motion.div;
+
+  return (
+    <MotionTag
+      className={className}
+      initial="hidden"
+      whileInView="shown"
+      viewport={{ once: true, margin: '-60px' }}
+      variants={{ shown: { transition: { staggerChildren: stagger } } }}
+      {...rest}
+    >
+      {children}
+    </MotionTag>
+  );
+};
 
 export const RevealItem = ({ children, as = 'div', className, y = 24, ...rest }) => {
   const reduceMotion = useReducedMotion();

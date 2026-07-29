@@ -1,3 +1,4 @@
+import { GeometricForm } from '@/components/geometric-form/geometric-form';
 import { Nav } from '@/components/nav/nav';
 import { PageHeader } from '@/components/page-header/page-header';
 import { SiteFooter } from '@/components/site-footer/site-footer';
@@ -29,6 +30,7 @@ export default function OpenSourcePage() {
           { label: 'Contributing since', value: openSource.since },
           { label: 'Merged PRs', value: openSource.stats[0].value },
         ]}
+        visual={<GeometricForm shape="graph" />}
       />
 
       <main className={styles.main}>
