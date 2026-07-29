@@ -1,0 +1,60 @@
+.header {
+  padding: clamp(30px, 5vw, 56px) var(--gutter) clamp(26px, 4vw, 40px);
+  border-bottom: 2px solid var(--rule);
+}
+
+.inner {
+  max-width: var(--page-width);
+  margin: 0 auto;
+}
+
+.kicker {
+  margin: 0 0 8px;
+  font-family: var(--font-hand);
+  font-size: 1.3rem;
+  color: var(--accent-ink);
+}
+
+.title {
+  max-width: 20ch;
+  margin: 0;
+  font-size: clamp(2.2rem, 6vw, 3.7rem);
+  letter-spacing: -0.03em;
+}
+
+.tagline {
+  max-width: 62ch;
+  margin: 16px 0 0;
+  font-size: clamp(1.02rem, 1.6vw, 1.18rem);
+  color: var(--ink-body);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 40px;
+  margin: 30px 0 0;
+  padding-top: 20px;
+  border-top: 1px dashed var(--rule);
+}
+
+.metaItem {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.metaLabel {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.metaValue {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 0.98rem;
+  color: var(--ink);
+}

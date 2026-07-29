@@ -1,0 +1,228 @@
+@import 'tailwindcss';
+
+/*
+ * Slam-book / scrapbook direction: warm paper, ink, tape and ruled lines.
+ * Layout-first phase — no 3D scenes, no scroll animation.
+ */
+
+:root {
+  --font-display: var(--font-fraunces), Georgia, 'Times New Roman', serif;
+  --font-body: var(--font-lora), Georgia, 'Times New Roman', serif;
+  --font-hand: var(--font-caveat), 'Segoe Script', cursive;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* The page fills the viewport — only the gutter holds content off the edge.
+     Long-form text is still capped by --prose-width so lines stay readable. */
+  --page-width: 100%;
+  --prose-width: 72ch;
+  --gutter: clamp(20px, 4vw, 72px);
+  --radius: 3px;
+}
+
+:root,
+[data-theme='light'] {
+  --paper: #efe4ce;
+  --paper-deep: #e4d5b8;
+  --card: #fbf6ea;
+  --card-alt: #f6eeda;
+  --ink: #2c2418;
+  --ink-body: #4a3f2e;
+  --ink-soft: #7d6e57;
+  --rule: #d8c6a3;
+  --rule-soft: #e3d5b9;
+  --tape: rgba(224, 205, 158, 0.85);
+  --accent: #b0432c;
+  --accent-soft: #d9a08d;
+  --accent-ink: #8c3320;
+  --marker: #e8c96a;
+  --stamp: #2f6560;
+  --shadow: rgba(80, 62, 34, 0.18);
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  --paper: #1c1813;
+  --paper-deep: #15120e;
+  --card: #262019;
+  --card-alt: #2d2620;
+  --ink: #f3e9d6;
+  --ink-body: #ddd0b8;
+  --ink-soft: #a29175;
+  --rule: #453b2e;
+  --rule-soft: #362e24;
+  --tape: rgba(120, 102, 66, 0.6);
+  --accent: #e08163;
+  --accent-soft: #7c4433;
+  --accent-ink: #f0a186;
+  --marker: #7a6530;
+  --stamp: #6aa9a2;
+  --shadow: rgba(0, 0, 0, 0.5);
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+/* Scrollbar hidden site-wide. Scrolling itself is untouched — wheel, trackpad,
+   keyboard, touch and programmatic scrolling all still work; only the track and
+   thumb are painted out. */
+html {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* legacy Edge */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none; /* Chrome, Safari, Edge */
+}
+
+* {
+  scrollbar-width: none;
+}
+
+body {
+  background-color: var(--paper);
+  /* Faint fibre speckle so the beige reads as paper, not a flat fill.
+     Inline SVG keeps it self-contained — no image request. */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+  color: var(--ink-body);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.72;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  color: var(--ink);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+p a,
+.prose a {
+  color: var(--accent-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--accent-soft);
+}
+
+::selection {
+  background: var(--marker);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ---- Shared paper primitives ---- */
+
+/* A sheet of paper: off-white card, hairline border, soft drop shadow. */
+.sheet {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  box-shadow: 0 1px 0 var(--rule-soft), 0 10px 24px -18px var(--shadow);
+}
+
+/* Notebook ruling, used behind long-form text blocks. */
+.ruled {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 33px,
+    var(--rule-soft) 33px,
+    var(--rule-soft) 34px
+  );
+}
+
+/* Handwritten aside, as if scribbled in the margin. */
+.hand {
+  font-family: var(--font-hand);
+  font-size: 1.32em;
+  line-height: 1.4;
+  color: var(--accent-ink);
+}
+
+/* Long-form article body, used on every blog-style page. Global rather than a
+   CSS module so the sub-pages can share one set of typographic rules. */
+.prose {
+  max-width: var(--prose-width);
+  font-size: 1.06rem;
+  line-height: 1.78;
+  color: var(--ink-body);
+}
+
+.prose > * + * {
+  margin-top: 1.15em;
+}
+
+.prose h2 {
+  margin-top: 2em;
+  font-size: 1.6rem;
+}
+
+.prose h3 {
+  margin-top: 1.7em;
+  font-size: 1.22rem;
+}
+
+.prose strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.prose blockquote {
+  margin-left: 0;
+  margin-right: 0;
+  padding: 4px 0 4px 20px;
+  border-left: 2px solid var(--accent-soft);
+  font-family: var(--font-hand);
+  font-size: 1.34rem;
+  line-height: 1.45;
+  color: var(--accent-ink);
+}
+
+.prose ul {
+  padding-left: 1.15em;
+}
+
+.prose li + li {
+  margin-top: 0.5em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

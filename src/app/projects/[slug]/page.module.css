@@ -1,0 +1,410 @@
+.main {
+  padding: clamp(36px, 5vw, 64px) var(--gutter) clamp(48px, 6vw, 72px);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: clamp(32px, 5vw, 68px);
+  align-items: start;
+  max-width: var(--page-width);
+  margin: 0 auto;
+}
+
+.article {
+  min-width: 0;
+}
+
+.block + .block {
+  margin-top: clamp(40px, 5vw, 60px);
+  padding-top: clamp(32px, 4vw, 46px);
+  border-top: 1px solid var(--rule);
+}
+
+.blockTitle {
+  margin: 0 0 20px;
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+}
+
+.caption {
+  margin: -8px 0 20px;
+  font-family: var(--font-hand);
+  font-size: 1.24rem;
+  color: var(--accent-ink);
+}
+
+/* Numbered build steps */
+.steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 46px minmax(0, 1fr);
+  gap: 18px;
+  padding: 20px 0;
+  border-bottom: 1px dashed var(--rule);
+}
+
+.step:last-child {
+  border-bottom: 0;
+}
+
+.stepNumber {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--accent);
+  padding-top: 3px;
+}
+
+.stepTitle {
+  margin: 0 0 6px;
+  font-size: 1.1rem;
+}
+
+.stepText {
+  max-width: var(--prose-width);
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.72;
+}
+
+/* Architecture as stacked layers rather than a drawn diagram */
+.diagram {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: layer;
+}
+
+.layer {
+  display: grid;
+  grid-template-columns: 130px minmax(0, 1fr);
+  gap: 16px;
+  align-items: center;
+  padding: 14px 16px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+}
+
+.layer + .layer {
+  margin-top: 8px;
+  position: relative;
+}
+
+/* Connector between layers */
+.layer + .layer::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 44px;
+  width: 1px;
+  height: 8px;
+  background: var(--rule);
+}
+
+.layerLabel {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.layerNodes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.node {
+  padding: 5px 12px;
+  background: var(--card-alt);
+  border: 1px solid var(--rule-soft);
+  border-radius: var(--radius);
+  font-size: 0.87rem;
+  color: var(--ink);
+}
+
+/* Highlights */
+.highlights {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.highlight {
+  position: relative;
+  padding: 11px 0 11px 24px;
+  border-bottom: 1px solid var(--rule-soft);
+  font-size: 1rem;
+}
+
+.highlight:last-child {
+  border-bottom: 0;
+}
+
+.highlight::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--stamp);
+}
+
+/* Sidebar. Not sticky — with two photos it is taller than the viewport, and a
+   sticky block that tall parks its own lower half off-screen. */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.photos {
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+  padding: 6px 0 8px;
+}
+
+.card {
+  padding: 20px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+}
+
+.cardTitle {
+  margin: 0 0 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--rule-soft);
+  font-size: 1rem;
+}
+
+.outcomes {
+  margin: 0;
+}
+
+.outcome + .outcome {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--rule-soft);
+}
+
+.outcomeValue {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.outcomeLabel {
+  margin: 3px 0 0;
+  font-size: 0.87rem;
+  color: var(--ink-body);
+}
+
+/* Evidence */
+.evidenceKind {
+  display: inline-block;
+  margin: 0 0 10px;
+  padding: 3px 11px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.evidenceKind[data-kind='open-source'] {
+  border-color: var(--stamp);
+  color: var(--stamp);
+}
+
+.evidenceKind[data-kind='proprietary'] {
+  border-color: var(--accent-soft);
+  color: var(--accent-ink);
+}
+
+.evidenceNote {
+  margin: 0;
+  font-size: 0.91rem;
+  line-height: 1.66;
+  color: var(--ink-body);
+}
+
+.outcomeBasis {
+  margin: 6px 0 0;
+  font-size: 0.79rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+/* Jump to any other project */
+.jumpList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jumpLink {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px dashed var(--rule-soft);
+  font-size: 0.93rem;
+  color: var(--ink-body);
+}
+
+.jumpList li:last-child .jumpLink {
+  border-bottom: 0;
+}
+
+.jumpLink:hover {
+  color: var(--accent-ink);
+}
+
+.jumpIndex {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--ink-soft);
+}
+
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tech {
+  padding: 4px 10px;
+  background: var(--card-alt);
+  border: 1px solid var(--rule-soft);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  color: var(--ink-soft);
+}
+
+.repoLink {
+  display: inline-block;
+  margin-top: 16px;
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  color: var(--accent-ink);
+}
+
+.repoLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Prev / next */
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: var(--page-width);
+  margin: clamp(48px, 6vw, 72px) auto 0;
+  padding-top: 26px;
+  border-top: 2px solid var(--rule);
+}
+
+.pagerLink {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 36%;
+}
+
+.pagerNext {
+  text-align: right;
+}
+
+/* Up one level, sat between prev and next */
+.pagerUp {
+  flex-shrink: 0;
+  padding: 9px 18px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--card);
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  color: var(--ink);
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.pagerUp:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fdf6ea;
+}
+
+.pagerLabel {
+  font-family: var(--font-mono);
+  font-size: 0.63rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.pagerName {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--ink);
+}
+
+.pagerLink:hover .pagerName {
+  color: var(--accent-ink);
+}
+
+@media (max-width: 940px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sidebar {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .sidebar > * {
+    flex: 1 1 260px;
+  }
+
+  .photos {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 24px;
+    flex-basis: 100%;
+  }
+
+  .photos > * {
+    flex: 1 1 220px;
+  }
+}
+
+@media (max-width: 620px) {
+  .layer {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .layer + .layer::before {
+    left: 24px;
+  }
+
+  .step {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+  }
+}

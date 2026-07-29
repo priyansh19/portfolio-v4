@@ -1,0 +1,263 @@
+.hero {
+  padding: clamp(40px, 7vw, 76px) var(--gutter) clamp(48px, 7vw, 80px);
+}
+
+.inner {
+  max-width: var(--page-width);
+  margin: 0 auto;
+}
+
+.head {
+  padding-bottom: 26px;
+  border-bottom: 2px solid var(--rule);
+}
+
+.kicker {
+  margin: 0 0 6px;
+  font-family: var(--font-hand);
+  font-size: 1.35rem;
+  color: var(--accent-ink);
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(2.7rem, 8vw, 5rem);
+  letter-spacing: -0.03em;
+}
+
+.subtitle {
+  max-width: 56ch;
+  margin: 14px 0 0;
+  font-size: clamp(1rem, 1.5vw, 1.14rem);
+  color: var(--ink-body);
+}
+
+/* Availability — the answer to "what are you doing right now" */
+.status {
+  margin-top: clamp(24px, 3.5vw, 36px);
+  padding: clamp(18px, 2.5vw, 24px);
+  background: var(--card-alt);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--stamp);
+  border-radius: var(--radius);
+}
+
+.statusHead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.08rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.statusDot {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--stamp);
+}
+
+.statusDetail {
+  max-width: 68ch;
+  margin: 8px 0 0;
+  font-size: 0.97rem;
+  line-height: 1.68;
+}
+
+.openTo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.openToItem {
+  padding: 3px 11px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: var(--card);
+  font-family: var(--font-mono);
+  font-size: 0.63rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+}
+
+/* Entry card + photos */
+.body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.85fr);
+  gap: clamp(28px, 5vw, 56px);
+  align-items: start;
+  margin-top: clamp(32px, 5vw, 52px);
+}
+
+.entryCard {
+  padding: clamp(22px, 3.5vw, 38px);
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 26px -20px var(--shadow);
+}
+
+.entries {
+  margin: 0;
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 16px;
+  align-items: baseline;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.entry:last-of-type {
+  border-bottom: 0;
+}
+
+.entryLabel {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.entryValue {
+  margin: 0;
+  font-family: var(--font-hand);
+  font-size: 1.42rem;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.note {
+  margin: 22px 0 0;
+  padding-top: 18px;
+  border-top: 1px dashed var(--rule);
+  font-size: 0.97rem;
+  color: var(--ink-body);
+}
+
+.photos {
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+  padding-top: 10px;
+}
+
+/* Fill the column rather than sitting at the default cap, so the photo reaches
+   roughly the height of the entry card beside it. */
+.photos > * {
+  max-width: none;
+  width: 100%;
+}
+
+/* Stats + actions */
+.footRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  margin-top: clamp(36px, 5vw, 56px);
+  padding-top: 26px;
+  border-top: 2px solid var(--rule);
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 34px;
+  margin: 0;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.statValue {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.statLabel {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.primary,
+.secondary {
+  display: inline-block;
+  padding: 11px 20px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  font-family: var(--font-display);
+  font-size: 0.94rem;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fdf6ea;
+}
+
+.primary:hover {
+  background: var(--accent-ink);
+  border-color: var(--accent-ink);
+}
+
+.secondary {
+  background: var(--card);
+  color: var(--ink);
+}
+
+.secondary:hover {
+  border-color: var(--accent-soft);
+  color: var(--accent-ink);
+}
+
+@media (max-width: 900px) {
+  .body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .photos {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .photos > * {
+    flex: 1 1 220px;
+  }
+}
+
+@media (max-width: 560px) {
+  .entry {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 3px;
+  }
+}

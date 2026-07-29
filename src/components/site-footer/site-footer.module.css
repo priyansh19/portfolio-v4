@@ -1,0 +1,49 @@
+.footer {
+  padding: 28px var(--gutter) 44px;
+  border-top: 2px solid var(--rule);
+}
+
+.inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: var(--page-width);
+  margin: 0 auto;
+}
+
+.name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 12px;
+  margin: 0;
+  font-family: var(--font-display);
+  color: var(--ink);
+}
+
+.location {
+  font-family: var(--font-mono);
+  font-size: 0.63rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.link {
+  font-size: 0.9rem;
+  color: var(--ink-body);
+}
+
+.link:hover {
+  color: var(--accent-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

@@ -1,0 +1,33 @@
+.heading {
+  margin-bottom: clamp(28px, 4vw, 46px);
+  padding-bottom: 18px;
+  border-bottom: 2px solid var(--rule);
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(1.9rem, 4.2vw, 2.9rem);
+}
+
+.lede {
+  max-width: var(--prose-width);
+  margin: 14px 0 0;
+  font-size: 1.03rem;
+  color: var(--ink-body);
+}
+
+.aside {
+  margin: 12px 0 0;
+  font-family: var(--font-hand);
+  font-size: 1.25rem;
+  color: var(--accent-ink);
+}

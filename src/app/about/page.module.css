@@ -1,0 +1,226 @@
+.main {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: clamp(36px, 5vw, 60px) var(--gutter) clamp(48px, 6vw, 72px);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: clamp(28px, 5vw, 64px);
+  align-items: start;
+}
+
+.prose {
+  max-width: var(--prose-width);
+  font-size: 1.05rem;
+  line-height: 1.78;
+}
+
+.prose p {
+  margin: 0 0 18px;
+}
+
+.prose p:first-child::first-letter {
+  float: left;
+  margin: 0.1em 0.12em 0 0;
+  font-family: var(--font-display);
+  font-size: 3.4em;
+  font-weight: 600;
+  line-height: 0.8;
+  color: var(--accent);
+}
+
+.prose blockquote {
+  margin: 26px 0 0;
+  padding: 4px 0 4px 20px;
+  border-left: 2px solid var(--accent-soft);
+  font-family: var(--font-hand);
+  font-size: 1.36rem;
+  line-height: 1.45;
+  color: var(--accent-ink);
+}
+
+.side {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Credential tiles span the full width under the intro, so a short bio never
+   strands a tall empty column beside it. */
+.credentials {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: clamp(16px, 2.5vw, 24px);
+  margin-top: clamp(30px, 4vw, 44px);
+}
+
+/* Both lists spread across their tile instead of running as one long column */
+.certList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+  gap: 0 26px;
+}
+
+.educationList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+  gap: 16px 26px;
+}
+
+.block {
+  padding: clamp(18px, 2.5vw, 24px);
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+}
+
+.blockTitle {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 0 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--rule-soft);
+  font-size: 1.02rem;
+}
+
+.count {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 400;
+  color: var(--ink-soft);
+}
+
+.educationList,
+.certList,
+.items {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.educationItem {
+  padding-left: 14px;
+  border-left: 2px solid var(--rule);
+}
+
+.degree {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 0.99rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.school {
+  margin: 2px 0 0;
+  font-size: 0.9rem;
+}
+
+.period {
+  margin: 4px 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--ink-soft);
+}
+
+.cert {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.cert:last-child {
+  border-bottom: 0;
+}
+
+.certCode {
+  flex-shrink: 0;
+  width: 58px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--accent-ink);
+}
+
+.certName {
+  font-size: 0.88rem;
+}
+
+/* Skills */
+.section {
+  margin-top: clamp(44px, 6vw, 70px);
+  padding-top: clamp(32px, 4vw, 44px);
+  border-top: 1px solid var(--rule);
+}
+
+.sectionTitle {
+  margin: 0 0 8px;
+  font-size: clamp(1.4rem, 3vw, 1.85rem);
+}
+
+.sectionNote {
+  max-width: var(--prose-width);
+  margin: 0 0 26px;
+  font-size: 0.97rem;
+  color: var(--ink-body);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: clamp(16px, 2.5vw, 24px);
+}
+
+.group {
+  padding: clamp(18px, 2.5vw, 24px);
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+}
+
+.groupTitle {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--rule-soft);
+  font-size: 1.08rem;
+}
+
+.backed {
+  margin: 0 0 12px;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--stamp);
+}
+
+.items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.item {
+  padding: 5px 11px;
+  background: var(--card-alt);
+  border: 1px solid var(--rule-soft);
+  border-radius: var(--radius);
+  font-size: 0.86rem;
+  color: var(--ink-body);
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
