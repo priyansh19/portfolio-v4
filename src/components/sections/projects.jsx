@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { FlowParagraph } from '@/components/flow-paragraph/flow-paragraph';
 import { Polaroid } from '@/components/polaroid/polaroid';
 import { Reveal, RevealGroup, RevealItem } from '@/components/reveal/reveal';
 import { SectionHeading } from '@/components/section-heading/section-heading';
@@ -42,7 +41,7 @@ export const Projects = () => (
                 </h3>
 
                 <p className={styles.subtitle}>{project.subtitle}</p>
-                <FlowParagraph className={styles.description} text={project.description} />
+                <p className={styles.description}>{project.description}</p>
 
                 <ul className={styles.stack}>
                   {project.stack.slice(0, 5).map(tech => (

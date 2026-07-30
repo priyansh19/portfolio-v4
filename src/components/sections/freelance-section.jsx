@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { FlowParagraph } from '@/components/flow-paragraph/flow-paragraph';
 import { Reveal, RevealGroup, RevealItem } from '@/components/reveal/reveal';
 import { SectionHeading } from '@/components/section-heading/section-heading';
 import { freelance } from '@/lib/content';
@@ -22,7 +21,7 @@ export const FreelanceSection = () => (
             {freelance.services.map(service => (
               <RevealItem as="li" className={styles.service} key={service.id}>
                 <span className={styles.serviceTitle}>{service.title}</span>
-                <FlowParagraph className={styles.serviceBody} text={service.body} />
+                <span className={styles.serviceBody}>{service.body}</span>
               </RevealItem>
             ))}
           </RevealGroup>

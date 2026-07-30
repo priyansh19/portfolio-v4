@@ -3,7 +3,6 @@ import { AgentOrb } from '@/components/agent-orb/agent-orb';
 import { AuroraField } from '@/components/aurora-field/aurora-field';
 import { LoadingScreen } from '@/components/loading-screen/loading-screen';
 import { ThemeProvider } from '@/components/theme-provider';
-import { TileField } from '@/components/tile-field/tile-field';
 import { links, profile } from '@/lib/content';
 import { siteUrl } from '@/lib/site';
 import './globals.css';
@@ -92,9 +91,7 @@ export default function RootLayout({ children }) {
           {/* Fixed site-wide backdrop — lives here rather than in the hero so
               it persists across scroll and across every route. */}
           <AuroraField />
-          {/* Tiles bounce around the viewport; every FlowParagraph inside
-              re-wraps around whichever ones are crossing it. */}
-          <TileField>{children}</TileField>
+          {children}
           {/* Persistent voice assistant — parks over the hero anchor, docks
               to the top-right corner on scroll and on every other route. */}
           <AgentOrb />

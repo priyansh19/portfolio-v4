@@ -10,6 +10,7 @@
 .lines {
   position: absolute;
   inset: 0;
+  z-index: 1; /* above the trail canvas, below the tile */
   display: none;
 }
 
@@ -29,6 +30,19 @@
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 2;
   will-change: transform;
   pointer-events: none;
 }
+
+/* Sits behind the text so the glow reads without hurting legibility. */
+.trail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+

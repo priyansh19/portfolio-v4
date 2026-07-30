@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { FlowParagraph } from '@/components/flow-paragraph/flow-paragraph';
 import { Polaroid } from '@/components/polaroid/polaroid';
 import { Reveal } from '@/components/reveal/reveal';
 import { SectionHeading } from '@/components/section-heading/section-heading';
@@ -18,9 +17,12 @@ export const About = () => (
 
       <Reveal className={styles.layout}>
         <div className={styles.prose}>
-          <FlowParagraph
-            text="I spend my time where research meets production. That has meant leading a team of ten through 20+ enterprise RAG rollouts, designing an LLM gateway that turned a multi-week deployment into an afternoon, and hardening the Kubernetes estate those systems run on."
-          />
+          <p>
+            I spend my time where research meets production. That has meant leading a team
+            of ten through 20+ enterprise RAG rollouts, designing an LLM gateway that turned
+            a multi-week deployment into an afternoon, and hardening the Kubernetes estate
+            those systems run on.
+          </p>
 
           <p className={styles.scribble}>
             The model is rarely the bottleneck. Identity, tenancy, evaluation, cost and

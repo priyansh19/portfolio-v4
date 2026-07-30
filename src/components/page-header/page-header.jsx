@@ -1,5 +1,4 @@
 import { Breadcrumbs } from '@/components/breadcrumbs/breadcrumbs';
-import { FlowParagraph } from '@/components/flow-paragraph/flow-paragraph';
 import styles from './page-header.module.css';
 
 /**
@@ -13,7 +12,7 @@ export const PageHeader = ({ crumbs = [], kicker, title, tagline, meta = [] }) =
 
       {kicker && <p className={styles.kicker}>{kicker}</p>}
       <h1 className={styles.title}>{title}</h1>
-      {tagline && <FlowParagraph className={styles.tagline} text={tagline} />}
+      {tagline && <p className={styles.tagline}>{tagline}</p>}
 
       {meta.length > 0 && (
         <dl className={styles.meta}>
