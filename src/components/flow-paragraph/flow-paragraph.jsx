@@ -7,11 +7,13 @@ import {
 } from '@chenglou/pretext';
 import { useReducedMotion } from 'framer-motion';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { LogoCube } from '@/components/logo-cube/logo-cube';
+import { LogoTile } from '@/components/logo-tile/logo-tile';
 import styles from './flow-paragraph.module.css';
 
-const GAP = 18; // clearance between the cube and the text it displaces
+const GAP = 18; // clearance between the tile and the text it displaces
 const MIN_LINE = 90; // never squeeze a line narrower than this
+/** The tile is exactly this many line-heights square, so it displaces two lines. */
+const TILE_LINES = 2;
 
 /**
  * Paragraph whose text genuinely re-wraps around a cube walking through it.
@@ -29,7 +31,7 @@ const MIN_LINE = 90; // never squeeze a line narrower than this
  * The cube walks a boustrophedon path — left to right along one line, down,
  * right to left along the next — like a counter on a snakes-and-ladders board.
  */
-export const FlowParagraph = ({ text, className = '', cubeSize = 76 }) => {
+export const FlowParagraph = ({ text, className = '' }) => {
   const wrapRef = useRef(null);
   const lineHostRef = useRef(null);
   const cubeRef = useRef(null);
@@ -40,6 +42,7 @@ export const FlowParagraph = ({ text, className = '', cubeSize = 76 }) => {
   const clockRef = useRef(0);
   const reduceMotion = useReducedMotion();
   const [enhanced, setEnhanced] = useState(false);
+  const [tileSize, setTileSize] = useState(0);
 
   /** Re-prepare whenever the text, font or container width changes. */
   const prepare = useCallback(() => {
@@ -139,9 +142,12 @@ export const FlowParagraph = ({ text, className = '', cubeSize = 76 }) => {
     const start = () => {
       if (cancelled || !prepare()) return;
 
-      // Reserve height for the worst case, so the block never jumps as the
-      // cube squeezes lines and the count changes.
       const { width, lineHeight } = metricsRef.current;
+      // Square, exactly two lines tall — so it displaces two lines, no more
+      const cubeSize = Math.round(lineHeight * TILE_LINES);
+
+      // Reserve height for the worst case, so the block never jumps as the
+      // tile squeezes lines and the count changes.
       const squeezed = flow({
         left: width - cubeSize,
         top: 0,
@@ -152,6 +158,7 @@ export const FlowParagraph = ({ text, className = '', cubeSize = 76 }) => {
         wrapRef.current.style.minHeight = `${squeezed * lineHeight}px`;
       }
 
+      setTileSize(cubeSize);
       setEnhanced(true);
 
       const animate = () => {
@@ -197,7 +204,7 @@ export const FlowParagraph = ({ text, className = '', cubeSize = 76 }) => {
       cancelAnimationFrame(frameRef.current);
       observer?.disconnect();
     };
-  }, [prepare, flow, cubeSize, reduceMotion]);
+  }, [prepare, flow, reduceMotion]);
 
   return (
     <div className={`${styles.wrap} ${className}`} data-enhanced={enhanced} ref={wrapRef}>
@@ -206,9 +213,9 @@ export const FlowParagraph = ({ text, className = '', cubeSize = 76 }) => {
 
       <span className={styles.lines} aria-hidden ref={lineHostRef} />
 
-      {enhanced && (
+      {enhanced && tileSize > 0 && (
         <span className={styles.cube} aria-hidden ref={cubeRef}>
-          <LogoCube size={cubeSize} spin={!reduceMotion} />
+          <LogoTile size={tileSize} animate={!reduceMotion} />
         </span>
       )}
     </div>

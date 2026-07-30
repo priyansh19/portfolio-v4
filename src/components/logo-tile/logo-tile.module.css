@@ -1,0 +1,79 @@
+.tile {
+  position: relative;
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  border: 1px solid color-mix(in srgb, var(--brand) 45%, var(--hairline-strong));
+  border-radius: 10px;
+  background: var(--surface-card);
+  box-shadow: 0 4px 14px var(--shadow-soft);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Breathing halo in the current logo's brand colour */
+.tile::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at 50% 50%,
+    color-mix(in srgb, var(--brand) 26%, transparent) 0%,
+    transparent 70%
+  );
+}
+
+.tile[data-animate='true'] {
+  animation: pulse 2.6s ease-in-out infinite;
+}
+
+.tile[data-animate='true']::before {
+  animation: glow 2.6s ease-in-out infinite;
+}
+
+.glyph {
+  position: relative;
+  width: 52%;
+  height: 52%;
+  animation: swapIn 0.45s ease both;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.07);
+  }
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes swapIn {
+  from {
+    opacity: 0;
+    transform: scale(0.72);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile[data-animate='true'],
+  .tile[data-animate='true']::before,
+  .glyph {
+    animation: none;
+  }
+}
