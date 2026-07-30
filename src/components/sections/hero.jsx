@@ -1,11 +1,14 @@
 import Link from 'next/link';
 import { Reveal, RevealGroup, RevealItem } from '@/components/reveal/reveal';
+import { TechCube } from '@/components/tech-cube/tech-cube';
 import { ScrambleText } from '@/components/scramble-text/scramble-text';
 import { links, profile, stats } from '@/lib/content';
 import styles from './hero.module.css';
 
 export const Hero = () => (
   <section className={styles.hero} id="top">
+    {/* Drifts across the hero behind the copy */}
+    <TechCube />
 
     <div className={styles.inner}>
       {/* Copy sits left, mockup rides up beside it — a centred stack left a

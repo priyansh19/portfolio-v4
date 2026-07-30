@@ -9,6 +9,7 @@
 
 /* Two columns: copy left, device mockup right. Stats span the full width
    underneath both. */
+/* z-index 1 keeps the copy above the drifting cube behind it. */
 .inner {
   position: relative;
   z-index: 1;
