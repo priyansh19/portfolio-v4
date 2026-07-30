@@ -283,11 +283,22 @@ export const FlowParagraph = ({ text, className = '' }) => {
         ctx.clearRect(0, 0, w, boxHeight);
         ctx.shadowColor = 'rgba(255, 255, 255, 0.35)';
 
-        for (let i = 1; i < points.length; i++) {
-          const a = points[i - 1];
-          const b = points[i];
+        // Each span runs midpoint-to-midpoint with the sample itself as the
+        // control point. Straight segments meeting at a shared vertex leave a
+        // hard corner; routing through midpoints keeps the tangent continuous,
+        // so every direction change reads as a curve. Consecutive spans share
+        // an endpoint exactly, so per-span alpha still tapers cleanly.
+        const midX = (p, q) => (p.x + q.x) / 2;
+        const midY = (p, q) => (p.y + q.y) / 2;
+
+        for (let i = 1; i < points.length - 1; i++) {
+          const prev = points[i - 1];
+          const cur = points[i];
+          const next = points[i + 1];
+
           // Skip the jump when the snake wraps to the next row
-          if (Math.abs(b.y - a.y) > lh * 1.5) continue;
+          if (Math.abs(cur.y - prev.y) > lh * 1.5) continue;
+          if (Math.abs(next.y - cur.y) > lh * 1.5) continue;
 
           const k = i / (points.length - 1); // 0 tail, 1 head
           ctx.globalAlpha = k * k * TRAIL_PEAK;
@@ -295,8 +306,8 @@ export const FlowParagraph = ({ text, className = '' }) => {
           ctx.shadowBlur = 6 * k;
           ctx.strokeStyle = '#ffffff';
           ctx.beginPath();
-          ctx.moveTo(a.x, a.y);
-          ctx.lineTo(b.x, b.y);
+          ctx.moveTo(midX(prev, cur), midY(prev, cur));
+          ctx.quadraticCurveTo(cur.x, cur.y, midX(cur, next), midY(cur, next));
           ctx.stroke();
         }
 

@@ -6,7 +6,6 @@ import { useRef, useState } from 'react';
 import { SectionHeading } from '@/components/section-heading/section-heading';
 import { experience } from '@/lib/content';
 import styles from './work.module.css';
-import { FlowParagraph } from '@/components/flow-paragraph/flow-paragraph';
 
 /**
  * Home-page teaser, built as a sticky scroll sequence: the panel on the right
@@ -109,9 +108,7 @@ export const Work = () => {
                       <h3 className={styles.sceneRole}>{activeJob.role}</h3>
                       <ul className={styles.scenePoints}>
                         {activeJob.points.slice(0, 3).map(point => (
-                          <li key={point}>
-                            <FlowParagraph text={point} />
-                          </li>
+                          <li key={point}>{point}</li>
                         ))}
                       </ul>
                       <ul className={styles.sceneTags}>

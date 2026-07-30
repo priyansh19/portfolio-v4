@@ -6,7 +6,6 @@ import { ScrollProgress } from '@/components/scroll-progress/scroll-progress';
 import { SiteFooter } from '@/components/site-footer/site-footer';
 import { freelance, links } from '@/lib/content';
 import styles from './page.module.css';
-import { FlowParagraph } from '@/components/flow-paragraph/flow-paragraph';
 
 export const metadata = {
   title: freelance.title,
@@ -117,7 +116,7 @@ export default function FreelancePage() {
             {freelance.services.map(service => (
               <RevealItem as="li" className={styles.service} key={service.id}>
                 <h3 className={styles.serviceTitle}>{service.title}</h3>
-                <FlowParagraph className={styles.serviceBody} text={service.body} />
+                <p className={styles.serviceBody}>{service.body}</p>
                 <ul className={styles.tags}>
                   {service.tags.map(tag => (
                     <li className={styles.tag} key={tag}>
@@ -138,7 +137,7 @@ export default function FreelancePage() {
                 <span className={styles.phaseStep}>{phase.step}</span>
                 <div>
                   <h3 className={styles.phaseTitle}>{phase.title}</h3>
-                  <FlowParagraph className={styles.phaseBody} text={phase.body} />
+                  <p className={styles.phaseBody}>{phase.body}</p>
                 </div>
               </li>
             ))}
@@ -151,7 +150,7 @@ export default function FreelancePage() {
             {freelance.engagements.map(item => (
               <li className={styles.engagement} key={item.title}>
                 <h3 className={styles.engagementTitle}>{item.title}</h3>
-                <FlowParagraph className={styles.engagementBody} text={item.body} />
+                <p className={styles.engagementBody}>{item.body}</p>
               </li>
             ))}
           </ul>
