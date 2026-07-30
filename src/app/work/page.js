@@ -1,3 +1,4 @@
+import { FlowParagraph } from '@/components/flow-paragraph/flow-paragraph';
 import { Nav } from '@/components/nav/nav';
 import { PageHeader } from '@/components/page-header/page-header';
 import { Reveal, RevealGroup, RevealItem } from '@/components/reveal/reveal';
@@ -63,7 +64,7 @@ export default function WorkPage() {
                   <ul className={styles.points}>
                     {job.points.map(point => (
                       <li className={styles.point} key={point}>
-                        {point}
+                        <FlowParagraph text={point} />
                       </li>
                     ))}
                   </ul>
