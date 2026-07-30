@@ -1,0 +1,29 @@
+/* The host keeps the real typography so pretext measures against the exact
+   computed font, and so the plain-text fallback looks identical. */
+.host {
+  display: block;
+}
+
+.stage {
+  display: block;
+  perspective: 900px;
+  perspective-origin: 50% 0%;
+}
+
+/* Each line gets its own clipping band, so a line rotating up from below is
+   revealed rather than sliding over its neighbour. */
+.lineMask {
+  display: block;
+  overflow: hidden;
+  /* Slight vertical slack so descenders are not clipped mid-flip */
+  padding-block: 0.06em;
+  margin-block: -0.06em;
+}
+
+.line {
+  display: block;
+  transform-origin: 50% 0%;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+  white-space: pre;
+}
