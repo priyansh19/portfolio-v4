@@ -1,0 +1,15 @@
+/* Viewport-fixed layer. Tiles are positioned in viewport coordinates so they
+   travel across the whole page, independent of any one section. */
+.field {
+  position: fixed;
+  inset: 0;
+  z-index: 44; /* above content, below the docked agent orb (45) */
+  pointer-events: none;
+}
+
+.tile {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform;
+}

@@ -10,8 +10,10 @@ import styles from './logo-tile.module.css';
  * Sized by the caller to exactly two line-heights, so it displaces precisely
  * two lines of the paragraph it travels through.
  */
-export const LogoTile = ({ size = 56, animate = true }) => {
-  const [index, setIndex] = useState(0);
+export const LogoTile = ({ size = 56, animate = true, offset = 0 }) => {
+  // `offset` staggers each tile's starting logo so several on screen at once
+  // are never showing the same one.
+  const [index, setIndex] = useState(offset % techLogos.length);
 
   useEffect(() => {
     if (!animate) return undefined;
