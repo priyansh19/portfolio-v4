@@ -27,6 +27,12 @@
   margin: 0 0 18px;
 }
 
+/* FlowParagraph renders a div, so it needs the paragraph spacing that
+   `.prose p` would otherwise have given it. */
+.bio {
+  margin: 0 0 18px;
+}
+
 .scribble {
   margin-top: 22px !important;
   padding-left: 18px;
