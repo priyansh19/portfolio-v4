@@ -77,11 +77,17 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* Wider than a normal measure so the cube has room to walk through without
+   crushing lines to nothing. */
+.introWrap {
+  width: 100%;
+  max-width: 62ch;
+  margin: 18px 0 0;
+}
+
 .intro {
-  max-width: 60ch;
-  margin: 16px 0 0;
   font-size: 1rem;
-  line-height: 1.65;
+  line-height: 1.75;
   color: var(--body);
 }
 

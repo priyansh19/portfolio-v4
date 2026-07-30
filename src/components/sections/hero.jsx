@@ -1,15 +1,12 @@
 import Link from 'next/link';
+import { FlowParagraph } from '@/components/flow-paragraph/flow-paragraph';
 import { Reveal, RevealGroup, RevealItem } from '@/components/reveal/reveal';
-import { TechCube } from '@/components/tech-cube/tech-cube';
 import { ScrambleText } from '@/components/scramble-text/scramble-text';
 import { links, profile, stats } from '@/lib/content';
 import styles from './hero.module.css';
 
 export const Hero = () => (
   <section className={styles.hero} id="top">
-    {/* Drifts across the hero behind the copy */}
-    <TechCube />
-
     <div className={styles.inner}>
       {/* Copy sits left, mockup rides up beside it — a centred stack left a
           dead band of empty canvas between the buttons and the device. */}
@@ -28,8 +25,9 @@ export const Hero = () => (
           <ScrambleText words={profile.titles} className={styles.scramble} />
         </Reveal>
 
-        <Reveal as="p" className={styles.intro} delay={0.15}>
-          {profile.intro}
+        {/* Text re-wraps live around the cube walking through it */}
+        <Reveal className={styles.introWrap} delay={0.15}>
+          <FlowParagraph className={styles.intro} text={profile.intro} />
         </Reveal>
 
         <Reveal className={styles.actions} delay={0.2}>

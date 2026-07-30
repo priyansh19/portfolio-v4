@@ -1,0 +1,34 @@
+/* The wrap keeps the real typography so pretext measures against the exact
+   computed font, and so the un-enhanced fallback looks identical. */
+.wrap {
+  position: relative;
+  display: block;
+}
+
+/* Once enhanced, the lines are absolutely placed, so the host is a bare
+   coordinate space. */
+.lines {
+  position: absolute;
+  inset: 0;
+  display: none;
+}
+
+.wrap[data-enhanced='true'] .lines {
+  display: block;
+}
+
+.line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: pre;
+  will-change: transform;
+}
+
+.cube {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform;
+  pointer-events: none;
+}
