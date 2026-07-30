@@ -40,6 +40,9 @@ export const FlowParagraph = ({ text, className = '' }) => {
   const poolRef = useRef([]);
   const frameRef = useRef(0);
   const clockRef = useRef(0);
+  const posRef = useRef({ x: 0, y: 0 });
+  const targetRef = useRef({ x: 0, y: 0 });
+  const dwellRef = useRef(0);
   const reduceMotion = useReducedMotion();
   const [enhanced, setEnhanced] = useState(false);
   const [tileSize, setTileSize] = useState(0);
@@ -161,27 +164,72 @@ export const FlowParagraph = ({ text, className = '' }) => {
       setTileSize(cubeSize);
       setEnhanced(true);
 
+      /**
+       * Pick somewhere new to go. X is free across the column; Y snaps to a
+       * line row so the tile always displaces exactly two whole lines rather
+       * than clipping a third. Direction is therefore unconstrained — it can
+       * head anywhere, including straight back where it came from.
+       */
+      const pickTarget = () => {
+        const { width: w, lineHeight: lh } = metricsRef.current;
+        const rows = Math.max(1, Math.round(wrapRef.current.clientHeight / lh) - (TILE_LINES - 1));
+        const maxX = Math.max(0, w - cubeSize);
+
+        let x = Math.random() * maxX;
+        let row = Math.floor(Math.random() * rows);
+
+        // Nudge away from the current spot so it never picks a non-move
+        if (Math.abs(x - posRef.current.x) < maxX * 0.25) {
+          x = posRef.current.x < maxX / 2 ? maxX * (0.6 + Math.random() * 0.4) : maxX * Math.random() * 0.4;
+        }
+        if (rows > 1 && row * lh === posRef.current.y) {
+          row = (row + 1 + Math.floor(Math.random() * (rows - 1))) % rows;
+        }
+
+        targetRef.current = { x, y: row * lh };
+        // Rest a beat once it arrives, for a wandering rather than frantic feel
+        dwellRef.current = 0.35 + Math.random() * 1.5;
+      };
+
+      pickTarget();
+
       const animate = () => {
         frameRef.current = requestAnimationFrame(animate);
         clockRef.current += 0.016;
 
-        const { width: w, lineHeight: lh } = metricsRef.current;
-        const rows = Math.max(1, Math.round(wrapRef.current.clientHeight / lh) - 1);
-        const travel = Math.max(1, w - cubeSize);
+        const pos = posRef.current;
+        const target = targetRef.current;
 
-        // Boustrophedon: sweep across a row, drop, sweep back the other way
-        const period = 6.5; // seconds per row
-        const t = clockRef.current / period;
-        const row = Math.floor(t) % rows;
-        const phase = t % 1;
-        const forward = Math.floor(t) % 2 === 0;
-        const eased = 0.5 - 0.5 * Math.cos(phase * Math.PI * 2 * 0.5 + Math.PI * 0);
+        const dx = target.x - pos.x;
+        const dy = target.y - pos.y;
+        const distance = Math.hypot(dx, dy);
 
-        const progress = forward ? eased : 1 - eased;
-        const left = progress * travel;
-        const top = row * lh;
+        if (distance < 1.2) {
+          // Arrived — sit still, then choose a new heading
+          dwellRef.current -= 0.016;
+          if (dwellRef.current <= 0) pickTarget();
+        } else {
+          // Critically-damped-ish ease, so it sets off and settles smoothly
+          pos.x += dx * 0.022;
+          pos.y += dy * 0.022;
+        }
 
-        flow({ left, top, bottom: top + cubeSize, size: cubeSize });
+        const left = pos.x;
+        const top = pos.y;
+
+        // The tile glides freely, but the box the text reacts to snaps to the
+        // nearest line row. Easing between rows would otherwise clip a third
+        // line for the duration of the move, and it should only ever displace
+        // two.
+        const collisionTop = Math.round(top / metricsRef.current.lineHeight) *
+          metricsRef.current.lineHeight;
+
+        flow({
+          left,
+          top: collisionTop,
+          bottom: collisionTop + cubeSize,
+          size: cubeSize,
+        });
 
         if (cubeRef.current) {
           cubeRef.current.style.transform = `translate3d(${left}px, ${top}px, 0)`;
