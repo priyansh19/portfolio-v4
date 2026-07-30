@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { VoiceOrb } from '@/components/voice-orb/voice-orb';
 import { Reveal, RevealGroup, RevealItem } from '@/components/reveal/reveal';
 import { ScrambleText } from '@/components/scramble-text/scramble-text';
 import { links, profile, stats } from '@/lib/content';
@@ -46,11 +45,12 @@ export const Hero = () => (
         </Reveal>
       </div>
 
-      {/* Placeholder for the voice assistant. Once it is wired up, drive this
-          with `state` and `amplitude` (0..1) from the audio analyser. */}
-      <Reveal delay={0.25} className={styles.mockupWrap}>
-        <VoiceOrb />
-      </Reveal>
+      {/* Reserves the orb's slot in the layout. The orb itself is a fixed
+          layer mounted in the root layout so it survives scroll and route
+          changes — it parks over this anchor, then docks to the corner. */}
+      <div className={styles.mockupWrap}>
+        <div className={styles.agentAnchor} id="agent-anchor" aria-hidden />
+      </div>
 
       <RevealGroup className={styles.stats}>
         {stats.map(stat => (

@@ -1,4 +1,5 @@
 import { Inter, JetBrains_Mono } from 'next/font/google';
+import { AgentOrb } from '@/components/agent-orb/agent-orb';
 import { AuroraField } from '@/components/aurora-field/aurora-field';
 import { LoadingScreen } from '@/components/loading-screen/loading-screen';
 import { ThemeProvider } from '@/components/theme-provider';
@@ -91,6 +92,9 @@ export default function RootLayout({ children }) {
               it persists across scroll and across every route. */}
           <AuroraField />
           {children}
+          {/* Persistent voice assistant — parks over the hero anchor, docks
+              to the top-right corner on scroll and on every other route. */}
+          <AgentOrb />
         </ThemeProvider>
       </body>
     </html>

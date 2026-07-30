@@ -1,0 +1,53 @@
+/* Fixed layer, positioned entirely by transform from the top-left origin so
+   the WebGL canvas never has to resize while it travels. */
+.wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* Above page content and the nav. It docks below the nav bar so they never
+     actually overlap, but if they did the agent should win. */
+  z-index: 45;
+  transform-origin: top left;
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform;
+}
+
+.wrapper[data-ready='true'] {
+  opacity: 1;
+  transition: opacity 0.8s ease;
+}
+
+/* Docked state gets a subtle plate behind it so a small orb still reads
+   against busy page content rather than floating loose. */
+.wrapper[data-docked='true'] .orb::after {
+  opacity: 1;
+}
+
+.orb {
+  width: 100%;
+  height: 100%;
+  max-width: none !important;
+}
+
+/* The status pill is unreadable at docked scale — fade it out as it shrinks. */
+.wrapper[data-docked='true'] .orb :global(p) {
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.wrapper[data-docked='false'] .orb :global(p) {
+  opacity: 1;
+  transition: opacity 0.4s ease 0.2s;
+}
+
+/* Reduced motion: no travel animation, it simply sits docked. */
+.wrapper[data-reduced='true'] {
+  transition: none;
+}
+
+@media (max-width: 640px) {
+  .wrapper {
+    z-index: 45;
+  }
+}

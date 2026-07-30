@@ -140,6 +140,21 @@
   margin-top: 0;
 }
 
+/* Empty box that reserves the orb's footprint. The orb is a fixed layer in
+   the root layout and positions itself over this. */
+.agentAnchor {
+  width: 100%;
+  max-width: 380px;
+  aspect-ratio: 1 / 1;
+  margin-inline: auto;
+}
+
+@media (max-width: 900px) {
+  .agentAnchor {
+    max-width: 300px;
+  }
+}
+
 .stats {
   grid-column: 1 / -1;
   display: flex;
