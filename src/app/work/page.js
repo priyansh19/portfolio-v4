@@ -5,6 +5,7 @@ import { ScrollProgress } from '@/components/scroll-progress/scroll-progress';
 import { SiteFooter } from '@/components/site-footer/site-footer';
 import { careerNarrative, experience, experienceNote } from '@/lib/content';
 import styles from './page.module.css';
+import { FlowParagraph } from '@/components/flow-paragraph/flow-paragraph';
 
 export const metadata = {
   title: 'Work',
@@ -63,7 +64,7 @@ export default function WorkPage() {
                   <ul className={styles.points}>
                     {job.points.map(point => (
                       <li className={styles.point} key={point}>
-                        {point}
+                        <FlowParagraph text={point} />
                       </li>
                     ))}
                   </ul>

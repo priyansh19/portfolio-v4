@@ -8,18 +8,20 @@ import {
 import { useReducedMotion } from 'framer-motion';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { LogoTile } from '@/components/logo-tile/logo-tile';
+import { useInViewport } from '@/lib/hooks';
 import styles from './flow-paragraph.module.css';
 
-const GAP = 16; // clearance between the tile and the text it displaces
+const GAP = 14; // clearance between the tile and the text it displaces
 const MIN_LINE = 110; // never squeeze a line narrower than this
 const MAX_LINES = 60; // hard stop, so a bad measure can never spin forever
-const TILE_LINES = 2; // tile is this many line-heights square
+const TILE_LINES = 1; // tile is this many line-heights square
 const ROW_SECONDS = 5.5; // time to cross one row
 const TRAIL_POINTS = 78; // ~1.3s of trail at 60fps before it is fully gone
+const TRAIL_PEAK = 0.34; // opacity at the head; the tail tapers from here to 0
 
 /**
- * Paragraph whose text re-wraps live around a cube walking through it, with
- * the cube leaving a glowing trail along its path.
+ * Paragraph whose text re-wraps live around a tile walking through it, with a
+ * soft trail marking where it has been.
  *
  * CSS cannot do this. `shape-outside` floats a shape at the edge of a static
  * flow; it cannot reflow around something that moves every frame. Doing it by
@@ -28,7 +30,10 @@ const TRAIL_POINTS = 78; // ~1.3s of trail at 60fps before it is fully gone
  *
  * Pretext lays out one line at a time at whatever width it is handed, using
  * pure arithmetic against the browser's font metrics — so each line asks for
- * the width left over by the cube's current position.
+ * the width left over by the tile's current position.
+ *
+ * Many of these run at once, so the loop is gated on visibility: a paragraph
+ * off-screen does no layout work at all.
  */
 export const FlowParagraph = ({ text, className = '' }) => {
   const wrapRef = useRef(null);
@@ -40,10 +45,12 @@ export const FlowParagraph = ({ text, className = '' }) => {
   const poolRef = useRef([]);
   const frameRef = useRef(0);
   const clockRef = useRef(0);
-  const prevRef = useRef([]); // recent tile positions, tail first
+  const trailPointsRef = useRef([]);
   const ctxRef = useRef(null);
+  const sizeRef = useRef(0);
   const boxHeightRef = useRef(0);
   const reduceMotion = useReducedMotion();
+  const isInViewport = useInViewport(wrapRef);
   const [enhanced, setEnhanced] = useState(false);
   const [tileSize, setTileSize] = useState(0);
 
@@ -74,11 +81,11 @@ export const FlowParagraph = ({ text, className = '' }) => {
   }, [text]);
 
   /**
-   * Lay out against the cube's box and write straight into a pool of spans.
+   * Lay out against the tile's box and write straight into a pool of spans.
    * Imperative on purpose — routing per-frame layout through React state
    * would be far too slow.
    */
-  const flow = useCallback(cube => {
+  const flow = useCallback(tile => {
     const prepared = preparedRef.current;
     const host = lineHostRef.current;
     if (!prepared || !host) return 0;
@@ -92,12 +99,12 @@ export const FlowParagraph = ({ text, className = '' }) => {
       let lineX = 0;
       let lineWidth = width;
 
-      if (cube && cube.bottom > y && cube.top < y + lineHeight) {
-        const onRight = cube.left + cube.size / 2 > width / 2;
+      if (tile && tile.bottom > y && tile.top < y + lineHeight) {
+        const onRight = tile.left + tile.size / 2 > width / 2;
         if (onRight) {
-          lineWidth = Math.max(MIN_LINE, cube.left - GAP);
+          lineWidth = Math.max(MIN_LINE, tile.left - GAP);
         } else {
-          lineX = Math.min(width - MIN_LINE, cube.left + cube.size + GAP);
+          lineX = Math.min(width - MIN_LINE, tile.left + tile.size + GAP);
           lineWidth = Math.max(MIN_LINE, width - lineX);
         }
       }
@@ -130,6 +137,53 @@ export const FlowParagraph = ({ text, className = '' }) => {
     return index;
   }, []);
 
+  /**
+   * Match the trail canvas to its current CSS box. Must run on every resize,
+   * not just once — a paragraph inside a grid or sticky stage can settle at a
+   * very different width than it had on first measure, and a stale backing
+   * store would draw the trail at the wrong scale.
+   */
+  const sizeTrail = useCallback(() => {
+    const canvas = trailRef.current;
+    if (!canvas) return;
+    const dpr = Math.min(window.devicePixelRatio, 2);
+    const width = metricsRef.current.width;
+    const height = boxHeightRef.current;
+    if (width < 2 || height < 2) return;
+
+    canvas.width = Math.round(width * dpr);
+    canvas.height = Math.round(height * dpr);
+    const ctx = canvas.getContext('2d');
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(dpr, dpr);
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctxRef.current = ctx;
+    trailPointsRef.current = [];
+  }, []);
+
+  /** Re-measure, re-reserve height and re-size the trail as one unit. */
+  const remeasure = useCallback(() => {
+    if (!prepare()) return;
+    const { width, lineHeight } = metricsRef.current;
+    const size = Math.round(lineHeight * TILE_LINES);
+    sizeRef.current = size;
+
+    const worst = flow({
+      left: width - size,
+      top: 0,
+      bottom: Number.MAX_SAFE_INTEGER,
+      size,
+    });
+    boxHeightRef.current = worst * lineHeight;
+    if (wrapRef.current) {
+      wrapRef.current.style.minHeight = `${boxHeightRef.current}px`;
+    }
+    sizeTrail();
+    flow(null);
+  }, [prepare, flow, sizeTrail]);
+
+  // --- setup: measure, reserve height, switch on the enhanced rendering
   useEffect(() => {
     if (reduceMotion) return undefined;
 
@@ -141,8 +195,14 @@ export const FlowParagraph = ({ text, className = '' }) => {
 
       const { width, lineHeight } = metricsRef.current;
       const size = Math.round(lineHeight * TILE_LINES);
+      sizeRef.current = size;
 
-      // Reserve the worst case so the block never changes height as the cube
+      // Random phase so many paragraphs on one page never march in lockstep.
+      // Seeded here rather than at render — Math.random() during render is
+      // impure and would produce a different value on every re-render.
+      clockRef.current = Math.random() * ROW_SECONDS * 4;
+
+      // Reserve the worst case so the block never changes height as the tile
       // squeezes lines and the line count shifts.
       const worst = flow({
         left: width - size,
@@ -150,83 +210,15 @@ export const FlowParagraph = ({ text, className = '' }) => {
         bottom: Number.MAX_SAFE_INTEGER,
         size,
       });
-      const boxHeight = worst * lineHeight;
-      boxHeightRef.current = boxHeight;
-      if (wrapRef.current) wrapRef.current.style.minHeight = `${boxHeight}px`;
+      boxHeightRef.current = worst * lineHeight;
+      if (wrapRef.current) {
+        wrapRef.current.style.minHeight = `${boxHeightRef.current}px`;
+      }
 
       setTileSize(size);
       setEnhanced(true);
 
-      const animate = () => {
-        frameRef.current = requestAnimationFrame(animate);
-        clockRef.current += 0.016;
-        const ctx = ctxRef.current;
-
-        const { width: w, lineHeight: lh } = metricsRef.current;
-        const rows = Math.max(1, Math.round(boxHeight / lh) - (TILE_LINES - 1));
-        const travel = Math.max(1, w - size);
-
-        // Snake: sweep a row left to right, drop, sweep back the other way
-        const t = clockRef.current / ROW_SECONDS;
-        const leg = Math.floor(t);
-        const phase = t - leg;
-        const row = leg % rows;
-        const forward = leg % 2 === 0;
-        const progress = forward ? phase : 1 - phase;
-
-        const left = progress * travel;
-        const top = row * lh;
-
-        flow({ left, top, bottom: top + size, size });
-
-        if (tileRef.current) {
-          tileRef.current.style.transform = `translate3d(${left}px, ${top}px, 0)`;
-        }
-
-        // --- trail
-        //
-        // Keeps a short history of positions and redraws the whole thing each
-        // frame, brightest and thickest at the head and tapering to nothing at
-        // the tail. Repainting from scratch rather than compositing a fade
-        // over the previous frame means no residue can accumulate, and the
-        // falloff is an explicit curve rather than an emergent one.
-        if (ctx) {
-          const points = prevRef.current;
-          points.push({ x: left + size / 2, y: top + size / 2 });
-          if (points.length > TRAIL_POINTS) points.shift();
-
-          ctx.clearRect(0, 0, w, boxHeight);
-          ctx.shadowColor = 'rgba(255, 255, 255, 0.85)';
-
-          for (let i = 1; i < points.length; i++) {
-            const a = points[i - 1];
-            const b = points[i];
-
-            // Skip the jump when the snake wraps to the next row
-            if (Math.abs(b.y - a.y) > lh * 1.5) continue;
-
-            // 0 at the tail, 1 at the head
-            const t = i / (points.length - 1);
-            ctx.globalAlpha = t * t;
-            ctx.lineWidth = 0.6 + t * 2.4;
-            ctx.shadowBlur = 12 * t;
-            ctx.strokeStyle = '#ffffff';
-            ctx.beginPath();
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
-            ctx.stroke();
-          }
-
-          ctx.globalAlpha = 1;
-          ctx.shadowBlur = 0;
-        }
-      };
-
-      animate();
-
-      observer = new ResizeObserver(() => {
-        if (prepare()) flow(null);
-      });
+      observer = new ResizeObserver(remeasure);
       observer.observe(wrapRef.current);
     };
 
@@ -235,26 +227,87 @@ export const FlowParagraph = ({ text, className = '' }) => {
 
     return () => {
       cancelled = true;
-      cancelAnimationFrame(frameRef.current);
       observer?.disconnect();
     };
-  }, [prepare, flow, reduceMotion]);
+  }, [prepare, flow, remeasure, reduceMotion]);
 
-  // The canvas only exists once the enhanced render has committed, so size it
-  // here rather than inside the animation loop — a throttled rAF would
-  // otherwise leave it at the 300x150 default.
+  // Runs after the enhanced render commits — the first point at which the
+  // canvas exists AND the element has its settled width. A full remeasure
+  // rather than just sizing the canvas, because a paragraph inside a grid or
+  // sticky stage is often laid out narrower than it measured on first pass,
+  // and re-using that stale width would scale the trail wrongly.
   useEffect(() => {
-    if (!enhanced || !trailRef.current) return;
-    const canvas = trailRef.current;
-    const dpr = Math.min(window.devicePixelRatio, 2);
-    canvas.width = Math.round(metricsRef.current.width * dpr);
-    canvas.height = Math.round(boxHeightRef.current * dpr);
-    const ctx = canvas.getContext('2d');
-    ctx.scale(dpr, dpr);
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-    ctxRef.current = ctx;
-  }, [enhanced]);
+    if (enhanced) remeasure();
+  }, [enhanced, remeasure]);
+
+  // --- animation, only while on screen
+  useEffect(() => {
+    if (!enhanced || reduceMotion || !isInViewport) return undefined;
+
+    const animate = () => {
+      frameRef.current = requestAnimationFrame(animate);
+      clockRef.current += 0.016;
+
+      const { width: w, lineHeight: lh } = metricsRef.current;
+      const size = sizeRef.current;
+      const boxHeight = boxHeightRef.current;
+      const rows = Math.max(1, Math.round(boxHeight / lh) - (TILE_LINES - 1));
+      const travel = Math.max(1, w - size);
+
+      // Snake: sweep a row left to right, drop, sweep back the other way
+      const t = clockRef.current / ROW_SECONDS;
+      const leg = Math.floor(t);
+      const phase = t - leg;
+      const row = leg % rows;
+      const forward = leg % 2 === 0;
+      const progress = forward ? phase : 1 - phase;
+
+      const left = progress * travel;
+      const top = row * lh;
+
+      flow({ left, top, bottom: top + size, size });
+
+      if (tileRef.current) {
+        tileRef.current.style.transform = `translate3d(${left}px, ${top}px, 0)`;
+      }
+
+      // Trail: keep a short history and repaint it whole each frame, brightest
+      // at the head and tapering to nothing at the tail. Repainting rather
+      // than compositing a fade means no residue accumulates.
+      const ctx = ctxRef.current;
+      if (ctx) {
+        const points = trailPointsRef.current;
+        points.push({ x: left + size / 2, y: top + size / 2 });
+        if (points.length > TRAIL_POINTS) points.shift();
+
+        ctx.clearRect(0, 0, w, boxHeight);
+        ctx.shadowColor = 'rgba(255, 255, 255, 0.35)';
+
+        for (let i = 1; i < points.length; i++) {
+          const a = points[i - 1];
+          const b = points[i];
+          // Skip the jump when the snake wraps to the next row
+          if (Math.abs(b.y - a.y) > lh * 1.5) continue;
+
+          const k = i / (points.length - 1); // 0 tail, 1 head
+          ctx.globalAlpha = k * k * TRAIL_PEAK;
+          ctx.lineWidth = 0.5 + k * 1.2;
+          ctx.shadowBlur = 6 * k;
+          ctx.strokeStyle = '#ffffff';
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.stroke();
+        }
+
+        ctx.globalAlpha = 1;
+        ctx.shadowBlur = 0;
+      }
+    };
+
+    animate();
+    return () => cancelAnimationFrame(frameRef.current);
+  }, [enhanced, isInViewport, reduceMotion, flow]);
 
   return (
     <div className={`${styles.wrap} ${className}`} data-enhanced={enhanced} ref={wrapRef}>

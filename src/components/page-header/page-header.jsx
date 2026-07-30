@@ -1,5 +1,6 @@
 import { Breadcrumbs } from '@/components/breadcrumbs/breadcrumbs';
 import styles from './page-header.module.css';
+import { FlowParagraph } from '@/components/flow-paragraph/flow-paragraph';
 
 /**
  * Masthead for the blog-style sub-pages. Always carries a breadcrumb trail so
@@ -12,7 +13,7 @@ export const PageHeader = ({ crumbs = [], kicker, title, tagline, meta = [] }) =
 
       {kicker && <p className={styles.kicker}>{kicker}</p>}
       <h1 className={styles.title}>{title}</h1>
-      {tagline && <p className={styles.tagline}>{tagline}</p>}
+      {tagline && <FlowParagraph className={styles.tagline} text={tagline} />}
 
       {meta.length > 0 && (
         <dl className={styles.meta}>

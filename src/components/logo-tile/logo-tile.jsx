@@ -7,8 +7,8 @@ import styles from './logo-tile.module.css';
 /**
  * Flat pulsating square carrying one technology logo at a time.
  *
- * Sized by the caller to exactly two line-heights, so it displaces precisely
- * two lines of the paragraph it travels through.
+ * Sized by the caller in whole line-heights, so it always displaces a clean
+ * number of lines in the paragraph it travels through.
  */
 export const LogoTile = ({ size = 56, animate = true, offset = 0 }) => {
   // `offset` staggers each tile's starting logo so several on screen at once

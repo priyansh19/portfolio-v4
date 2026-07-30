@@ -3,6 +3,7 @@ import { Reveal, RevealGroup, RevealItem } from '@/components/reveal/reveal';
 import { SectionHeading } from '@/components/section-heading/section-heading';
 import { freelance } from '@/lib/content';
 import styles from './freelance-section.module.css';
+import { FlowParagraph } from '@/components/flow-paragraph/flow-paragraph';
 
 export const FreelanceSection = () => (
   <section className={styles.section} id="freelance">
@@ -21,7 +22,7 @@ export const FreelanceSection = () => (
             {freelance.services.map(service => (
               <RevealItem as="li" className={styles.service} key={service.id}>
                 <span className={styles.serviceTitle}>{service.title}</span>
-                <span className={styles.serviceBody}>{service.body}</span>
+                <FlowParagraph className={styles.serviceBody} text={service.body} />
               </RevealItem>
             ))}
           </RevealGroup>
