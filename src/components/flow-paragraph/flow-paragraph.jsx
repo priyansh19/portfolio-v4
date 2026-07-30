@@ -46,6 +46,8 @@ export const FlowParagraph = ({ text, className = '' }) => {
   const frameRef = useRef(0);
   const clockRef = useRef(0);
   const trailPointsRef = useRef([]);
+  // Boxes the text currently occupies, so the trail can be kept out of them
+  const occupiedRef = useRef([]);
   const ctxRef = useRef(null);
   const sizeRef = useRef(0);
   const boxHeightRef = useRef(0);
@@ -94,6 +96,7 @@ export const FlowParagraph = ({ text, className = '' }) => {
     let cursor = { segmentIndex: 0, graphemeIndex: 0 };
     let y = 0;
     let index = 0;
+    const occupied = [];
 
     while (index < MAX_LINES) {
       let lineX = 0;
@@ -125,6 +128,10 @@ export const FlowParagraph = ({ text, className = '' }) => {
       node.style.transform = `translate3d(${lineX}px, ${y}px, 0)`;
       node.style.display = '';
 
+      // Pretext gives the line's real width, not the width it was allowed —
+      // so the trail can still show through the ragged right-hand edge.
+      occupied.push({ x: lineX, y, w: line.width, h: lineHeight });
+
       cursor = range.end;
       y += lineHeight;
       index += 1;
@@ -134,6 +141,7 @@ export const FlowParagraph = ({ text, className = '' }) => {
       poolRef.current[i].style.display = 'none';
     }
 
+    occupiedRef.current = occupied;
     return index;
   }, []);
 
@@ -281,6 +289,21 @@ export const FlowParagraph = ({ text, className = '' }) => {
         if (points.length > TRAIL_POINTS) points.shift();
 
         ctx.clearRect(0, 0, w, boxHeight);
+
+        // Keep the trail out of the text. Without this it survives on a row
+        // after the tile has moved on, and once the text reflows back over
+        // that space the leftover line reads as a strikethrough.
+        //
+        // An even-odd fill rule over [whole box] + [each text box] yields the
+        // complement, so the trail is visible only where no text sits.
+        const holes = new Path2D();
+        holes.rect(0, 0, w, boxHeight);
+        for (const r of occupiedRef.current) {
+          holes.rect(r.x, r.y, r.w, r.h);
+        }
+
+        ctx.save();
+        ctx.clip(holes, 'evenodd');
         ctx.shadowColor = 'rgba(255, 255, 255, 0.35)';
 
         // Each span runs midpoint-to-midpoint with the sample itself as the
@@ -311,6 +334,7 @@ export const FlowParagraph = ({ text, className = '' }) => {
           ctx.stroke();
         }
 
+        ctx.restore();
         ctx.globalAlpha = 1;
         ctx.shadowBlur = 0;
       }
