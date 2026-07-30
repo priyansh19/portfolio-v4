@@ -1,4 +1,5 @@
 import { Inter, JetBrains_Mono } from 'next/font/google';
+import { AuroraField } from '@/components/aurora-field/aurora-field';
 import { LoadingScreen } from '@/components/loading-screen/loading-screen';
 import { ThemeProvider } from '@/components/theme-provider';
 import { links, profile } from '@/lib/content';
@@ -86,6 +87,9 @@ export default function RootLayout({ children }) {
       <body>
         <ThemeProvider>
           <LoadingScreen />
+          {/* Fixed site-wide backdrop — lives here rather than in the hero so
+              it persists across scroll and across every route. */}
+          <AuroraField />
           {children}
         </ThemeProvider>
       </body>

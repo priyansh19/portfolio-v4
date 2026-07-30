@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { AuroraField } from '@/components/aurora-field/aurora-field';
 import { VoiceOrb } from '@/components/voice-orb/voice-orb';
 import { Reveal, RevealGroup, RevealItem } from '@/components/reveal/reveal';
 import { ScrambleText } from '@/components/scramble-text/scramble-text';
@@ -8,8 +7,6 @@ import styles from './hero.module.css';
 
 export const Hero = () => (
   <section className={styles.hero} id="top">
-    <div className={styles.sky} aria-hidden />
-    <AuroraField className={styles.particles} />
 
     <div className={styles.inner}>
       {/* Copy sits left, mockup rides up beside it — a centred stack left a

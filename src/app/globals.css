@@ -189,6 +189,15 @@ h4 {
   text-wrap: balance;
 }
 
+/* The aurora backdrop is fixed at z-index 0; every page region rides above
+   it. Without this, non-positioned content would paint underneath. */
+header,
+main,
+footer {
+  position: relative;
+  z-index: 1;
+}
+
 a {
   color: inherit;
   text-decoration: none;

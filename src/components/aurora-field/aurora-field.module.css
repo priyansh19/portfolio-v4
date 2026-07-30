@@ -1,5 +1,7 @@
+/* Fixed to the viewport so it stays put through scroll and route changes,
+   rather than scrolling away with whatever section it was mounted in. */
 .container {
-  position: absolute;
+  position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
