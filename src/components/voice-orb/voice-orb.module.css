@@ -1,0 +1,106 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-width: 520px;
+  margin-inline: auto;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.container[data-visible='true'] {
+  opacity: 1;
+}
+
+/* Soft bloom behind the mesh so the orb sits in light rather than on flat
+   canvas. Scales with state so a speaking orb glows harder. */
+.container::before {
+  content: '';
+  position: absolute;
+  inset: 12%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    color-mix(in oklab, var(--text-link) 34%, transparent) 0%,
+    transparent 68%
+  );
+  filter: blur(38px);
+  opacity: 0.75;
+  transition: opacity var(--duration-base) ease;
+  pointer-events: none;
+}
+
+.container[data-state='speaking']::before,
+.container[data-state='thinking']::before {
+  opacity: 1;
+}
+
+/* Sized entirely by CSS — the renderer is told not to write inline styles,
+   so the backing store can never feed back into layout. */
+.canvas {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.status {
+  position: absolute;
+  bottom: 4%;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 6px 14px 6px 10px;
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-pill);
+  background: var(--surface-card);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  color: var(--body);
+  box-shadow: 0 4px 12px var(--shadow-soft);
+  white-space: nowrap;
+}
+
+.statusDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-link);
+  flex-shrink: 0;
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+.container[data-state='listening'] .statusDot,
+.container[data-state='speaking'] .statusDot {
+  background: var(--success);
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.8);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .statusDot {
+    animation: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .container {
+    max-width: 400px;
+  }
+}
