@@ -15,7 +15,7 @@ const MIN_LINE = 110; // never squeeze a line narrower than this
 const MAX_LINES = 60; // hard stop, so a bad measure can never spin forever
 const TILE_LINES = 2; // tile is this many line-heights square
 const ROW_SECONDS = 5.5; // time to cross one row
-const TRAIL_FADE = 0.045; // how fast the trail dissolves each frame
+const TRAIL_POINTS = 78; // ~1.3s of trail at 60fps before it is fully gone
 
 /**
  * Paragraph whose text re-wraps live around a cube walking through it, with
@@ -40,7 +40,7 @@ export const FlowParagraph = ({ text, className = '' }) => {
   const poolRef = useRef([]);
   const frameRef = useRef(0);
   const clockRef = useRef(0);
-  const prevRef = useRef(null);
+  const prevRef = useRef([]); // recent tile positions, tail first
   const ctxRef = useRef(null);
   const boxHeightRef = useRef(0);
   const reduceMotion = useReducedMotion();
@@ -183,29 +183,42 @@ export const FlowParagraph = ({ text, className = '' }) => {
           tileRef.current.style.transform = `translate3d(${left}px, ${top}px, 0)`;
         }
 
-        // --- trail: erase a little each frame, then stroke the new segment
+        // --- trail
+        //
+        // Keeps a short history of positions and redraws the whole thing each
+        // frame, brightest and thickest at the head and tapering to nothing at
+        // the tail. Repainting from scratch rather than compositing a fade
+        // over the previous frame means no residue can accumulate, and the
+        // falloff is an explicit curve rather than an emergent one.
         if (ctx) {
-          const cx = left + size / 2;
-          const cy = top + size / 2;
+          const points = prevRef.current;
+          points.push({ x: left + size / 2, y: top + size / 2 });
+          if (points.length > TRAIL_POINTS) points.shift();
 
-          ctx.globalCompositeOperation = 'destination-out';
-          ctx.fillStyle = `rgba(0, 0, 0, ${TRAIL_FADE})`;
-          ctx.fillRect(0, 0, w, boxHeight);
+          ctx.clearRect(0, 0, w, boxHeight);
+          ctx.shadowColor = 'rgba(255, 255, 255, 0.85)';
 
-          ctx.globalCompositeOperation = 'source-over';
-          const prev = prevRef.current;
-          // Skip the jump when the snake wraps to a new row
-          if (prev && Math.abs(cy - prev.y) < lh * 1.5) {
-            ctx.shadowBlur = 14;
-            ctx.shadowColor = 'rgba(255, 255, 255, 0.9)';
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.95)';
-            ctx.lineWidth = 2.5;
+          for (let i = 1; i < points.length; i++) {
+            const a = points[i - 1];
+            const b = points[i];
+
+            // Skip the jump when the snake wraps to the next row
+            if (Math.abs(b.y - a.y) > lh * 1.5) continue;
+
+            // 0 at the tail, 1 at the head
+            const t = i / (points.length - 1);
+            ctx.globalAlpha = t * t;
+            ctx.lineWidth = 0.6 + t * 2.4;
+            ctx.shadowBlur = 12 * t;
+            ctx.strokeStyle = '#ffffff';
             ctx.beginPath();
-            ctx.moveTo(prev.x, prev.y);
-            ctx.lineTo(cx, cy);
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
             ctx.stroke();
           }
-          prevRef.current = { x: cx, y: cy };
+
+          ctx.globalAlpha = 1;
+          ctx.shadowBlur = 0;
         }
       };
 
